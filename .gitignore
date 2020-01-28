@@ -1,0 +1,4 @@
+#mac files
+.DS_Store
+#vscode configuration files
+.vscode/
