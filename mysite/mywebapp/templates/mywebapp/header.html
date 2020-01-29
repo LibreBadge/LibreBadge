@@ -3,13 +3,18 @@
 
 <head>
 	<title>mywebapp</title>
-	<meta charset="utf-8" />
+    <meta charset="utf-8" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css %'}" type = "text/css"/>
 </head>
 
-<body class="body" style="background-color:#f6f6f6">
-	<div>
+<body>
+	<div class="row">
+        <br><br>
+        <div class="col-11">
 	   {% block content %}
-	   {% endblock %}	
+       {% endblock %}
+    </div>	
 	</div>
 </body>
 
