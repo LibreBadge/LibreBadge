@@ -9,13 +9,11 @@
 </head>
 
 <body>
-    <br><br>
-	<div class="row">
-        <div class="col-11">
+    {% include "mywebapp/navbar.html" %}
 	   {% block content %}
        {% endblock %}
-    </div>	
-	</div>
 </body>
 
 </html>
+<script src="{% static 'mywebapp/js/jquery-3.4.1.slim.min.js' %}"></script>
+<script src="{% static 'mywebapp/js/bootstrap.bundle.min.js' %}"></script>
