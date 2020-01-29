@@ -133,3 +133,4 @@ dmypy.json
 
 #mac
 .DS_Store
+*.pyc
