@@ -3,7 +3,7 @@
 {% block content %}
     <form method="POST">
         {% csrf_token %}
-        {{form}}
+        {{myform}}
     </form>
 <button class="btn btn-outline-primary" type="submit">login</button>
 {% endblock %}
