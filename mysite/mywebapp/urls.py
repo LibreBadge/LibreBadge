@@ -3,7 +3,10 @@ from django.urls import path
 
 from . import views
 
+app_name = "mywebapp"
 urlpatterns = [
     url('^$', views.index, name='index'),
-    url('login/', views.login, name='login'),
+    url('login/', views.login_request, name='login'),
+    url('register/', views.register, name='register'),
+    url("logout/", views.logout_request, name="logout"),
 ]

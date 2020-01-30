@@ -3,7 +3,8 @@
 {% block content %}
     <form method="POST">
         {% csrf_token %}
-        {{form}}
+        {{form.as_p}}
     </form>
-<button class="btn btn-outline-primary" type="submit">login</button>
+
+    If you already have an account login
 {% endblock %}
