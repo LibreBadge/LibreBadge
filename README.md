@@ -1,5 +1,7 @@
 # energized-id-django
 ## Open source web based ID badge software
+![issuehunt-readme-button-v1](https://raw.githubusercontent.com/BoostIO/issuehunt-materials/master/v1/issuehunt-button-v1.svg)
+https://issuehunt.io/r/energized-id/energized-id-django
 ### What is this project?
 This project is an open source web based ID badge generator software that is meant to be much faster and smoother than most existing paid ID badge solutions due to it being web based.
 ### What was the inspiraton for this project?
