@@ -8,6 +8,7 @@ from django.contrib import messages
 
 def index(request):
     return render(request, 'mywebapp/home.html')
+    messages.success(request, 'Test message!')
 
 def login(request):
     return render(request, 'mywebapp/login.html')
