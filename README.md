@@ -2,6 +2,8 @@
 ## Open source web based ID badge software
 ### Fund development on issuehunt.io!
 https://issuehunt.io/r/energized-id/energized-id-django
+### Application admin user (for development purpose)
+Username: admin Password: admin
 ### What is this project?
 This project is an open source web based ID badge generator software that is meant to be much faster and smoother than most existing paid ID badge solutions due to it being web based.
 ### What was the inspiraton for this project?
