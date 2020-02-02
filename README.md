@@ -8,4 +8,6 @@ https://pythonprogramming.net/django-web-development-python-tutorial/
 <br>
 Thank you so much [@sentdex](https://github.com/Sentdex) for creating amazing tutorials. Without them, this project propably wouldn't be here
 <br>
+<br>
+### Credits
 Original ID badge proof of concept and proper print rendering by [@Quantaly](https://github.com/Quantaly)
