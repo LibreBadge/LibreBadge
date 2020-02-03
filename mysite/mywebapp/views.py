@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 
@@ -12,12 +12,6 @@ def index(request):
 
 def login(request):
     return render(request, 'mywebapp/login.html')
-
-def register(request):
-    form = UserCreationForm
-    return render(request, 
-                   "mywebapp/register.html",
-                   context={"form":form} )
 
 def logout_request(request):
     logout(request),
