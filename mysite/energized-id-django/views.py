@@ -7,7 +7,6 @@ from django.contrib import messages
 # Create your views here.
 
 def index(request):
-    messages.success(request, 'Test message!'),
     return render(request, 'energized-id-django/home.html')
 
 
