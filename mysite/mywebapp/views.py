@@ -14,7 +14,7 @@ def index(request):
 def logout_request(request):
     logout(request),
     messages.info(request, "Logged out syccessfully!"),
-    return redirect("")
+    return redirect("mywebapp:index")
 
 def login_request(request):
     if request.method == 'POST':
