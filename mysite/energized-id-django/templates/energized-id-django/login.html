@@ -1,29 +1,39 @@
-{% extends "energized-id-django/header.html" %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block content %}
-    <div id="login">
-        <form method="post">
-            <div class="col-sm-4 align-items-center">
+<head>
+	<title>energized-id-django</title>
+    <meta charset="utf-8" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'energized-id-django/css/bootstrap.min.css' %}" type = "text/css"/>
+    <link rel="stylesheet" href="{% static 'energized-id-django/css/signin.css' %}" type="text/css"/>
+    {% include "energized-id-django/messages.html" %}
+
+
+</head>
+
+<body>
+    <form class="form-signin" method="POST">
         {% csrf_token %}
-        {% if next %}
+            {% if next %}
             <input type="hidden" name="next" value="{{ next }}" />
-        {% endif %}
-        <div class="form-group-row">
-            <div class="controls">
-                <input type="text" class="form-control" id="username" name="username"  placeholder="Username" autofocus>
-            </div>
+            {% endif %}
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <label for="username" class="sr-only">User name</label>
+        <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+        <label for="password" class="sr-only">Password</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+        <div class="checkbox mb-3">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
         </div>
-        <div class="form-group-row">
-            <div class="controls">
-                <input type="password" class="form-control" id="password" name="password"  placeholder="Password">
-            </div>
-        </div>
-        <div class="control-group-row align-items-center">
-            <div class="controls">
-                <button type="submit" class="btn btn-primary">Login</button>
-            </div>
-        </div>
-        </div>
-        </form>
-    </div>
-{% endblock %}
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <p class="mt-5 mb-3 text-muted align-self-center">Energized-ID-Django</p>
+      </form>
+    
+</body>
+
+</html>
+<script src="{% static 'energized-id-django/js/jquery-3.4.1.slim.min.js' %}"></script>
+<script src="{% static 'energized-id-django/js/bootstrap.bundle.min.js' %}"></script>

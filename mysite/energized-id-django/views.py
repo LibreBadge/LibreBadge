@@ -3,13 +3,14 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-
+@login_required
 def index(request):
     return render(request, 'energized-id-django/home.html')
 
-
+@login_required
 def logout_request(request):
     logout(request),
     messages.info(request, "Logged out syccessfully!"),
