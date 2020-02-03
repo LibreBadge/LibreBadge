@@ -10,8 +10,6 @@ def index(request):
     messages.success(request, 'Test message!'),
     return render(request, 'mywebapp/home.html')
 
-def login(request):
-    return render(request, 'mywebapp/login.html')
 
 def logout_request(request):
     logout(request),
