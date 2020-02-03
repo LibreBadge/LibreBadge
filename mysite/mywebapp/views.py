@@ -7,8 +7,8 @@ from django.contrib import messages
 # Create your views here.
 
 def index(request):
+    messages.success(request, 'Test message!'),
     return render(request, 'mywebapp/home.html')
-    messages.success(request, 'Test message!')
 
 def login(request):
     return render(request, 'mywebapp/login.html')
