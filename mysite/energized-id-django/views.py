@@ -8,13 +8,13 @@ from django.contrib import messages
 
 def index(request):
     messages.success(request, 'Test message!'),
-    return render(request, 'mywebapp/home.html')
+    return render(request, 'energized-id-django/home.html')
 
 
 def logout_request(request):
     logout(request),
     messages.info(request, "Logged out syccessfully!"),
-    return redirect("mywebapp:index")
+    return redirect("energized-id-django:index")
 
 def login_request(request):
     if request.method == 'POST':
@@ -33,5 +33,5 @@ def login_request(request):
             messages.error(request, "Invalid username or password.")
     form = AuthenticationForm()
     return render(request = request,
-                    template_name = "mywebapp/login.html",
+                    template_name = "energized-id-django/login.html",
                     context={"form":form})
