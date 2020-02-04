@@ -37,5 +37,5 @@ def login_request(request):
                     context={"form":form})
 
 @login_required
-def card(request):
-    return render(request, 'energized-id-django/card.html')
+def cookietemplate(request):
+    return render(request, 'energized-id-django/cookietemplate.html')

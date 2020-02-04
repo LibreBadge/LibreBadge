@@ -1,0 +1,140 @@
+body {
+  font-family: 'Noto Sans', sans-serif;
+  margin: 0;
+}
+
+.page {
+  width: 2.125in;
+  height: 3.375in;
+  display: -ms-grid;
+  display: grid;
+  background-color: white;
+}
+
+img {
+  margin: auto;
+}
+
+div {
+  text-align: center;
+}
+
+#one {
+  -ms-grid-rows: 0.375in 0.375in 0.0625in 0.5625in 0.75in 0.0625in 0.25in 0.21875in 0.125in 0.15625in 0.11111in 0.0625in 0.0625in;
+      grid-template-rows: 0.375in 0.375in 0.0625in 0.5625in 0.75in 0.0625in 0.25in 0.21875in 0.125in 0.15625in 0.11111in 0.0625in 0.0625in;
+  -ms-grid-columns: 1.0625in 1.0625in;
+      grid-template-columns: 1.0625in 1.0625in;
+      grid-template-areas: "ua89dd9d0 u47de8fd6" "header header" "ua0b10fdd uee9527d4" "photo logo" "photo qr" "u7d71a95f u1686354e" "title title" "name name" "id id" "security-level security-level" "moto moto" "u1145acad ud68af8b5" "expires expires";
+}
+
+#header {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: header;
+  font-size: 0.21875in;
+  background-color: #007bff;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  padding: 5px;
+}
+
+#photo {
+  -ms-grid-row: 4;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 1;
+  grid-area: photo;
+  max-width: 1.0625in;
+  max-height: 1.3125in;
+}
+
+#logo {
+  -ms-grid-row: 4;
+  -ms-grid-column: 2;
+  grid-area: logo;
+  max-width: 1.0625in;
+  max-height: 0.5625in;
+}
+
+#qr {
+  -ms-grid-row: 5;
+  -ms-grid-column: 2;
+  grid-area: qr;
+  max-width: 1.0625in;
+  max-height: 0.75in;
+}
+
+#title {
+  -ms-grid-row: 7;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: title;
+  font-size: 0.09375in;
+}
+
+#name {
+  -ms-grid-row: 8;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: name;
+  font-size: 0.15625in;
+  font-weight: bold;
+}
+
+#id {
+  -ms-grid-row: 9;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: id;
+  font-size: 0.09375in;
+}
+
+#security-level {
+  -ms-grid-row: 10;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: security-level;
+  font-size: 0.09375in;
+}
+
+#expires {
+  -ms-grid-row: 13;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: expires;
+  font-size: 0.09375in;
+}
+
+#two {
+  -ms-grid-rows: 0.375in 1in 1.25in 0.75in;
+      grid-template-rows: 0.375in 1in 1.25in 0.75in;
+  -ms-grid-columns: 2.125in;
+      grid-template-columns: 2.125in;
+      grid-template-areas: "ud2f43671" "logo2" "addrz" "barcode";
+}
+
+#logo2 {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: logo2;
+  max-width: 2.125in;
+  max-height: 1in;
+}
+
+#addrz {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  grid-area: addrz;
+  padding-top: 0.0625in;
+  font-size: 0.09375in;
+}
+
+#barcode {
+  -ms-grid-row: 4;
+  -ms-grid-column: 1;
+  grid-area: barcode;
+  max-width: 1.59375in;
+  max-height: 0.75in;
+  margin-top: 9.25px;
+}
+/*# sourceMappingURL=styles.css.map */

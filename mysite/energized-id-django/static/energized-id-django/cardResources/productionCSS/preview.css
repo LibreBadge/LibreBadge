@@ -1,0 +1,18 @@
+body {
+  background-color: #f0f0f0;
+}
+
+.page {
+  border-radius: 9px;
+}
+
+#one {
+  position: fixed;
+  left: 0.5in;
+}
+
+#two {
+  position: fixed;
+  left: 3.125in;
+}
+/*# sourceMappingURL=preview.css.map */
