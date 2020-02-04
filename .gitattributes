@@ -1,2 +1,2 @@
 *.py linguist-detectable=true
-*.html linguist-language=Django
+*.html linguist-detectable=false
