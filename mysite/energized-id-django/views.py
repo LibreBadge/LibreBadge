@@ -35,3 +35,7 @@ def login_request(request):
     return render(request = request,
                     template_name = "energized-id-django/login.html",
                     context={"form":form})
+
+@login_required
+def card(request):
+    return render(request, 'energized-id-django/card.html')

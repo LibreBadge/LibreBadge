@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>energized-id-django</title>
+    <meta charset="utf-8" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'energized-id-django/css/bootstrap.min.css' %}" type = "text/css" media="screen"/>
+    <link rel="stylesheet" href="{% static 'energized-id-django/css/card.css' %}" type = "text/css" media="print"/>
+
+</head>
+
+<body>
+    {% include "energized-id-django/navbar.html" %}
+    {% include "energized-id-django/messages.html" %}
+	   {% block content %}
+       {% endblock %}
+</body>
+
+</html>
+<script src="{% static 'energized-id-django/js/jquery-3.4.1.slim.min.js' %}"></script>
+<script src="{% static 'energized-id-django/js/bootstrap.bundle.min.js' %}"></script>
+<script>
+    $(document).ready(function(){
+      $('.toast').toast('show');
+    });
+    </script>
+    
