@@ -3,18 +3,20 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-@login_required
-def index(request):
-    return render(request, 'energized-id-django/home.html')
 
-@login_required
+def index(request):
+    messages.success(request, 'Test message!'),
+    return render(request, 'mywebapp/home.html')
+
+def login(request):
+    return render(request, 'mywebapp/login.html')
+
 def logout_request(request):
     logout(request),
     messages.info(request, "Logged out syccessfully!"),
-    return redirect("energized-id-django:index")
+    return redirect("")
 
 def login_request(request):
     if request.method == 'POST':
@@ -33,5 +35,5 @@ def login_request(request):
             messages.error(request, "Invalid username or password.")
     form = AuthenticationForm()
     return render(request = request,
-                    template_name = "energized-id-django/login.html",
+                    template_name = "mywebapp/login.html",
                     context={"form":form})
