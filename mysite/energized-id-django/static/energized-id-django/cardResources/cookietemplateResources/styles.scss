@@ -1,0 +1,171 @@
+@function nil-row($n) {
+    $ret: "#{unique-id()}";
+    @for $i from 1 to $n {
+        $ret: "#{unique-id()} " + $ret;
+    }
+    @return $ret;
+}
+
+body {
+    font-family: 'Noto Sans', sans-serif;
+    margin: 0;
+}
+
+$id-width: 2.125in;
+$id-height: 3.375in;
+
+.page {
+    width: $id-width;
+    height: $id-height;
+    display: grid;
+    background-color: white;
+    
+
+}
+
+img {
+    margin: auto;
+}
+
+div {
+    text-align: center;
+}
+
+$fixed-dist: 1in/2;
+
+$logo-height: (1 + 3/8 - 13/16) * 1in;
+$qr-height: (2 + 1/8 - 1 - 3/8) * 1in;
+
+#one {
+    grid-template-rows: (3/8) * 1in // padding
+                        (3/8) * 1in // header
+                        (1/16) * 1in // padding
+                        $logo-height // logo
+                        $qr-height // qr
+                        (1/16) * 1in // padding
+                        (1/4) * 1in // title
+                        (7/32) * 1in // name
+                        (1/8) * 1in // id
+                        (5/32) * 1in // security-level
+                        (1/9) * 1in // moto
+                        (1/16) * 1in // padding
+                        (1/16) * 1in // expires
+                        ;
+    grid-template-columns: $id-width/2 $id-width/2;
+    grid-template-areas:
+        nil-row(2)
+        "header header"
+        nil-row(2)
+        "photo logo"
+        "photo qr"
+        nil-row(2)
+        "title title"
+        "name name"
+        "id id"
+        "security-level security-level"
+        "moto moto"
+        nil-row(2)
+        "expires expires"
+        ;
+        
+
+}
+
+@mixin headerColor {
+    background-color: rgb(0,123,255);
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#header {
+    grid-area: header;
+    font-size: (7/32) * 1in;
+    @include headerColor;
+    padding: 5px;
+}
+
+#photo {
+    grid-area: photo;
+    max-width: $id-width/2;
+    max-height: $logo-height + $qr-height;
+}
+
+#logo {
+    grid-area: logo;
+    max-width: $id-width/2;
+    max-height: $logo-height;
+}
+
+#qr {
+    grid-area: qr;
+    max-width: $id-width/2;
+    max-height: $qr-height;
+}
+
+#title {
+    grid-area: title;
+    font-size: (3/32) * 1in;
+}
+
+#name {
+    grid-area: name;
+    font: {
+        size: (5/32) * 1in;
+        weight: bold;
+    }
+}
+
+#id {
+    grid-area: id;
+    font-size: (3/32) * 1in;
+}
+
+#security-level {
+    grid-area: security-level;
+    font-size: (3/32) * 1in;
+}
+
+
+
+#expires {
+    grid-area: expires;
+    font-size: (3/32) * 1in;
+}
+
+#two {
+    grid-template-rows: (3/8) * 1in // padding
+                        1in // logo2
+                        (1 + 1/4) * 1in // addrz
+                        (3/4) * 1in // barcode
+                        ;
+    grid-template-columns: $id-width;
+    grid-template-areas:
+        nil-row(1)
+        "logo2"
+        "addrz"
+        "barcode"
+        ;
+    
+
+}
+
+#logo2 {
+    grid-area: logo2;
+    max-width: $id-width;
+    max-height: 1in;
+}
+
+#addrz {
+    grid-area: addrz;
+    padding-top: (1/16) * 1in;
+    font-size: (3/32) * 1in;
+}
+
+#barcode {
+    grid-area: barcode;
+    max-width: $id-width * (3/4);
+    max-height: (3/4) * 1in;
+    
+    // for some reason, the barcode warps around when the page resizes without a specified top margin
+    margin-top: 9.25px;
+}
