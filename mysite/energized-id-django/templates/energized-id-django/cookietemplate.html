@@ -1,9 +1,11 @@
 {% extends "energized-id-django/card.html" %}
 
 {% load static %}
-<link href="{% static 'energized-id-django/cardResources/cookietemplateResources/styles.css' %}"/>
-<link href="https://fonts.googleapis.com/css?family=Noto+Sans|Open+Sans" type = "stylesheet">
-=
+{% block header %}
+<link rel="stylesheet" href="{% static 'energized-id-django/cardResources/cookietemplateResources/styles.css' %}"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans|Open+Sans"/>
+{% endblock %}
+
 {% block content %}
 
 
