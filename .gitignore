@@ -136,3 +136,4 @@ dmypy.json
 *.pyc
 *.pyc
 *.pyc
+mysite/mysite/__pycache__/__init__.cpython-38.pyc
