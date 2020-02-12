@@ -1,0 +1,10 @@
+{% for i in AlertMessage %}
+<div class="alert alert-{{i.alert_color}} {% if i.alert_dismissable == True %} alert-dismissible {% endif %} fade show" role="alert">
+    {{i.alert_content}}
+    {% if i.alert_dismissable == True %}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    {% endif %}
+  </div>
+{% endfor %}

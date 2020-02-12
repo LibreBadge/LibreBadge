@@ -1,5 +1,11 @@
-{% extends "energized-id-django/header.html" %}
+{% extends "energized-id-django/page.html" %}
 {% block content %}
 <h1>energized-id-django</h1>
 <h2>Welcome!</h2>
+{% for i in WelcomeMessage %}
+    <p>{{i.welcome_title}}</p>
+    <p>{{i.welcome_published}}</p>
+    <p>{{i.welcome_content}}</p>
+    <br><br>
+{% endfor %}
 {% endblock %}

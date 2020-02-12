@@ -16,8 +16,10 @@
 
 <body>
   <div class="noPrint">
-    {% include "energized-id-django/navbar.html" %}
-    {% include "energized-id-django/messages.html" %}
+    {% include "energized-id-django/components/navbar.html" %}
+    {% include "energized-id-django/components/alert.html" %}
+    {% include "energized-id-django/components/messages.html" %}
+    <br>
 </div>
 	   {% block content %}
        {% endblock %}
