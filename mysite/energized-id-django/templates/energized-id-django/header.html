@@ -11,8 +11,11 @@
 <body>
     {% include "energized-id-django/navbar.html" %}
     {% include "energized-id-django/messages.html" %}
-	   {% block content %}
-       {% endblock %}
+    <div class="col">
+      {% block content %}
+      {% endblock %}
+    </div>
+
 </body>
 
 </html>

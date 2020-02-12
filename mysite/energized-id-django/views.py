@@ -4,11 +4,13 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from .models import WelcomeMessage
 
 # Create your views here.
 @login_required
 def index(request):
-    return render(request, 'energized-id-django/home.html')
+    return render(request, 'energized-id-django/home.html',
+    context = {"WelcomeMessage":WelcomeMessage.objects.all})
 
 @login_required
 def logout_request(request):
