@@ -43,3 +43,8 @@ def login_request(request):
 def cookietemplate(request):
     return render(request, 'energized-id-django/cookietemplate.html',
     context = {"AlertMessage":AlertMessage.objects.all})
+
+@login_required
+def databaseTest(request):
+    return render(request, 'energized-id-django/databaseTest.html',
+    context = {"AlertMessage":AlertMessage.objects.all})
