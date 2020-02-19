@@ -22,6 +22,5 @@ Thank you so much [@sentdex](https://github.com/Sentdex) for creating amazing tu
 <br>
 ### Credits
 Original ID badge proof of concept and proper print rendering by [@Quantaly](https://github.com/Quantaly)
-<br>
-SVG ID Template: <a href="https://www.freepik.com/free-photos-vectors/business">Business vector created by freepik - www.freepik.com</a>
+
 
