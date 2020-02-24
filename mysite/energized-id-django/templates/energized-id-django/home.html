@@ -1,11 +1,28 @@
 {% extends "energized-id-django/page.html" %}
 {% block content %}
-<h1>energized-id-django</h1>
-<h2>Welcome!</h2>
-{% for i in WelcomeMessage %}
-    <p>{{i.welcome_title}}</p>
-    <p>{{i.welcome_published}}</p>
-    <p>{{i.welcome_content}}</p>
-    <br><br>
+
+<br>
+<div class="col-6">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary rounded-top">  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <span class="navbar-brand mb-0 h1">Select a template</span>
+      <form class="form-inline my-2 my-lg-1">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+<div class="list-group" style="max-height: 800px;overflow: auto;">
+    {% for i in WelcomeMessage %}
+    <a href="#" class="list-group-item list-group-item-action">
+    {{i.welcome_title}} {{i.welcome_published}}<br>
+    {{i.welcome_content}}
+    </a>
 {% endfor %}
+    <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
+    <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
+    <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">Vestibulum at eros</a>
+  </div>
+</div>
 {% endblock %}
+

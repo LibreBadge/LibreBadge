@@ -7,13 +7,15 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'energized-id-django/css/bootstrap.min.css' %}"/>
     <link rel="stylesheet" href="{% static 'energized-id-django/css/login.css' %}"/>
-    {% include "energized-id-django/components/messages.html" %}
-  
-
 </head>
 
 <body>
     <form class="form-login" method="POST">
+      {% if messages %}
+        {% for message in messages %}
+         {{message}}
+        {% endfor %}
+      {% endif %}
         {% csrf_token %}
             {% if next %}
             <input type="hidden" name="next" value="{{ next }}" />
