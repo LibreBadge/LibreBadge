@@ -1,6 +1,5 @@
 from .imports import *
-
-# Create your views here.
+#Put all views that don't belong elsewere here
 @login_required
 def index(request):
     return render(request, 'LibreBadge/home.html',

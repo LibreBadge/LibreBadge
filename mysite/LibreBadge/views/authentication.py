@@ -1,5 +1,5 @@
 from .imports import *
-
+##Put all authentication related views here
 @login_required
 def logout_request(request):
     logout(request),
