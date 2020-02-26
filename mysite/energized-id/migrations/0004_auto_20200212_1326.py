@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('energized-id-django', '0003_alertmessage'),
+        ('energized-id', '0003_alertmessage'),
     ]
 
     operations = [

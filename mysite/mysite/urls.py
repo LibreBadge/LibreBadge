@@ -18,6 +18,6 @@ from django.urls import path,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('energized-id-django.urls')),
+    path('', include('energized-id.urls')),
 
 ]

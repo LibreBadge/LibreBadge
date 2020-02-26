@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('energized-id-django', '0002_auto_20200212_0937'),
+        ('energized-id', '0002_auto_20200212_0937'),
     ]
 
     operations = [

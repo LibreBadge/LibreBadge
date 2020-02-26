@@ -4,7 +4,7 @@ from .imports import *
 def logout_request(request):
     logout(request),
     messages.info(request, "Logged out syccessfully!"),
-    return redirect("energized-id-django:index")
+    return redirect("energized-id:index")
 
 def login_request(request):
     if request.method == 'POST':
@@ -23,5 +23,5 @@ def login_request(request):
             messages.error(request, "Invalid username or password.")
     form = AuthenticationForm()
     return render(request = request,
-                    template_name = "energized-id-django/login.html",
+                    template_name = "energized-id/login.html",
                     context={"form":form})
