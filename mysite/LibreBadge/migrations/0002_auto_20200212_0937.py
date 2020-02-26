@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('energized-id', '0001_initial'),
+        ('LibreBadge', '0001_initial'),
     ]
 
     operations = [

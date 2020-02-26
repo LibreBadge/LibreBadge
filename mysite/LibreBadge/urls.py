@@ -3,7 +3,7 @@ from django.urls import path
 
 from . import views
 
-app_name = "energized-id"
+app_name = "LibreBadge"
 urlpatterns = [
     url('^$', views.index, name='index'),
     url('login/', views.login_request, name='login'),

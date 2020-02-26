@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>LibreBadge</title>
+    <meta charset="utf-8" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'LibreBadge/css/bootstrap.min.css' %}" type = "text/css"/>
+</head>
+
+<body>
+    {% include "LibreBadge/components/navbar.html" %}
+    {% include "LibreBadge/components/alert.html" %}
+    {% include "LibreBadge/components/messages.html" %}
+    <div class="col">
+      {% block content %}
+      {% endblock %}
+    </div>
+
+</body>
+
+</html>
+<script src="{% static 'LibreBadge/js/jquery-3.4.1.slim.min.js' %}"></script>
+<script src="{% static 'LibreBadge/js/bootstrap.bundle.min.js' %}"></script>
+<script>
+    $(document).ready(function(){
+      $('.toast').toast('show');
+    });
+    </script>
+    
