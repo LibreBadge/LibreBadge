@@ -1,17 +1,13 @@
-body {
-  background-color: #f0f0f0;
-}
-
-.page {
+.IDCard .page {
   border-radius: 9px;
 }
 
-#one {
+.IDCard #one {
   position: fixed;
   left: 0.5in;
 }
 
-#two {
+.IDCard #two {
   position: fixed;
   left: 3.125in;
 }

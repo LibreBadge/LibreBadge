@@ -1,9 +1,7 @@
 $fixed-dist: 1in/2;
 $id-width: 2.125in;
 $id-height: 3.375in;
-body{
-    background-color: #f0f0f0;
-}
+.IDCard{
 //rounds cornets of badge
 .page{
         border-radius: 9px;
@@ -18,4 +16,4 @@ body{
     left: $fixed-dist * 2 + $id-width;
     
 }
-
+}
