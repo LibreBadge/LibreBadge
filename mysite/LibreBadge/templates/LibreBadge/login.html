@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>LibreBadge</title>
+    <meta charset="utf-8" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'LibreBadge/css/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'LibreBadge/css/login.css' %}"/>
+</head>
+
+<body>
+    <form class="form-login" method="POST">
+      {% if messages %}
+        {% for message in messages %}
+         {{message}}
+        {% endfor %}
+      {% endif %}
+        {% csrf_token %}
+            {% if next %}
+            <input type="hidden" name="next" value="{{ next }}" />
+            {% endif %}
+        <h1 class="h3 mb-3 font-weight-normal text-center">Please login</h1>
+        <label for="username" class="sr-only">User name</label>
+        <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+        <label for="password" class="sr-only">Password</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+        <div class="checkbox mb-3">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+        <p class="mt-5 mb-3 text-muted text-center">LibreBadge</p>
+      </form>
+    
+</body>
+
+</html>
+<script src="{% static 'LibreBadge/js/jquery-3.4.1.slim.min.js' %}"></script>
+<script src="{% static 'LibreBadge/js/bootstrap.bundle.min.js' %}"></script>

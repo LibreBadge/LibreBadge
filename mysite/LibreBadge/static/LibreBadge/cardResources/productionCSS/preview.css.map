@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAGA,AAEA,OAFO,CAEP,KAAK,CAAA;EACG,aAAa,EAAE,GAAG;CACzB;;AAJD,AAMC,OANM,CAMN,IAAI,CAAA;EACG,QAAQ,EAAE,KAAK;EACf,IAAI,EAXC,KAAK;CAYjB;;AATD,AAUA,OAVO,CAUP,IAAI,CAAA;EACA,QAAQ,EAAE,KAAK;EACf,IAAI,EAAE,OAA2B;CAEpC",
+    "sources": [
+        "preview.scss"
+    ],
+    "names": [],
+    "file": "preview.css"
+}

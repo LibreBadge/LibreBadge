@@ -1,0 +1,14 @@
+.IDCard .page {
+  border-radius: 9px;
+}
+
+.IDCard #one {
+  position: fixed;
+  left: 0.5in;
+}
+
+.IDCard #two {
+  position: fixed;
+  left: 3.125in;
+}
+/*# sourceMappingURL=preview.css.map */

@@ -1,0 +1,63 @@
+{% extends "LibreBadge/production.html" %}
+
+{% load static %}
+{% block header %}
+<link rel="stylesheet" href="{% static 'LibreBadge/cardResources/cookietemplateResources/styles.css' %}"/>
+{% endblock %}
+
+{% block content %}
+
+
+
+ <div class="IDCard">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans|Open+Sans"/>
+  <div class="page" id="one">
+    <div id="header">COOKIES INC</div>
+    <img src="{% static 'LibreBadge/cardResources/cookietemplateResources/photo.jpg' %}" id="photo" />
+    <img src="{% static 'LibreBadge/cardResources/cookietemplateResources/logo.png' %}" id="logo" />
+    <img src="{% static 'LibreBadge/cardResources/cookietemplateResources/qr.png' %}" id="qr" />
+    <div id="title">Chief Cookie Eater</div>
+    <div id="name">Name</div>
+    <div id="id">Employee ID#: ID </div>
+    <div id="security-level">Security Level </div>
+    <div id="expires">Expires: 08/2019</div>
+</div>
+<div class="page" id="two">
+    <img src="{% static 'LibreBadge/cardResources/cookietemplateResources/logo.png' %}" id="logo2" />
+    <div id="addrz">
+        <div>Cookies Inc</div>
+        <div>123 Seasame Street</div>
+        <div>Houston, Texas</div>
+        <div>(999) 999-9999</div>
+        <div>github.com/LibreBadge</div>
+        <div>more text</div>
+
+    </div>
+    <img src="https://barcode.tec-it.com/barcode.ashx?data=1948293&code=Code39&multiplebarcodes=false&translate-esc=false&unit=Fit&dpi=96&imagetype=Png&rotation=0&color=%23000000&bgcolor=%23ffffff&qunit=Mm&quiet=0" id="barcode" />
+</div>
+ </div>    
+       
+        <div class="container noprint">
+        <div class="row">
+        <div class="col-6">filler</div>
+        <div class="col">
+            <form>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email address</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+        </div>
+        </div>
+{% endblock %}

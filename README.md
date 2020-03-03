@@ -1,8 +1,8 @@
-# energized-id-django
+# LibreBadge
 ## Open source web based ID badge software
-[![issuehunt.io](https://github.com/BoostIO/issuehunt-materials/raw/master/v1/issuehunt-button-v1.svg?sanitize=true)](https://issuehunt.io/r/energized-id/energized-id-django)
+[![issuehunt.io](https://github.com/BoostIO/issuehunt-materials/raw/master/v1/issuehunt-button-v1.svg?sanitize=true)](https://issuehunt.io/r/LibreBadge/LibreBadge)
 <br>
-[![Open Source Helpers](https://www.codetriage.com/energized-id/energized-id-django/badges/users.svg)](https://www.codetriage.com/energized-id/energized-id-django)
+[![Open Source Helpers](https://www.codetriage.com/LibreBadge/LibreBadge/badges/users.svg)](https://www.codetriage.com/LibreBadge/LibreBadge)
 ### Application admin user (for development purpose)
 Username: admin Password: admin
 ### Community code of conduct
