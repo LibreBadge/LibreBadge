@@ -2,7 +2,7 @@
 ## Open source web based ID badge software
 [![issuehunt.io](https://github.com/BoostIO/issuehunt-materials/raw/master/v1/issuehunt-button-v1.svg?sanitize=true)](https://issuehunt.io/r/LibreBadge/LibreBadge)
 <br>
-[![Open Source Helpers](https://www.codetriage.com/LibreBadge/LibreBadge/badges/users.svg)](https://www.codetriage.com/LibreBadge/LibreBadge)
+[![Open Source Helpers](https://www.codetriage.com/librebadge/librebadge/badges/users.svg)](https://www.codetriage.com/LibreBadge/LibreBadge)
 ### Application admin user (for development purpose)
 Username: admin Password: admin
 ### Community code of conduct
@@ -22,5 +22,3 @@ Thank you so much [@sentdex](https://github.com/Sentdex) for creating amazing tu
 <br>
 ### Credits
 Original ID badge proof of concept and proper print rendering by [@Quantaly](https://github.com/Quantaly)
-
-
