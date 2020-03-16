@@ -3,7 +3,7 @@ from .imports import *
 @login_required
 def index(request):
     return render(request, 'LibreBadge/home.html',
-    context = {"WelcomeMessage":WelcomeMessage.objects.all,"AlertMessage":AlertMessage.objects.all})
+    context = {"BadgePage":BadgePage.objects.all,"AlertMessage":AlertMessage.objects.all})
 
 @login_required
 def cookietemplate(request):
