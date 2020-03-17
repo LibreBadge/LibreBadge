@@ -1,14 +1,12 @@
 from django.db import models
 # Create your models here.
 
-class BadgePage(models.Model):
-    name = models.CharField(max_length=200)
-    slug = models.TextField()
-    badge = models.TextField()
-    published = models.DateTimeField('date published')
-
+class BadgeTemplate(models.Model):
+    name = models.CharField(max_length=50)
+    slug = models.CharField(max_length=50)
+    badge = models.FileField()
     def __str__(self):
-        return self.badge_title
+        return self.name
 
 class AlertMessage(models.Model):
     name = models.CharField(max_length=200)

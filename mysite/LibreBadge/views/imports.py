@@ -5,4 +5,4 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from ..models import BadgePage, AlertMessage
+from ..models import AlertMessage, BadgeTemplate
