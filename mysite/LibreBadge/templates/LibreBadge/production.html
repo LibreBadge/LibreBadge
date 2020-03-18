@@ -1,4 +1,13 @@
 {% extends "LibreBadge/page.html" %}
 {% block content %}
-{{slug}}
+{{slug}}<br>
+{% for BadgeTemplate in BadgeTemplate %}
+{% ifequal BadgeTemplate.slug slug %}
+<div class="border-dark">
+    <img src="{{BadgeTemplate.template.url}}">
+</div>
+{% else %}
+Template not found
+{% endifequal %}
+{% endfor %}
 {% endblock %}
