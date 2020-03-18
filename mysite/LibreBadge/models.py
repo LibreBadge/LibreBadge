@@ -3,8 +3,8 @@ from django.db import models
 
 class BadgeTemplate(models.Model):
     name = models.CharField(max_length=50)
-    slug = models.CharField(max_length=50)
-    badge = models.FileField()
+    slug = models.SlugField(unique=True)
+    template = models.FileField(upload_to='badgeTemplates/')
     def __str__(self):
         return self.name
 
@@ -15,4 +15,4 @@ class AlertMessage(models.Model):
     dismissable = models.BooleanField()
 
     def __str__(self):
-        return self.alert_name
+        return self.name
