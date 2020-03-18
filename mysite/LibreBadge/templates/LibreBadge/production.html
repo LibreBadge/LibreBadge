@@ -1,9 +1,10 @@
 {% extends "LibreBadge/page.html" %}
 {% block content %}
+<style>body {background-color: rgb(233, 235, 240)} .badgeTemplate {background-color: white !important}</style>
 {{slug}}<br>
 {% for BadgeTemplate in BadgeTemplate %}
 {% ifequal BadgeTemplate.slug slug %}
-<div class="border-dark">
+<div id="badgeTemplate" class="badgeTemplate" style="width: fit-content;height:fit-content;">
     <img src="{{BadgeTemplate.template.url}}">
 </div>
 {% else %}
