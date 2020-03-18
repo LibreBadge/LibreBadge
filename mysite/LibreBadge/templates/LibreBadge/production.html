@@ -1,40 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "LibreBadge/page.html" %}
+{% block content %}
 
-<head>
-	<title>LibreBadge</title>
-    <meta charset="utf-8" />
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-<meta http-equiv="Pragma" content="no-cache" />
-<meta http-equiv="Expires" content="0" />
-
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'LibreBadge/css/bootstrap.min.css' %}" media="screen"/>
-    <link rel="stylesheet" href="{% static 'LibreBadge/cardResources/productionCSS/preview.css' %}" media="screen"/>
-    <link rel="stylesheet" href="{% static 'LibreBadge/cardResources/productionCSS/print.css' %}" media="print"/>
-    {% block header %}
-    {% endblock %}
- 
-
-</head>
-
-<body>
-  <div class="noPrint">
-    {% include "LibreBadge/components/navbar.html" %}
-    {% include "LibreBadge/components/alert.html" %}
-    {% include "LibreBadge/components/messages.html" %}
-    <br>
-</div>
-	   {% block content %}
-       {% endblock %}
-</body>
-
-</html>
-<script src="{% static 'LibreBadge/js/jquery-3.4.1.slim.min.js' %}"></script>
-<script src="{% static 'LibreBadge/js/bootstrap.bundle.min.js' %}"></script>
-<script>
-    $(document).ready(function(){
-      $('.toast').toast('show');
-    });
-    </script>
-    
+{% endblock %}

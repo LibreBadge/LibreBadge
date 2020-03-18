@@ -6,8 +6,8 @@ def index(request):
     context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all})
 
 @login_required
-def badgeProduction(request):
-    return render(request, 'LibreBadge/home.html',
+def production(request):
+    return render(request, 'LibreBadge/production.html',
     context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all})
 
 @login_required

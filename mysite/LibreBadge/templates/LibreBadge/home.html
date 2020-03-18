@@ -14,11 +14,10 @@
   </nav>
 <div class="list-group" style="max-height: 400px;min-height: 400px; overflow: auto;">
     {% for BadgeTemplate in BadgeTemplate %}
-    <a href="{{BadgeTemplate.slug}}" class="list-group-item list-group-item-action">
+    <a href="production/{{BadgeTemplate.slug}}" class="list-group-item list-group-item-action">
     {{BadgeTemplate.name}}
     </a>
 {% endfor %}
   </div>
 </div>
 {% endblock %}
-
