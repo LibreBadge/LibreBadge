@@ -6,9 +6,9 @@ def index(request):
     context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all})
 
 @login_required
-def production(request):
+def production(request, slug):
     return render(request, 'LibreBadge/production.html',
-    context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all})
+    context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug})
 
 @login_required
 def cookietemplate(request):
