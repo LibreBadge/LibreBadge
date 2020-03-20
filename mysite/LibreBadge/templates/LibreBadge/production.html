@@ -6,7 +6,7 @@
 {% ifequal BadgeTemplate.slug slug %}
 {{BadgeTemplate.name}}
 <div id="badgeTemplate" class="badgeTemplate" style="width: fit-content;height:fit-content;">
-    {% include_anything BadgeTemplate.template.url %}
+    {% include_anything BadgeTemplate.template.path %}
 </div>
 {% else %}
 Template not found
