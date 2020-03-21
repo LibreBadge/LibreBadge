@@ -9,10 +9,10 @@
 <meta http-equiv="Expires" content="0" />
 
     {% load static %}
-    <link rel="stylesheet" href="{% static 'LibreBadge/css/bootstrap.min.css' %}" type = "text/css"/>
+    <link rel="stylesheet" href="{% static 'LibreBadge/css/bootstrap.min.css' %}" type = "text/css"/>    
 </head>
 
-<body>
+<body onbeforeprint"beforeprint()">
     {% include "LibreBadge/components/navbar.html" %}
     {% include "LibreBadge/components/alert.html" %}
     {% include "LibreBadge/components/messages.html" %}
@@ -20,13 +20,15 @@
       {% endblock %}
 
 </body>
-
-</html>
 <script src="{% static 'LibreBadge/js/jquery-3.4.1.slim.min.js' %}"></script>
 <script src="{% static 'LibreBadge/js/bootstrap.bundle.min.js' %}"></script>
 <script>
     $(document).ready(function(){
       $('.toast').toast('show');
     });
+    function beforeprint(){
+      jQuery('#content :not(.print)').remove();
+    }
+
     </script>
-    
+</html>
