@@ -1,11 +1,12 @@
 {% extends "LibreBadge/page.html" %}
+{% load include_anything %}
 {% block content %}
 <style>body {background-color: rgb(245, 245, 255)} .badgeTemplate {background-color: white !important}</style>
 {% for BadgeTemplate in BadgeTemplate %}
 {% ifequal BadgeTemplate.slug slug %}
 {{BadgeTemplate.name}}
 <div id="badgeTemplate" class="badgeTemplate" style="width: fit-content;height:fit-content;">
-    <img src="{{BadgeTemplate.template.url}}">
+        {% include_anything BadgeTemplate.template.path|safe %}
 </div>
 {% else %}
 Template not found
