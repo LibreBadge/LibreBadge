@@ -4,7 +4,9 @@
 <style>body {background-color: rgb(245, 245, 255)} .badgeTemplate {background-color: white !important}</style>
 {% for BadgeTemplate in BadgeTemplate %}
 {% ifequal BadgeTemplate.slug slug %}
-{{BadgeTemplate.name}}
+<div class="alert alert-primary" role="alert">
+    {{BadgeTemplate.name}}
+</div>
 <div id="badgeTemplate" class="badgeTemplate" style="width: fit-content;height:fit-content;">
         {% include_anything BadgeTemplate.template.path|safe %}
 </div>
