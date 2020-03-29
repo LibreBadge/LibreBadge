@@ -27,10 +27,8 @@
       $('.toast').toast('show');
     });
     function myFunction(){
-      $('#content :not(.printme)').remove();
       alert("You are about to print this document!");
-
-    };
+      $('*').not('.printme').remove();    };
 
     </script>
 </html>
