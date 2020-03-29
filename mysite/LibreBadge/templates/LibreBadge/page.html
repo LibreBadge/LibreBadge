@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{% static 'LibreBadge/css/bootstrap.min.css' %}" type = "text/css"/>    
 </head>
 
-<body onbeforeprint"myFunction()">
+<body onbeforeprint="myFunction()">
     {% include "LibreBadge/components/navbar.html" %}
     {% include "LibreBadge/components/alert.html" %}
     {% include "LibreBadge/components/messages.html" %}
@@ -27,7 +27,9 @@
       $('.toast').toast('show');
     });
     function myFunction(){
-      jQuery('#content :not(.print)').remove();
+      $('#content :not(.printme)').remove();
+      alert("You are about to print this document!");
+
     };
 
     </script>
