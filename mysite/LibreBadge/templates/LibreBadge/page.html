@@ -28,7 +28,7 @@
     });
     function printRendering(){
       alert("You are about to print this document!");
-      $(' *').not('.printme *,body,html,visibility:hidden').addClass('hiddenByPrint');
+      $(' *').not('.printme *,body,nav *,head *,style,script,html,visibility:hidden').addClass('hiddenByPrint');
       $('.hiddenByPrint').hide();
       }; 
     function afterPrintRendering(){
