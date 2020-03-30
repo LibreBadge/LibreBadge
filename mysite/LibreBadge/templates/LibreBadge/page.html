@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{% static 'LibreBadge/css/bootstrap.min.css' %}" type = "text/css"/>    
 </head>
 
-<body onbeforeprint="printRendering()">
+<body onbeforeprint="printRendering()" onafterprint="afterPrintRendering()">
     {% include "LibreBadge/components/navbar.html" %}
     {% include "LibreBadge/components/alert.html" %}
     {% include "LibreBadge/components/messages.html" %}
@@ -28,6 +28,12 @@
     });
     function printRendering(){
       alert("You are about to print this document!");
-      $(' *').not('.printme *,body,html').hide();    };  
+      $(' *').not('.printme *,body,html,visibility:hidden').addClass('hiddenByPrint');
+      $('.hiddenByPrint').hide();
+      }; 
+    function afterPrintRendering(){
+      alert("You just printed this document!");
+      $('.hiddenByPrint').show();
+    };     
     </script>
 </html>
