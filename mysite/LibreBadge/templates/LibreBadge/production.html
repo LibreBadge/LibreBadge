@@ -1,7 +1,7 @@
 {% extends "LibreBadge/page.html" %}
 {% load include_anything %}
 {% block content %}
-<style>body {background-color: rgb(245, 245, 255)} .badgeTemplate {background-color: white !important}</style>
+<style>body {background-color: rgb(245, 245, 255)} .badgeTemplate {background-color: white !important; display: inline !important;}</style>
 {% for BadgeTemplate in BadgeTemplate %}
 {% ifequal BadgeTemplate.slug slug %}
 <div class="alert alert-primary" role="alert">
