@@ -27,12 +27,10 @@
       $('.toast').toast('show');
     });
     function printRendering(){
-      alert("You are about to print this document!");
       $(' *').not('.printme *,body,nav *,head *,style,script,html,visibility:hidden').addClass('hiddenByPrint');
       $('.hiddenByPrint').hide();
       }; 
     function afterPrintRendering(){
-      alert("You just printed this document!");
       $('.hiddenByPrint').show();
     };     
     </script>
