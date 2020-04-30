@@ -13,10 +13,14 @@ def production(request, slug):
 
 @login_required
 def databaseTest(request):
-    with connections['cardholders'].cursor() as cursor:
-        cursor.execute("SELECT * FROM cardholders WHERE id = 1")
-        row = cursor.fetchall()
-        print (row)
-        cursor.close()
-    return render(request, 'LibreBadge/databaseTest.html',
-    context = {"AlertMessage":AlertMessage.objects.all})
+    if request.method == 'POST':
+        with connections['cardholders'].cursor() as cursor:
+            cursor.execute("SELECT * FROM cardholders WHERE id = %s", [request.POST.get("id")])
+            row = cursor.fetchall()
+            cursor.close()
+        return render(request, 'LibreBadge/databaseTest.html',
+        context = {"AlertMessage":AlertMessage.objects.all, "row":row})
+        row = "none"
+    else:
+        return render(request, 'LibreBadge/databaseTest.html',
+        context = {"AlertMessage":AlertMessage.objects.all})

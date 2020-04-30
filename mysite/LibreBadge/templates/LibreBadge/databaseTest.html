@@ -3,4 +3,13 @@
 <h1>LibreBadge</h1>
 <h2>Welcome!</h2>
 test
+<form method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="id">id</label>
+      <input type="text" class="form-control" id="id" name="id" aria-describedby="text">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  {{ row }}
 {% endblock %}
