@@ -1,5 +1,13 @@
 from .imports import *
+#db test stuff
 from django.db import connections
+from collections import namedtuple
+def namedtuplefetchall(cursor):
+    "Return all rows from a cursor as a namedtuple"
+    desc = cursor.description
+    nt_result = namedtuple('Result', [col[0] for col in desc])
+    return [nt_result(*row) for row in cursor.fetchall()]
+
 #Put all views that don't belong elsewere here
 @login_required
 def index(request):
@@ -15,8 +23,8 @@ def production(request, slug):
 def databaseTest(request):
     if request.method == 'POST':
         with connections['cardholders'].cursor() as cursor:
-            cursor.execute("SELECT * FROM cardholders WHERE id = %s", [request.POST.get("id")])
-            row = cursor.fetchall()
+            cursor.execute("SELECT * FROM cardholders WHERE ID = %s", [request.POST.get("id")])
+            row = namedtuplefetchall(cursor)
             cursor.close()
         return render(request, 'LibreBadge/databaseTest.html',
         context = {"AlertMessage":AlertMessage.objects.all, "row":row})
