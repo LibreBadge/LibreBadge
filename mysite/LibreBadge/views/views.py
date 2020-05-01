@@ -22,8 +22,9 @@ def production(request, slug):
 @login_required
 def databaseTest(request):
     if request.method == 'POST':
+        postid = request.POST.get("id")
         with connections['cardholders'].cursor() as cursor:
-            cursor.execute("SELECT * FROM cardholders WHERE ID = %s", [request.POST.get("id")])
+            cursor.execute("SELECT * FROM %s WHERE ID = %s",['cardholders',postid])
             row = namedtuplefetchall(cursor)
             cursor.close()
         return render(request, 'LibreBadge/databaseTest.html',
