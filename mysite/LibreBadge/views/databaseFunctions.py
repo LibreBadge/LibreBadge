@@ -8,15 +8,15 @@ def namedtuplefetchall(cursor):
     return [nt_result(*row) for row in cursor.fetchall()]
 
 def select(db, table, field, value):
-    with connections['cardholders'].cursor() as cursor:
+    with connections[db].cursor() as cursor:
                 qry = "SELECT * FROM " + table + " WHERE " + field + " = " + value
                 cursor.execute(qry,[])
                 return namedtuplefetchall(cursor)
                 cursor.close()
 
-def selectLike(db, table, field, value):
-    with connections['cardholders'].cursor() as cursor:
-                qry = "SELECT * FROM " + table + " WHERE " + field + " LIKE " + value
+def selectStartingWith(db, table, field, value):
+    with connections[db].cursor() as cursor:
+                qry = "SELECT * FROM " + table + " WHERE " + field + " LIKE " + value + '%%'
                 cursor.execute(qry,[])
                 return namedtuplefetchall(cursor)
                 cursor.close()
