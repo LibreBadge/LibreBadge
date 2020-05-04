@@ -9,14 +9,14 @@ def namedtuplefetchall(cursor):
 
 def select(db, table, field, value):
     with connections[db].cursor() as cursor:
-                qry = "SELECT * FROM " + table + " WHERE " + field + " = " + value
-                cursor.execute(qry,[])
+                qry = "SELECT * FROM " + table + " WHERE " + field + " = %s"
+                cursor.execute(qry,[value])
                 return namedtuplefetchall(cursor)
                 cursor.close()
 
 def selectStartingWith(db, table, field, value):
     with connections[db].cursor() as cursor:
-                qry = "SELECT * FROM " + table + " WHERE " + field + " LIKE " + value + '%%'
-                cursor.execute(qry,[])
+                qry = "SELECT * FROM " + table + " WHERE " + field + " LIKE %s %%"
+                cursor.execute(qry,[value])
                 return namedtuplefetchall(cursor)
                 cursor.close()
