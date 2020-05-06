@@ -1,11 +1,12 @@
-"Database":[
+{
+"Database":{    
     "cardholders":{
         "DatabaseAddress":"sqlite3://cardholders.sqlite3",
         "Username":"",
-        "Password":"",
+        "Password":""
     }
-]
-"Form":[
+},
+"Form":{
     "FirstName":{
         "DisplayName":"First Name",
         "FormElement":"textbox",
@@ -13,7 +14,7 @@
         "Database":"cardholders",
         "DatabaseColumn":"FirstName",
         "SearchType":"startingWith"
-    }
+    },
     "LastName":{
         "DisplayName":"Last Name",
         "FormElement":"textbox",
@@ -22,12 +23,13 @@
         "DatabaseColumn":"LastName",
         "SearchType":"startingWith"
     }
-]
-"Card":[
+},
+"Card":{
     "CombinedName":{
         "SVGElementID":"101",
         "FormattingRegex":"putregexhere",
         "Database":"cardholders",
-        "DatabaseColumn":"CombinedName",
+        "DatabaseColumn":"CombinedName"
     }
-]
+}
+}
