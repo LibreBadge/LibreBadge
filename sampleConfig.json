@@ -9,16 +9,24 @@
     "FirstName":{
         "DisplayName":"First Name",
         "FormElement":"textbox",
-        "Regex":"putregexhere",
+        "ValidationRegex":"putregexhere",
         "Database":"cardholders",
         "DatabaseColumn":"FirstName",
+        "SearchType":"startingWith"
+    }
+    "LastName":{
+        "DisplayName":"Last Name",
+        "FormElement":"textbox",
+        "ValidationRegex":"putregexhere",
+        "Database":"cardholders",
+        "DatabaseColumn":"LastName",
         "SearchType":"startingWith"
     }
 ]
 "Card":[
     "CombinedName":{
         "SVGElementID":"101",
-        "Regex":"putregexhere",
+        "FormattingRegex":"putregexhere",
         "Database":"cardholders",
         "DatabaseColumn":"CombinedName",
     }
