@@ -9,13 +9,6 @@
 </div>
 <div id="badgeTemplateTempWrapper" class="printme"></div>
 <div id="productionLayout" class="row justify-content-center">
-    <div id="badgeTemplateWrapper" class="">
-        <div id="badgeTemplate" class="printme" style="width: fit-content;height:fit-content;">
-            {% include_anything BadgeTemplate.template.path|safe %}
-        </div>
-    </div>
-    <div class="col-4">
-    </div>
     <div class="col-4">
         <form>
             <div class="form-group">
@@ -48,6 +41,14 @@
             </div>
           </form>
     </div>
+    <div class="col-4">
+    </div>
+    <div id="badgeTemplateWrapper" class="">
+        <div id="badgeTemplate" class="printme" style="width: fit-content;height:fit-content;">
+            {% include_anything BadgeTemplate.template.path|safe %}
+        </div>
+    </div>
+    <div class="col-2"></div>
 </div>
 {% else %}
 Template not found
