@@ -16,7 +16,16 @@ def select(db, table, field, value):
 
 def selectStartingWith(db, table, field, value):
     with connections[db].cursor() as cursor:
-                qry = "SELECT * FROM " + table + " WHERE " + field + " LIKE %s %%"
+                qry = "SELECT * FROM " + table + " WHERE " + field + " LIKE %s%%"
+                cursor.execute(qry,[value])
+                return namedtuplefetchall(cursor)
+                cursor.close()
+
+def formQuery(db, columns, table, values):
+    #columns dict to comma seperated values
+    #for loop for every key/value pair in values append AND + field + like %s%% and append values to value variable in cursor execute
+    with connections[db].cursor() as cursor:
+                qry = "SELECT"+ columns + "FROM " + table + " WHERE " + field + " LIKE %s%%"
                 cursor.execute(qry,[value])
                 return namedtuplefetchall(cursor)
                 cursor.close()
