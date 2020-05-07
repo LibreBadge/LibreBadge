@@ -7,6 +7,14 @@
     }
 },
 "Form":{
+    "EmployeeID":{
+        "DisplayName":"Employee ID",
+        "FormElement":"Employee ID",
+        "ValidationRegex":"putregexhere",
+        "Database":"cardholders",
+        "DatabaseColumn":"EmployeeID",
+        "SearchType":"exact"
+    },
     "FirstName":{
         "DisplayName":"First Name",
         "FormElement":"textbox",
