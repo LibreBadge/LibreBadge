@@ -1,14 +1,53 @@
 {% extends "LibreBadge/page.html" %}
 {% load include_anything %}
 {% block content %}
-<style>.badgeTemplate {background-color: white !important; display: inline !important;}</style>
+<style>.badgeTemplate {background-color: white !important;}</style>
 {% for BadgeTemplate in BadgeTemplate %}
 {% ifequal BadgeTemplate.slug slug %}
 <div class="alert alert-primary" role="alert">
     {{BadgeTemplate.name}}
 </div>
-<div id="badgeTemplate" class="badgeTemplate printme" style="width: fit-content;height:fit-content;">
-        {% include_anything BadgeTemplate.template.path|safe %}
+<div id="badgeTemplateTempWrapper" class="printme"></div>
+<div id="productionLayout" class="row justify-content-center">
+    <div id="badgeTemplateWrapper" class="">
+        <div id="badgeTemplate" class="printme" style="width: fit-content;height:fit-content;">
+            {% include_anything BadgeTemplate.template.path|safe %}
+        </div>
+    </div>
+    <div class="col-4">
+    </div>
+    <div class="col-4">
+        <form>
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Email address</label>
+              <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Example select</label>
+              <select class="form-control" id="exampleFormControlSelect1">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlSelect2">Example multiple select</label>
+              <select multiple class="form-control" id="exampleFormControlSelect2">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Example textarea</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+          </form>
+    </div>
 </div>
 {% else %}
 Template not found
