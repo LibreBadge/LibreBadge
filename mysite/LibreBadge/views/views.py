@@ -1,4 +1,5 @@
 from .imports import *
+import json
 #db test stuff
 from .databaseFunctions import *
 #Put all views that don't belong elsewere here
@@ -9,8 +10,11 @@ def index(request):
 
 @login_required
 def production(request, slug):
+    obj = BadgeTemplate.objects.get(slug=slug)
+   #obj = obj.configFile.readlines()
+    obj = json.loads(obj.configFile.read())
     return render(request, 'LibreBadge/production.html',
-    context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug})
+    context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"obj":obj})
 
 @login_required
 def databaseTest(request):

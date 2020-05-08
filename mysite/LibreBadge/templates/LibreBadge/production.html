@@ -3,6 +3,7 @@
 {% block content %}
 {% for BadgeTemplate in BadgeTemplate %}
 {% ifequal BadgeTemplate.slug slug %}
+{{obj}}
 <div class="alert alert-primary" role="alert">
     {{BadgeTemplate.name}}
 </div>
