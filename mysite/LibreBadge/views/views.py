@@ -13,7 +13,7 @@ def production(request, slug):
     BadgeTemplateInstance = BadgeTemplate.objects.get(slug=slug)
     BadgeTemplateConfigFile = json.loads(BadgeTemplateInstance.configFile.read())
     return render(request, 'LibreBadge/production.html',
-    context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"obj":BadgeTemplateConfigFile})
+    context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile})
 
 @login_required
 def databaseTest(request):
