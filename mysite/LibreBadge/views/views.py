@@ -10,8 +10,11 @@ def index(request):
 
 @login_required
 def production(request, slug):
-    BadgeTemplateInstance = BadgeTemplate.objects.get(slug=slug)
-    BadgeTemplateConfigFile = json.loads(BadgeTemplateInstance.configFile.read())
+    try:
+        BadgeTemplateInstance = BadgeTemplate.objects.get(slug=slug)
+        BadgeTemplateConfigFile = json.loads(BadgeTemplateInstance.configFile.read())
+    except:
+       BadgeTemplateConfigFile = None
     return render(request, 'LibreBadge/production.html',
     context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile})
 
