@@ -1,6 +1,13 @@
 {% extends "LibreBadge/page.html" %}
 {% load include_anything %}
 {% block content %}
+{% for key, value in BadgeTemplateConfigFile.items %}
+    <tr>
+        <td> Key: {{ key }} </td> 
+        <td> Value: {{ value }} </td>
+    </tr>
+{% endfor %}
+<br><br>
 {% for BadgeTemplate in BadgeTemplate %}
 {% ifequal BadgeTemplate.slug slug %}
 {{BadgeTemplateConfigFile}}
