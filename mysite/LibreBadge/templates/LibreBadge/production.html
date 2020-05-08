@@ -2,15 +2,16 @@
 {% load include_anything %}
 {% block content %}
 {% for key, value in BadgeTemplateConfigFile.items %}
-    <tr>
-        <td> Key: {{ key }} </td> 
-        <td> Value: {{ value }} </td>
-    </tr>
+    {{ key }} <br>
+    {% for key2,value2 in value.items %}
+    &emsp; {{ key2 }} <br>
+        {% for key3, value3 in value2.items %}
+        &emsp; &emsp;        {{ key3 }}:{{ value3 }} <br>
+        {% endfor %}
+    {% endfor %}
 {% endfor %}
-<br><br>
 {% for BadgeTemplate in BadgeTemplate %}
 {% ifequal BadgeTemplate.slug slug %}
-{{BadgeTemplateConfigFile}}
 <div class="alert alert-primary" role="alert">
     {{BadgeTemplate.name}}
 </div>
