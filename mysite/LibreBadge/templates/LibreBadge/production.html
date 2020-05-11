@@ -2,21 +2,10 @@
 {% load include_anything %}
 {% block content %}
 {{ BadgeTemplateConfigFile.Form }}
-{% for BadgeTemplateFormConfig in BadgeTemplateConfigFile.FormFields %}
-    {{BadgeTemplateFormConfig}} 
+{% for BadgeTemplateFormConfig in BadgeTemplateConfigFile.FormFields%}
+    {{ BadgeTemplateFormConfig.id}}
 {% endfor %}
 <br><br>
-
-<br> <br>
-{% for key, value in BadgeTemplateConfigFile.items %}
-    {{ key }} <br>  
-    {% for key2,value2 in value.items %}
-    &emsp; {{ key2 }} <br>
-        {% for key3, value3 in value2.items %}
-        &emsp; &emsp;        {{ key3 }}:{{ value3 }} <br>
-        {% endfor %}
-    {% endfor %}
-{% endfor %}
 {% for BadgeTemplate in BadgeTemplate %}
 {% ifequal BadgeTemplate.slug slug %}
 <div class="alert alert-primary" role="alert">
