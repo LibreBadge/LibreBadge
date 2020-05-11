@@ -15,8 +15,15 @@ def production(request, slug):
         BadgeTemplateConfigFile = json.loads(BadgeTemplateInstance.configFile.read())
     except:
        BadgeTemplateConfigFile = None
-    return render(request, 'LibreBadge/production.html',
-    context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile})
+    if request.method == 'POST':
+        for BadgeTemplateFormConfig in BadgeTemplateConfigFile['FormFields']:
+            postDataVar = 'postData_' + BadgeTemplateFormConfig['id']
+            exec(postDataVar + " = request.POST.get(BadgeTemplateFormConfig['id'])")
+            return render(request, 'LibreBadge/production.html',
+            context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile})
+    else:
+        return render(request, 'LibreBadge/production.html',
+        context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile})
 
 @login_required
 def databaseTest(request):
