@@ -19,8 +19,8 @@ def production(request, slug):
         columns = []
         values = []
         for BadgeTemplateFormConfig in BadgeTemplateConfigFile['FormFields']:
-            postDataVar = 'postData_' + BadgeTemplateFormConfig['id']
-            exec(postDataVar + " = request.POST.get(BadgeTemplateFormConfig['id'])")
+            postDataNameVar = 'postData_' + BadgeTemplateFormConfig['id']
+            exec(postDataNameVar + " = request.POST.get(BadgeTemplateFormConfig['id'])")
             columns.append(BadgeTemplateFormConfig['DatabaseColumn'])
             values.append(exec('postData_' + BadgeTemplateFormConfig['id']))
         rows = formQuery('cardholders', columns, 'cardholders', values)
