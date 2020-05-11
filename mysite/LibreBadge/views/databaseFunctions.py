@@ -31,7 +31,7 @@ def formQuery(db, columns, table, values):
                 for x in columns:
                     if i<1:
                         qry = qry + "WHERE " + x + " LIKE %s "
-                        i + 1
+                        i = i + 1
                     else:
                         qry = qry + "AND " + x + " LIKE %s "
                 cursor.execute(qry,values)
