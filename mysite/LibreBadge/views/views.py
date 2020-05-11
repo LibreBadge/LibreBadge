@@ -16,8 +16,8 @@ def production(request, slug):
     except:
        BadgeTemplateConfigFile = None
     if request.method == 'POST':
-        columns = []
-        values = []
+        columns = list()
+        values = list()
         for BadgeTemplateFormConfig in BadgeTemplateConfigFile['FormFields']:
             postDataNameVar = 'postData_' + BadgeTemplateFormConfig['id']
             exec(postDataNameVar + " = request.POST.get(BadgeTemplateFormConfig['id'])")
