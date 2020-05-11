@@ -22,7 +22,7 @@ def production(request, slug):
             postDataVar = 'postData_' + BadgeTemplateFormConfig['id']
             exec(postDataVar + " = request.POST.get(BadgeTemplateFormConfig['id'])")
             columns.append(BadgeTemplateFormConfig['DatabaseColumn'])
-            values.append('postData_' + BadgeTemplateFormConfig['id'])
+            values.append(exec('postData_' + BadgeTemplateFormConfig['id']))
         rows = formQuery('cardholders', columns, 'cardholders', values)
         return render(request, 'LibreBadge/production.html',
         context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile,"rows":rows})

@@ -36,7 +36,7 @@
             "Options":["Red","Green","Blue"],
 			"ValidationRegex": "putregexhere",
 			"Database": "cardholders",
-			"DatabaseColumn": "FirstName"
+			"DatabaseColumn": "AccessLevel"
 		}
 	],
 	"Card": [{
