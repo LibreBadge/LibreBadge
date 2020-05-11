@@ -1,8 +1,15 @@
 {% extends "LibreBadge/page.html" %}
 {% load include_anything %}
 {% block content %}
+{{ BadgeTemplateConfigFile.Form }}
+{% for BadgeTemplateFormConfig in BadgeTemplateConfigFile.FormFields %}
+    {{BadgeTemplateFormConfig}} 
+{% endfor %}
+<br><br>
+
+<br> <br>
 {% for key, value in BadgeTemplateConfigFile.items %}
-    {{ key }} <br>
+    {{ key }} <br>  
     {% for key2,value2 in value.items %}
     &emsp; {{ key2 }} <br>
         {% for key3, value3 in value2.items %}

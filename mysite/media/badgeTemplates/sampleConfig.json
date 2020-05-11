@@ -1,43 +1,40 @@
 {
-"Database":{    
-    "cardholders":{
-        "DatabaseAddress":"sqlite3://cardholders.sqlite3",
-        "Username":"",
-        "Password":""
-    }
-},
-"Form":{
-    "EmployeeID":{
-        "DisplayName":"Employee ID",
-        "FormElement":"Employee ID",
-        "ValidationRegex":"putregexhere",
-        "Database":"cardholders",
-        "DatabaseColumn":"EmployeeID",
-        "SearchType":"exact"
-    },
-    "FirstName":{
-        "DisplayName":"First Name",
-        "FormElement":"textbox",
-        "ValidationRegex":"putregexhere",
-        "Database":"cardholders",
-        "DatabaseColumn":"FirstName",
-        "SearchType":"startingWith"
-    },
-    "LastName":{
-        "DisplayName":"Last Name",
-        "FormElement":"textbox",
-        "ValidationRegex":"putregexhere",
-        "Database":"cardholders",
-        "DatabaseColumn":"LastName",
-        "SearchType":"startingWith"
-    }
-},
-"Card":{
-    "CombinedName":{
-        "SVGElementID":"101",
-        "FormattingRegex":"putregexhere",
-        "Database":"cardholders",
-        "DatabaseColumn":"CombinedName"
-    }
-}
+	"Database": [{
+		"id": "cardholders",
+		"DatabaseAddress": "sqlite3://cardholders.sqlite3",
+		"Username": "",
+		"Password": ""
+	}],
+	"FormFields": [{
+			"id": "EmployeeID",
+			"DisplayName": "Employee ID",
+			"FormElement": "PrimaryKey",
+			"ValidationRegex": "putregexhere",
+			"Database": "cardholders",
+			"DatabaseColumn": "EmployeeID"
+		},
+		{
+			"id": "FirstName",
+			"DisplayName": "First Name",
+			"FormElement": "text",
+			"ValidationRegex": "putregexhere",
+			"Database": "cardholders",
+			"DatabaseColumn": "FirstName"
+		},
+		{
+			"id": "LastName",
+			"DisplayName": "Last Name",
+			"FormElement": "text",
+			"ValidationRegex": "putregexhere",
+			"Database": "cardholders",
+			"DatabaseColumn": "LastName"
+		}
+	],
+	"Card": [{
+		"id": "CombinedName",
+		"SVGElementID": "101",
+		"FormattingRegex": "putregexhere",
+		"Database": "cardholders",
+		"DatabaseColumn": "CombinedName"
+	}]
 }
