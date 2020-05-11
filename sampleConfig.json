@@ -28,6 +28,15 @@
 			"ValidationRegex": "putregexhere",
 			"Database": "cardholders",
 			"DatabaseColumn": "LastName"
+		},
+        {
+			"id": "AccessLevel",
+			"DisplayName": "Access Level",
+			"FormElement": "dropdown",
+            "Options":["Red","Green","Blue"],
+			"ValidationRegex": "putregexhere",
+			"Database": "cardholders",
+			"DatabaseColumn": "FirstName"
 		}
 	],
 	"Card": [{
