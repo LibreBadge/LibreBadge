@@ -8,7 +8,7 @@
 	"FormFields": [{
 			"id": "EmployeeID",
 			"DisplayName": "Employee ID",
-			"FormElement": "PrimaryKey",
+			"FormElement": "primaryKey",
 			"ValidationRegex": "putregexhere",
 			"Database": "cardholders",
 			"DatabaseColumn": "EmployeeID"

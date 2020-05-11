@@ -1,11 +1,6 @@
 {% extends "LibreBadge/page.html" %}
 {% load include_anything %}
 {% block content %}
-{{ BadgeTemplateConfigFile.Form }}
-{% for BadgeTemplateFormConfig in BadgeTemplateConfigFile.FormFields%}
-    {{ BadgeTemplateFormConfig.id}}
-{% endfor %}
-<br><br>
 {% for BadgeTemplate in BadgeTemplate %}
 {% ifequal BadgeTemplate.slug slug %}
 <div class="alert alert-primary" role="alert">
@@ -15,10 +10,20 @@
 <div class="row justify-content-center">
     <div class="col-4 border">
         <form>
-            <div class="form-group">
-              <label for="exampleFormControlInput1">Email address</label>
-              <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-            </div>
+             {% for BadgeTemplateFormConfig in BadgeTemplateConfigFile.FormFields%}
+              {% if BadgeTemplateFormConfig.FormElement == "primaryKey" %}
+                <div class="form-group">
+                  <label for="{{ BadgeTemplateFormConfig.id}}">{{ BadgeTemplateFormConfig.DisplayName}}</label>
+                  <input type="text" class="form-control" id="{{ BadgeTemplateFormConfig.id}}" placeholder="{{ BadgeTemplateFormConfig.DisplayName}}">
+                </div>
+              {% endif %}
+              {% if BadgeTemplateFormConfig.FormElement == "text" %}
+                <div class="form-group">
+                  <label for="{{ BadgeTemplateFormConfig.id}}">{{ BadgeTemplateFormConfig.DisplayName}}</label>
+                  <input type="text" class="form-control" id="{{ BadgeTemplateFormConfig.id}}" placeholder="{{ BadgeTemplateFormConfig.DisplayName}}">
+                </div>
+              {% endif %}
+          {% endfor %}  
             <div class="form-group">
               <label for="exampleFormControlSelect1">Example select</label>
               <select class="form-control" id="exampleFormControlSelect1">
@@ -60,10 +65,9 @@
     <table class="table table-bordered table-hover">
         <thead>
           <tr>
-            <th scope="col">Employee ID</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">Handle</th>
+          {% for BadgeTemplateFormConfig in BadgeTemplateConfigFile.FormFields%}
+            <th scope="col">{{ BadgeTemplateFormConfig.id}}</th>
+          {% endfor %}
           </tr>
         </thead>
         <tbody>
