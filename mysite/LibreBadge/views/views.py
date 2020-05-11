@@ -19,10 +19,9 @@ def production(request, slug):
         columns = list()
         values = list()
         for BadgeTemplateFormConfig in BadgeTemplateConfigFile['FormFields']:
-            postDataNameVar = 'postData_' + BadgeTemplateFormConfig['id']
-            exec(postDataNameVar + " = request.POST.get(BadgeTemplateFormConfig['id'])")
+            postData = request.POST.get(BadgeTemplateFormConfig['id'])
             columns.append(BadgeTemplateFormConfig['DatabaseColumn'])
-            values.append(exec('postData_' + BadgeTemplateFormConfig['id']))
+            values.append(postData)
         rows = formQuery('cardholders', columns, 'cardholders', values)
         return render(request, 'LibreBadge/production.html',
         context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile,"rows":rows})
