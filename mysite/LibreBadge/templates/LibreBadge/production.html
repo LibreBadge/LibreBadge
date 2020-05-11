@@ -14,13 +14,13 @@
               {% if BadgeTemplateFormConfig.FormElement == "primaryKey" %}
                 <div class="form-group">
                   <label for="{{ BadgeTemplateFormConfig.id}}">{{ BadgeTemplateFormConfig.DisplayName}}</label>
-                  <input type="text" class="form-control" id="{{ BadgeTemplateFormConfig.id}}" placeholder="{{ BadgeTemplateFormConfig.DisplayName}}">
+                  <input type="text" class="form-control" id="{{ BadgeTemplateFormConfig.id}}" name="{{ BadgeTemplateFormConfig.id }}" placeholder="{{ BadgeTemplateFormConfig.DisplayName}}">
                 </div>
               {% endif %}
               {% if BadgeTemplateFormConfig.FormElement == "text" %}
                 <div class="form-group">
                   <label for="{{ BadgeTemplateFormConfig.id}}">{{ BadgeTemplateFormConfig.DisplayName}}</label>
-                  <input type="text" class="form-control" id="{{ BadgeTemplateFormConfig.id}}" placeholder="{{ BadgeTemplateFormConfig.DisplayName}}">
+                  <input type="text" class="form-control" id="{{ BadgeTemplateFormConfig.id}}" name="{{ BadgeTemplateFormConfig.id }}" placeholder="{{ BadgeTemplateFormConfig.DisplayName}}">
                 </div>
               {% endif %}
           {% endfor %}  
