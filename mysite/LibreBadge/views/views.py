@@ -16,11 +16,16 @@ def production(request, slug):
     except:
        BadgeTemplateConfigFile = None
     if request.method == 'POST':
+        columns = []
+        values = []
         for BadgeTemplateFormConfig in BadgeTemplateConfigFile['FormFields']:
             postDataVar = 'postData_' + BadgeTemplateFormConfig['id']
             exec(postDataVar + " = request.POST.get(BadgeTemplateFormConfig['id'])")
-            return render(request, 'LibreBadge/production.html',
-            context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile})
+            columns.append(BadgeTemplateFormConfig['DatabaseColumn'])
+            values.append('postData_' + BadgeTemplateFormConfig['id'])
+        rows = formQuery('cardholders', columns, 'cardholders', values)
+        return render(request, 'LibreBadge/production.html',
+        context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile,"rows":rows})
     else:
         return render(request, 'LibreBadge/production.html',
         context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile})
