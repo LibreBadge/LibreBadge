@@ -8,7 +8,7 @@
 </div>
 <div id="badgeTemplateTempWrapper" class="printme"></div>
 <div class="row justify-content-center">
-    <div class="col-4 border">
+    <div class="col-4 border" style="height: 500px;resize: vertical;overflow: auto;">
         <form method="POST">
             {% csrf_token %}
              {% for BadgeTemplateFormConfig in BadgeTemplateConfigFile.FormFields%}
@@ -102,7 +102,6 @@
       </table>
 </div>
 </div>
-{{rows}}
 {% else %}
 Template not found
 {% endifequal %}
