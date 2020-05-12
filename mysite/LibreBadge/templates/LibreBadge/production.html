@@ -1,14 +1,106 @@
 {% extends "LibreBadge/page.html" %}
 {% load include_anything %}
 {% block content %}
-<style>.badgeTemplate {background-color: white !important; display: inline !important;}</style>
 {% for BadgeTemplate in BadgeTemplate %}
 {% ifequal BadgeTemplate.slug slug %}
 <div class="alert alert-primary" role="alert">
     {{BadgeTemplate.name}}
 </div>
-<div id="badgeTemplate" class="badgeTemplate printme" style="width: fit-content;height:fit-content;">
-        {% include_anything BadgeTemplate.template.path|safe %}
+<div id="badgeTemplateTempWrapper" class="printme"></div>
+<div class="row justify-content-center">
+    <div class="col-4 border" style="height: 500px;resize: vertical;overflow: auto;">
+        <form method="POST">
+            {% csrf_token %}
+             {% for BadgeTemplateFormConfig in BadgeTemplateConfigFile.FormFields%}
+              {% if BadgeTemplateFormConfig.FormElement == "primaryKey" %}
+                <div class="form-group">
+                  <label for="{{ BadgeTemplateFormConfig.id}}">{{ BadgeTemplateFormConfig.DisplayName}}</label>
+                  <input type="text" class="form-control" id="{{ BadgeTemplateFormConfig.id}}" name="{{ BadgeTemplateFormConfig.id }}" placeholder="{{ BadgeTemplateFormConfig.DisplayName}}">
+                </div>
+              {% endif %}
+              {% if BadgeTemplateFormConfig.FormElement == "text" %}
+                <div class="form-group">
+                  <label for="{{ BadgeTemplateFormConfig.id}}">{{ BadgeTemplateFormConfig.DisplayName}}</label>
+                  <input type="text" class="form-control" id="{{ BadgeTemplateFormConfig.id}}" name="{{ BadgeTemplateFormConfig.id }}" placeholder="{{ BadgeTemplateFormConfig.DisplayName}}">
+                </div>
+              {% endif %}
+              {% if BadgeTemplateFormConfig.FormElement == "dropdown" %}
+                <div class="form-group">
+                  <label for="{{ BadgeTemplateFormConfig.id}}">{{ BadgeTemplateFormConfig.DisplayName}}</label>
+                  <select class="form-control" id="{{ BadgeTemplateFormConfig.id}}" name="{{ BadgeTemplateFormConfig.id }}">
+                    <option value="" selected>Select...</option>
+                    {% for Option in BadgeTemplateFormConfig.Options %}
+                      <option>{{ Option }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              {% endif %}
+          {% endfor %}  
+            <div class="form-group">
+              <label for="exampleFormControlSelect2">Example multiple select</label>
+              <select multiple class="form-control" id="exampleFormControlSelect2">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Example textarea</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+             <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+    </div>
+    <div class="col-4">
+    </div>
+    <div id="badgeTemplateWrapper" class="border" style="width: fit-content;height:fit-content;">
+        <div id="badgeTemplate" class="printme" style="width: fit-content;height:fit-content;background-color: white!important;">
+            {% include_anything BadgeTemplate.template.path|safe %}
+        </div>
+    </div>
+    <div class="col-2"></div>
+</div>
+<br>
+<div class="row align-items-end justify-content-center">
+<div class="col">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="">Results</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+    <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+          {% for BadgeTemplateFormConfig in BadgeTemplateConfigFile.FormFields%}
+            <th scope="col">{{ BadgeTemplateFormConfig.DisplayName}}</th>
+          {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in rows %}
+          <tr>
+            <th scope="row"></th>
+            {% for key in row %}
+            <td>{{key}}</td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+</div>
 </div>
 {% else %}
 Template not found

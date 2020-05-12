@@ -2,9 +2,10 @@ from django.db import models
 # Create your models here.
 
 class BadgeTemplate(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50,unique=True)
     slug = models.SlugField(unique=True)
     template = models.FileField(upload_to='badgeTemplates/',unique=True)
+    configFile = models.FileField(upload_to='badgeTemplates/',unique=True)
     def __str__(self):
         return self.name
 

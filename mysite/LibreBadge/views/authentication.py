@@ -1,4 +1,6 @@
 from .imports import *
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, logout, authenticate
 ##Put all authentication related views here
 @login_required
 def logout_request(request):

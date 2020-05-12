@@ -27,11 +27,13 @@
       $('.toast').toast('show');
     });
     function printRendering(){
-      $(' *').not('.printme *,body,nav *,head *,style,script,html,visibility:hidden').addClass('hiddenByPrint');
+      $('#badgeTemplateTempWrapper').append( $('#badgeTemplateWrapper>*') );
+      $(' *').not('.printme *,.printme,body,nav *,head *,style,script,html,visibility:hidden').addClass('hiddenByPrint');
       $('.hiddenByPrint').hide();
       }; 
     function afterPrintRendering(){
       $('.hiddenByPrint').show();
+      $('#badgeTemplateWrapper').append( $('#badgeTemplateTempWrapper>*') );
     };     
     </script>
 </html>
