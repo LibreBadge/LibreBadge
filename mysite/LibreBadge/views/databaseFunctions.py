@@ -23,8 +23,8 @@ def selectStartingWith(db, table, field, value):
 
 def formQuery(db, columns, table, values):
     columnsComma = ', '.join(columns)
-    #columns and values dict to comma seperated values
-    #for loop for every key/value pair in values append AND + field + like %s%% and append values to value variable in cursor execute
+    valuesLike = [sub + '%' for sub in values]
+    print(valuesLike) 
     with connections[db].cursor() as cursor:
                 qry = "SELECT "+ columnsComma + " FROM " + table + " "
                 i=0
@@ -34,6 +34,6 @@ def formQuery(db, columns, table, values):
                         i = i + 1
                     else:
                         qry = qry + "AND " + x + " LIKE %s "
-                cursor.execute(qry,values)
+                cursor.execute(qry,valuesLike)
                 return namedtuplefetchall(cursor)
                 cursor.close()
