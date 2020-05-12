@@ -28,7 +28,7 @@
                 <div class="form-group">
                   <label for="{{ BadgeTemplateFormConfig.id}}">{{ BadgeTemplateFormConfig.DisplayName}}</label>
                   <select class="form-control" id="{{ BadgeTemplateFormConfig.id}}" name="{{ BadgeTemplateFormConfig.id }}">
-                    <option selected disabled>Select...</option>
+                    <option value="" selected disabled>Select...</option>
                     {% for Option in BadgeTemplateFormConfig.Options %}
                       <option>{{ Option }}</option>
                     {% endfor %}
