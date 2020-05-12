@@ -35,5 +35,5 @@ def formQuery(db, columns, table, values):
                     else:
                         qry = qry + "AND " + x + " LIKE %s "
                 cursor.execute(qry,valuesLike)
-                return namedtuplefetchall(cursor)
+                return cursor.fetchall()
                 cursor.close()

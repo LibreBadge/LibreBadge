@@ -83,30 +83,21 @@
     <table class="table table-bordered table-hover">
         <thead>
           <tr>
+            <th scope="col"></th>
           {% for BadgeTemplateFormConfig in BadgeTemplateConfigFile.FormFields%}
             <th scope="col">{{ BadgeTemplateFormConfig.DisplayName}}</th>
           {% endfor %}
           </tr>
         </thead>
         <tbody>
+          {% for row in rows %}
           <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
+            <th scope="row"></th>
+            {% for key in row %}
+            <td>{{key}}</td>
+            {% endfor %}
           </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-          </tr>
+          {% endfor %}
         </tbody>
       </table>
 </div>
