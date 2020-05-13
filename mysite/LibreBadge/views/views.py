@@ -28,15 +28,3 @@ def production(request, slug):
     else:
         return render(request, 'LibreBadge/production.html',
         context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile})
-
-@login_required
-def databaseTest(request):
-    if request.method == 'POST':
-        postid = request.POST.get("id")
-        row = select("cardholders", "cardholders", "ID", postid)
-        return render(request, 'LibreBadge/databaseTest.html',
-        context = {"AlertMessage":AlertMessage.objects.all, "row":row})
-        row = "none"
-    else:
-        return render(request, 'LibreBadge/databaseTest.html',
-        context = {"AlertMessage":AlertMessage.objects.all})
