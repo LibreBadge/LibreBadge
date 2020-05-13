@@ -77,8 +77,8 @@
         </thead>
         <tbody>
           {% for row in rows %}
-          <tr>
-            <th scope="row"></th>
+          <tr onclick="document.location='{{ row.0 }}'" style="cursor: pointer;">
+            <th scope="row">{{forloop.counter}}</th>
             {% for key in row %}
             <td>{{key}}</td>
             {% endfor %}
