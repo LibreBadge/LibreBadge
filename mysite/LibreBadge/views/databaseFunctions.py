@@ -1,9 +1,16 @@
 from django.db import connections
 
+def select(db, columns, table, field, value):
+    columnsComma = ', '.join(columns)
+    with connections[db].cursor() as cursor:
+                qry = "SELECT "+ columnsComma + " FROM " + table + " WHERE " + field + " = %"
+                cursor.execute(qry,[value])
+                return cursor.fetchall()
+                cursor.close()
+
 def formQuery(db, columns, table, values):
     columnsComma = ', '.join(columns)
     valuesLike = [sub + '%' for sub in values]
-    print(valuesLike) 
     with connections[db].cursor() as cursor:
                 qry = "SELECT "+ columnsComma + " FROM " + table + " "
                 i=0
