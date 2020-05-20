@@ -34,6 +34,9 @@
     function afterPrintRendering(){
       $('.hiddenByPrint').show();
       $('#badgeTemplateWrapper').append( $('#badgeTemplateTempWrapper>*') );
-    };     
+    };
+    function replaceAttribute(id,attribute,value){
+      $("#badgeTemplate").children()('#'+id).attr(attribute, value);
+    }   
     </script>
 </html>
