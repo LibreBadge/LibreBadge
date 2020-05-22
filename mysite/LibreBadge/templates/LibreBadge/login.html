@@ -11,11 +11,6 @@
 
 <body>
     <form class="form-login" method="POST">
-      {% if messages %}
-        {% for message in messages %}
-         {{message}}
-        {% endfor %}
-      {% endif %}
         {% csrf_token %}
             {% if next %}
             <input type="hidden" name="next" value="{{ next }}" />

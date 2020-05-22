@@ -5,7 +5,7 @@ from django.contrib.auth import login, logout, authenticate
 @login_required
 def logout_request(request):
     logout(request),
-    messages.info(request, "Logged out syccessfully!"),
+    messages.info(request, "Logged out successfully!"),
     return redirect("LibreBadge:index")
 
 def login_request(request):
