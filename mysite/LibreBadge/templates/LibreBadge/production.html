@@ -106,19 +106,19 @@
             {% if BadgeTemplateFormConfig.FormElement == "primaryKey" %}
               <div class="form-group">
                 <label for="{{ BadgeTemplateFormConfig.id}}">{{ BadgeTemplateFormConfig.DisplayName}}</label>
-                <input type="text" class="form-control" id="{{ BadgeTemplateFormConfig.id}}" name="{{ BadgeTemplateFormConfig.id }}" placeholder="{{ BadgeTemplateFormConfig.DisplayName}}">
+                <input type="text" class="form-control" id="Modal{{ BadgeTemplateFormConfig.id}}" name="{{ BadgeTemplateFormConfig.id }}" placeholder="{{ BadgeTemplateFormConfig.DisplayName}}">
               </div>
             {% endif %}
             {% if BadgeTemplateFormConfig.FormElement == "text" %}
               <div class="form-group">
                 <label for="{{ BadgeTemplateFormConfig.id}}">{{ BadgeTemplateFormConfig.DisplayName}}</label>
-                <input type="text" class="form-control" id="{{ BadgeTemplateFormConfig.id}}" name="{{ BadgeTemplateFormConfig.id }}" placeholder="{{ BadgeTemplateFormConfig.DisplayName}}">
+                <input type="text" class="form-control" id="Modal{{ BadgeTemplateFormConfig.id}}" name="{{ BadgeTemplateFormConfig.id }}" placeholder="{{ BadgeTemplateFormConfig.DisplayName}}">
               </div>
             {% endif %}
             {% if BadgeTemplateFormConfig.FormElement == "dropdown" %}
               <div class="form-group">
                 <label for="{{ BadgeTemplateFormConfig.id}}">{{ BadgeTemplateFormConfig.DisplayName}}</label>
-                <select class="form-control" id="{{ BadgeTemplateFormConfig.id}}" name="{{ BadgeTemplateFormConfig.id }}">
+                <select class="form-control" id="Modal{{ BadgeTemplateFormConfig.id}}" name="{{ BadgeTemplateFormConfig.id }}">
                   <option value="" selected>Select...</option>
                   {% for Option in BadgeTemplateFormConfig.Options %}
                     <option>{{ Option }}</option>
