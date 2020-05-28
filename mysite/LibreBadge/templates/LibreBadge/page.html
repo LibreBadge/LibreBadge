@@ -37,6 +37,16 @@
     };
     function replaceAttribute(id,attribute,value){
       $("#badgeTemplate").children()('#'+id).attr(attribute, value);
-    }   
+    }
+    function searchFunction(inputElement,elementSelector){
+      $(document).ready(function(){
+      $(inputElement).on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $(elementSelector).filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+      });
+      });   
+    }
     </script>
 </html>

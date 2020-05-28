@@ -28,3 +28,12 @@ def production(request, slug):
     else:
         return render(request, 'LibreBadge/production.html',
         context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile})
+
+@login_required
+def productionCreate(request,slug):
+    try:
+        BadgeTemplateInstance = BadgeTemplate.objects.get(slug=slug)
+        BadgeTemplateConfigFile = json.loads(BadgeTemplateInstance.configFile.read())
+    except:
+       BadgeTemplateConfigFile = None
+       

@@ -6,13 +6,14 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary rounded-top">  
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <span class="navbar-brand mb-0 h1">Select a template</span>
+        <ul class="navbar-nav mr-auto">
+        </ul>
       <form class="form-inline my-2 my-lg-1">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+        <input class="form-control mr--2" type="search" placeholder="Search" aria-label="Search">
       </form>
     </div>
   </nav>
-<div class="list-group" style="max-height: 400px;min-height: 400px; overflow: auto;">
+<div class="list-group" style="max-height: 25%;min-height: 25%; overflow: auto;">
     {% for BadgeTemplate in BadgeTemplate %}
     <a href="production/{{BadgeTemplate.slug}}" class="list-group-item list-group-item-action">
     {{BadgeTemplate.name}}
