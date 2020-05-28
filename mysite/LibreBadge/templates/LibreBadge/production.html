@@ -94,17 +94,41 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Create New Record</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
+        <form method="POST">
+          {% csrf_token %}
+           {% for BadgeTemplateFormConfig in BadgeTemplateConfigFile.FormFields%}
+            {% if BadgeTemplateFormConfig.FormElement == "primaryKey" %}
+              <div class="form-group">
+                <label for="{{ BadgeTemplateFormConfig.id}}">{{ BadgeTemplateFormConfig.DisplayName}}</label>
+                <input type="text" class="form-control" id="{{ BadgeTemplateFormConfig.id}}" name="{{ BadgeTemplateFormConfig.id }}" placeholder="{{ BadgeTemplateFormConfig.DisplayName}}">
+              </div>
+            {% endif %}
+            {% if BadgeTemplateFormConfig.FormElement == "text" %}
+              <div class="form-group">
+                <label for="{{ BadgeTemplateFormConfig.id}}">{{ BadgeTemplateFormConfig.DisplayName}}</label>
+                <input type="text" class="form-control" id="{{ BadgeTemplateFormConfig.id}}" name="{{ BadgeTemplateFormConfig.id }}" placeholder="{{ BadgeTemplateFormConfig.DisplayName}}">
+              </div>
+            {% endif %}
+            {% if BadgeTemplateFormConfig.FormElement == "dropdown" %}
+              <div class="form-group">
+                <label for="{{ BadgeTemplateFormConfig.id}}">{{ BadgeTemplateFormConfig.DisplayName}}</label>
+                <select class="form-control" id="{{ BadgeTemplateFormConfig.id}}" name="{{ BadgeTemplateFormConfig.id }}">
+                  <option value="" selected>Select...</option>
+                  {% for Option in BadgeTemplateFormConfig.Options %}
+                    <option>{{ Option }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            {% endif %}
+        {% endfor %}  
+           <button type="submit" class="btn btn-primary" data-dismiss="modal">Save</button>
+        </form>
       </div>
     </div>
   </div>

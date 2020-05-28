@@ -36,4 +36,16 @@ def productionCreate(request,slug):
         BadgeTemplateConfigFile = json.loads(BadgeTemplateInstance.configFile.read())
     except:
        BadgeTemplateConfigFile = None
-       
+    if request.method == 'POST':
+        columns = list()
+        values = list()
+        for BadgeTemplateFormConfig in BadgeTemplateConfigFile['FormFields']:
+            postData = request.POST.get(BadgeTemplateFormConfig['id'])
+            columns.append(BadgeTemplateFormConfig['DatabaseColumn'])
+            values.append(postData)
+        rows = formCreate('cardholders', columns, 'cardholders', values)
+        return render(request, 'LibreBadge/production.html',
+        context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile,"rows":rows})
+    else:
+        return render(request, 'LibreBadge/production.html',
+        context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile})
