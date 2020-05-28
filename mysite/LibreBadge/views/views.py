@@ -44,8 +44,8 @@ def productionCreate(request,slug):
             columns.append(BadgeTemplateFormConfig['DatabaseColumn'])
             values.append(postData)
         rows = formCreate('cardholders', columns, 'cardholders', values)
-        return render(request, 'LibreBadge/production.html',
+        return render(request, 'LibreBadge/productionCreate.html',
         context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile,"rows":rows})
     else:
-        return render(request, 'LibreBadge/production.html',
+        return render(request, 'LibreBadge/productionCreate.html',
         context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile})

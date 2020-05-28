@@ -23,15 +23,17 @@ def formQuery(db, columns, table, values):
                 cursor.close()
 
 def formCreate(db, columns, table, values):
+    print(str(values[0]))
+    value = (str(values[0]))
     with connections[db].cursor() as cursor:
                 qry = "SELECT "+ columns[0] + " FROM " + table + " WHERE " + columns[0] + " = %s "
-                cursor.execute(qry,values[0])
+                cursor.execute(qry,value)
                 row = cursor.fetchall()
                 cursor.close()
-    if row is not None:
+    if row != None:
         raise Exception("Record with the same primary key already exists")
     with connections[db].cursor() as cursor:
                 qry = "INSERT INTO " + table + " ("+ columnsComma + ") Values (" + values + ");"
-                cursor.execute(qry,valuesLike)
+                cursor.execute(qry,values)
                 return cursor.fetchall()
                 cursor.close()
