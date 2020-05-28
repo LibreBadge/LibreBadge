@@ -31,7 +31,7 @@ def formCreate(db, columns, table, values):
     if row is not None:
         raise Exception("Record with the same primary key already exists")
     with connections[db].cursor() as cursor:
-                qry = "INSERT INTO " + table " ("+ columnsComma + ") Values (" + values + ");"
+                qry = "INSERT INTO " + table + " ("+ columnsComma + ") Values (" + values + ");"
                 cursor.execute(qry,valuesLike)
                 return cursor.fetchall()
                 cursor.close()
