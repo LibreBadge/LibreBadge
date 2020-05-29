@@ -8,7 +8,7 @@ def index(request):
     context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all})
 
 @login_required
-def production(request, slug):
+def productionSearch(request, slug):
     try:
         BadgeTemplateInstance = BadgeTemplate.objects.get(slug=slug)
         BadgeTemplateConfigFile = json.loads(BadgeTemplateInstance.configFile.read())
@@ -22,10 +22,10 @@ def production(request, slug):
             columns.append(BadgeTemplateFormConfig['DatabaseColumn'])
             values.append(postData)
         rows = formQuery('cardholders', columns, 'cardholders', values)
-        return render(request, 'LibreBadge/production.html',
+        return render(request, 'LibreBadge/productionSearch.html',
         context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile,"rows":rows})
     else:
-        return render(request, 'LibreBadge/production.html',
+        return render(request, 'LibreBadge/productionSearch.html',
         context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile})
 
 @login_required
