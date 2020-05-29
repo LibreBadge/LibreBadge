@@ -3,16 +3,17 @@
 {% block content %}
 {% for BadgeTemplate in BadgeTemplate %}
 {% ifequal BadgeTemplate.slug slug %}
+<br>
 <div id="badgeTemplateTempWrapper" class="printme"></div>
 <div class="row justify-content-center">
     <div class="col-4 border" style="height: 500px;resize: vertical;overflow: auto;">
         <ul class="nav nav-tabs">
             <a class="navbar-brand">{{BadgeTemplate.name}}</a>
             <li class="nav-item">
-              <a class="nav-link {{searchTab}}" href="{% url 'LibreBadge:productionSearch' slug=BadgeTemplate.slug %}">Search</a>
+              <a class="nav-link {% block searchTabActive %}{% endblock %}" href="{% url 'LibreBadge:productionSearch' slug=BadgeTemplate.slug %}">Search</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active {{createTab}}" href="{% url 'LibreBadge:productionCreate' slug=BadgeTemplate.slug %}">Create</a>
+                <a class="nav-link {% block createTabActive %}{% endblock %}" href="{% url 'LibreBadge:productionCreate' slug=BadgeTemplate.slug %}">Create</a>
             </li>
           </ul>
         <form method="POST">
@@ -42,9 +43,8 @@
                 </div>
               {% endif %}
           {% endfor %}  
-             <button type="submit" class="btn btn-primary">Search</button>
-             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">Create</button>
-             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">Create From Last Search</button>
+            {% block formButtons%}
+            {% endblock %}
              <button type="button" class="btn btn-danger" onclick="window.location.href = window.location.href;">Clear</button>
           </form>
     </div>
@@ -58,46 +58,9 @@
     <div class="col-2"></div>
 </div>
 <br>
-<div class="row align-items-end justify-content-center">
-<div class="col">
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand">Results</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <script>searchFunction("tableSearch","#tableSearch tr");</script>
-      <input id="tableSearch" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-    </form>
-  </div>
-</nav>
-    <table class="table table-bordered table-hover">
-        <thead>
-          <tr>
-            <th scope="col"></th>
-          {% for BadgeTemplateFormConfig in BadgeTemplateConfigFile.FormFields%}
-            <th scope="col">{{ BadgeTemplateFormConfig.DisplayName}}</th>
-          {% endfor %}
-          </tr>
-        </thead>
-        <tbody>
-          {% for row in rows %}
-          <tr onclick="document.location='{{ row.0 }}'" style="cursor: pointer;">
-            <th scope="row">{{forloop.counter}}</th>
-            {% for key in row %}
-            <td>{{key}}</td>
-            {% endfor %}
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-</div>
-</div>
+{% block bottom %}
 <!-- Modal -->
+{% endblock %}
 {% block modal %}
 {% endblock %}
 {% else %}
