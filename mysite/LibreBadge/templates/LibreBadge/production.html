@@ -3,12 +3,18 @@
 {% block content %}
 {% for BadgeTemplate in BadgeTemplate %}
 {% ifequal BadgeTemplate.slug slug %}
-<div class="alert alert-primary" role="alert">
-    {{BadgeTemplate.name}}
-</div>
 <div id="badgeTemplateTempWrapper" class="printme"></div>
 <div class="row justify-content-center">
     <div class="col-4 border" style="height: 500px;resize: vertical;overflow: auto;">
+        <ul class="nav nav-tabs">
+            <a class="navbar-brand">{{BadgeTemplate.name}}</a>
+            <li class="nav-item">
+              <a class="nav-link {{searchTab}}" href="{% url 'LibreBadge:productionSearch' slug=BadgeTemplate.slug %}">Search</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active {{createTab}}" href="{% url 'LibreBadge:productionCreate' slug=BadgeTemplate.slug %}">Create</a>
+            </li>
+          </ul>
         <form method="POST">
             {% csrf_token %}
              {% for BadgeTemplateFormConfig in BadgeTemplateConfigFile.FormFields%}
@@ -91,53 +97,8 @@
       </table>
 </div>
 </div>
-{% block modal %}
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Create New Record</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form method="POST">
-          {% csrf_token %}
-           {% for BadgeTemplateFormConfig in BadgeTemplateConfigFile.FormFields%}
-            {% if BadgeTemplateFormConfig.FormElement == "primaryKey" %}
-              <div class="form-group">
-                <label for="{{ BadgeTemplateFormConfig.id}}">{{ BadgeTemplateFormConfig.DisplayName}}</label>
-                <input type="text" class="form-control" id="Modal{{ BadgeTemplateFormConfig.id}}" name="{{ BadgeTemplateFormConfig.id }}" placeholder="{{ BadgeTemplateFormConfig.DisplayName}}">
-              </div>
-            {% endif %}
-            {% if BadgeTemplateFormConfig.FormElement == "text" %}
-              <div class="form-group">
-                <label for="{{ BadgeTemplateFormConfig.id}}">{{ BadgeTemplateFormConfig.DisplayName}}</label>
-                <input type="text" class="form-control" id="Modal{{ BadgeTemplateFormConfig.id}}" name="{{ BadgeTemplateFormConfig.id }}" placeholder="{{ BadgeTemplateFormConfig.DisplayName}}">
-              </div>
-            {% endif %}
-            {% if BadgeTemplateFormConfig.FormElement == "dropdown" %}
-              <div class="form-group">
-                <label for="{{ BadgeTemplateFormConfig.id}}">{{ BadgeTemplateFormConfig.DisplayName}}</label>
-                <select class="form-control" id="Modal{{ BadgeTemplateFormConfig.id}}" name="{{ BadgeTemplateFormConfig.id }}">
-                  <option value="" selected>Select...</option>
-                  {% for Option in BadgeTemplateFormConfig.Options %}
-                    <option>{{ Option }}</option>
-                  {% endfor %}
-                </select>
-              </div>
-            {% endif %}
-        {% endfor %}  
-           <button type="submit" class="btn btn-primary" data-dismiss="modal">Save</button>
-           <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-           <button type="button" class="btn btn-warning">Clear</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
+{% block modal %}
 {% endblock %}
 {% else %}
 Template not found
