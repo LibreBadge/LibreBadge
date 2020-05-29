@@ -1,6 +1,5 @@
 from .imports import *
 import json
-#db test stuff
 from .databaseFunctions import *
 #Put all views that don't belong elsewere here
 @login_required
