@@ -4,7 +4,7 @@ def formQuery(db, columns, table, values):
     columnsComma = ', '.join(columns)
     valuesLike = [sub + '%' for sub in values]
     like = True
-    if values[0] is not '':
+    if values[0] != '':
         like = False
         del valuesLike[0];
         valuesLike.insert(0,(values[0]))
@@ -18,22 +18,29 @@ def formQuery(db, columns, table, values):
                             qry += "WHERE " + x + " LIKE %s "
                     else:
                         qry += "AND " + x + " LIKE %s "
+                qry = qry[:-1]
+                qry += ";"
                 cursor.execute(qry,valuesLike)
                 return cursor.fetchall()
                 cursor.close()
 
 def formCreate(db, columns, table, values):
-    print(str(values[0]))
-    value = (str(values[0]))
+    columnsComma = ', '.join(columns)
     with connections[db].cursor() as cursor:
                 qry = "SELECT "+ columns[0] + " FROM " + table + " WHERE " + columns[0] + " = %s "
-                cursor.execute(qry,value)
+                cursor.execute(qry,[values[0]])
                 row = cursor.fetchall()
                 cursor.close()
-    if row != None:
+    if row != []:
         raise Exception("Record with the same primary key already exists")
+    if values == []:
+        raise Exception("No data submited")
     with connections[db].cursor() as cursor:
-                qry = "INSERT INTO " + table + " ("+ columnsComma + ") Values (" + values + ");"
+                qry = "INSERT INTO "+ table + " (" + columnsComma + ") VALUES ("
+                for i, x in enumerate(columns):
+                        qry += "%s, "
+                qry = qry[:-1]
+                qry += ");"
                 cursor.execute(qry,values)
                 return cursor.fetchall()
                 cursor.close()
