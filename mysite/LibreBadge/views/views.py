@@ -29,27 +29,6 @@ def productionSearch(request, slug):
         context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile, "searchTab":"Active"})
 
 @login_required
-def productionTest(request, slug):
-    try:
-        BadgeTemplateInstance = BadgeTemplate.objects.get(slug=slug)
-        BadgeTemplateConfigFile = json.loads(BadgeTemplateInstance.configFile.read())
-    except:
-       BadgeTemplateConfigFile = None
-    if request.method == 'POST':
-        columns = list()
-        values = list()
-        for BadgeTemplateFormConfig in BadgeTemplateConfigFile['FormFields']:
-            postData = request.POST.get(BadgeTemplateFormConfig['id'])
-            columns.append(BadgeTemplateFormConfig['DatabaseColumn'])
-            values.append(postData)
-        rows = formQuery('cardholders', columns, 'cardholders', values)
-        return render(request, 'LibreBadge/production.html',
-        context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile,"rows":rows, "searchTab":"Active"})
-    else:
-        return render(request, 'LibreBadge/production.html',
-        context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile, "searchTab":"Active"})
-
-@login_required
 def productionCreate(request, slug):
     try:
         BadgeTemplateInstance = BadgeTemplate.objects.get(slug=slug)
