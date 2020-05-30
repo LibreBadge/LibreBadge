@@ -50,7 +50,7 @@ def productionTest(request, slug):
         context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile, "searchTab":"Active"})
 
 @login_required
-def productionCreate(request,slug):
+def productionCreate(request, slug):
     try:
         BadgeTemplateInstance = BadgeTemplate.objects.get(slug=slug)
         BadgeTemplateConfigFile = json.loads(BadgeTemplateInstance.configFile.read())
@@ -63,6 +63,7 @@ def productionCreate(request,slug):
             postData = request.POST.get(BadgeTemplateFormConfig['id'])
             columns.append(BadgeTemplateFormConfig['DatabaseColumn'])
             values.append(postData)
+        formCreate('cardholders', columns, 'cardholders', values)
         return render(request, 'LibreBadge/productionCreate.html',
         context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile,"createTab":"Active"})
     else:

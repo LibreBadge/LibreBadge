@@ -37,10 +37,12 @@ def formCreate(db, columns, table, values):
         raise Exception("No data submited")
     with connections[db].cursor() as cursor:
                 qry = "INSERT INTO "+ table + " (" + columnsComma + ") VALUES ("
-                for i, x in enumerate(columns):
+                for i in enumerate(columns):
                         qry += "%s, "
-                qry = qry[:-1]
+                qry = qry[:-2]
+                print(qry)
                 qry += ");"
+                print(qry)
                 cursor.execute(qry,values)
                 return cursor.fetchall()
                 cursor.close()
