@@ -33,7 +33,7 @@ def formCreate(db, columns, table, values):
                 cursor.close()
     if row != []:
         raise Exception("Record with the same primary key already exists")
-    if values == []:
+    if not values:
         raise Exception("No data submited")
     with connections[db].cursor() as cursor:
                 qry = "INSERT INTO "+ table + " (" + columnsComma + ") VALUES ("
