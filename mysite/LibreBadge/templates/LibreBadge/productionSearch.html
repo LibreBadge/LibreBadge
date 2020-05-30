@@ -58,33 +58,8 @@
         </button>
       </div>
       <div class="modal-body">
-        <form method="POST">
-          {% csrf_token %}
-           {% for BadgeTemplateFormConfig in BadgeTemplateConfigFile.FormFields%}
-            {% if BadgeTemplateFormConfig.FormElement == "primaryKey" %}
-              <div class="form-group">
-                <label for="{{ BadgeTemplateFormConfig.id}}">{{ BadgeTemplateFormConfig.DisplayName}}</label>
-                <input type="text" class="form-control" id="Modal{{ BadgeTemplateFormConfig.id}}" name="{{ BadgeTemplateFormConfig.id }}" placeholder="{{ BadgeTemplateFormConfig.DisplayName}}">
-              </div>
-            {% endif %}
-            {% if BadgeTemplateFormConfig.FormElement == "text" %}
-              <div class="form-group">
-                <label for="{{ BadgeTemplateFormConfig.id}}">{{ BadgeTemplateFormConfig.DisplayName}}</label>
-                <input type="text" class="form-control" id="Modal{{ BadgeTemplateFormConfig.id}}" name="{{ BadgeTemplateFormConfig.id }}" placeholder="{{ BadgeTemplateFormConfig.DisplayName}}">
-              </div>
-            {% endif %}
-            {% if BadgeTemplateFormConfig.FormElement == "dropdown" %}
-              <div class="form-group">
-                <label for="{{ BadgeTemplateFormConfig.id}}">{{ BadgeTemplateFormConfig.DisplayName}}</label>
-                <select class="form-control" id="Modal{{ BadgeTemplateFormConfig.id}}" name="{{ BadgeTemplateFormConfig.id }}">
-                  <option value="" selected>Select...</option>
-                  {% for Option in BadgeTemplateFormConfig.Options %}
-                    <option>{{ Option }}</option>
-                  {% endfor %}
-                </select>
-              </div>
-            {% endif %}
-        {% endfor %}  
+        <form method="POST" action="{% url 'LibreBadge:productionCreate' slug=BadgeTemplate.slug %}">
+          {% include "LibreBadge/components/searchFormGenerator.html" %}
            <button type="submit" class="btn btn-primary" data-dismiss="modal">Save</button>
            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
            <button type="button" class="btn btn-warning">Clear</button>

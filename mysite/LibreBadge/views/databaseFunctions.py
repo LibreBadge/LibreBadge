@@ -26,15 +26,18 @@ def formQuery(db, columns, table, values):
 
 def formCreate(db, columns, table, values):
     columnsComma = ', '.join(columns)
+    noData = []
     with connections[db].cursor() as cursor:
                 qry = "SELECT "+ columns[0] + " FROM " + table + " WHERE " + columns[0] + " = %s "
                 cursor.execute(qry,[values[0]])
                 row = cursor.fetchall()
                 cursor.close()
+    for value in values:
+        noData.append('')
+    if values == noData:
+        raise Exception("No data submited")
     if row != []:
         raise Exception("Record with the same primary key already exists")
-    if not values:
-        raise Exception("No data submited")
     with connections[db].cursor() as cursor:
                 qry = "INSERT INTO "+ table + " (" + columnsComma + ") VALUES ("
                 for i in enumerate(columns):
