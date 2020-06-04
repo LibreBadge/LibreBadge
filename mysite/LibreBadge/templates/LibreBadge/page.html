@@ -48,5 +48,9 @@
       });
       });   
     }
+    function rowClick() {
+      document.badgeForm.{{ BadgeTemplateConfigFile.FormFields.0.id }}.value = '{{ row.0 }}';
+      //document.badgeForm.submit();
+    }
     </script>
 </html>

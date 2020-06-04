@@ -16,7 +16,7 @@
                 <a class="nav-link {% block createTabActive %}{% endblock %}" href="{% url 'LibreBadge:productionCreate' slug=BadgeTemplate.slug %}">Create</a>
             </li>
           </ul>
-        <form method="POST">
+        <form method="POST" name="badgeForm">
             {% include "LibreBadge/components/searchFormGenerator.html" %}
             {% block formButtons%}
             {% endblock %}
@@ -31,11 +31,11 @@
         </div>
     </div>
     <div class="col-2"></div>
-</div>
 <br>
 {% block bottom %}
-<!-- Modal -->
 {% endblock %}
+</div>
+<!-- Modal -->
 {% block modal %}
 {% endblock %}
 {% else %}

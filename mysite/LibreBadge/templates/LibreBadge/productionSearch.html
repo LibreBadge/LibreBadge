@@ -34,7 +34,7 @@
         </thead>
         <tbody>
           {% for row in rows %}
-          <tr onclick="document.location='{{ row.0 }}'" style="cursor: pointer;">
+          <tr onclick="rowClick()" style="cursor: pointer;">
             <th scope="row">{{forloop.counter}}</th>
             {% for key in row %}
             <td>{{key}}</td>
