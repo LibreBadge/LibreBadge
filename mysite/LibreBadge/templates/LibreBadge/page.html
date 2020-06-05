@@ -26,27 +26,7 @@
     $(document).ready(function(){
       $('.toast').toast('show');
     });
-    function printRendering(){
-      $('#badgeTemplateTempWrapper').append( $('#badgeTemplateWrapper>*') );
-      $(' *').not('.printme *,.printme,body,nav *,head *,style,script,html,visibility:hidden').addClass('hiddenByPrint');
-      $('.hiddenByPrint').hide();
-      }; 
-    function afterPrintRendering(){
-      $('.hiddenByPrint').show();
-      $('#badgeTemplateWrapper').append( $('#badgeTemplateTempWrapper>*') );
-    };
-    function replaceAttribute(id,attribute,value){
-      $("#badgeTemplate").children()('#'+id).attr(attribute, value);
-    }
-    function searchFunction(inputElement,elementSelector){
-      $(document).ready(function(){
-      $(inputElement).on("keyup", function() {
-      var value = $(this).val().toLowerCase();
-      $(elementSelector).filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-      });
-      });
-      });   
-    }
     </script>
+  {% block jsFunctions %}
+  {% endblock %}
 </html>
