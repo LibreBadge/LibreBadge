@@ -42,9 +42,9 @@
 Template not found
 {% endifequal %}
 {% endfor %}
-{% block jsFunctions %}
+{% block js %}
     <script>
-        function printRendering(){
+    function printRendering(){
         $('#badgeTemplateTempWrapper').append( $('#badgeTemplateWrapper>*') );
         $(' *').not('.printme *,.printme,body,nav *,head *,style,script,html,visibility:hidden').addClass('hiddenByPrint');
         $('.hiddenByPrint').hide();
@@ -56,16 +56,14 @@ Template not found
     function replaceAttribute(id,attribute,value){
         $("#badgeTemplate").children()('#'+id).attr(attribute, value);
     }
-    function searchFunction(inputElement,elementSelector){
-        $(document).ready(function(){
-        $(inputElement).on("keyup", function() {
+    $(document).ready(function(){
+    $("#tableSearch").on("keyup", function() {
         var value = $(this).val().toLowerCase();
-        $(elementSelector).filter(function() {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
-        });
-        });   
-    }
+        $("#resultsTable tr").not('thead tr').filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+    });
+    });
     function rowClick(row) {
         document.badgeForm.{{ BadgeTemplateConfigFile.FormFields.0.id }}.value = row;
         document.badgeForm.submit();

@@ -5,9 +5,8 @@
 	<title>LibreBadge</title>
     <meta charset="utf-8" />
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-<meta http-equiv="Pragma" content="no-cache" />
-<meta http-equiv="Expires" content="0" />
-
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     {% load static %}
     <link rel="stylesheet" href="{% static 'LibreBadge/css/bootstrap.min.css' %}" type = "text/css"/>    
 </head>
@@ -18,15 +17,14 @@
     {% include "LibreBadge/components/messages.html" %}
       {% block content %}
       {% endblock %}
-
-</body>
-<script src="{% static 'LibreBadge/js/jquery-3.4.1.slim.min.js' %}"></script>
-<script src="{% static 'LibreBadge/js/bootstrap.bundle.min.js' %}"></script>
-<script>
-    $(document).ready(function(){
-      $('.toast').toast('show');
-    });
+    <script src="{% static 'LibreBadge/js/jquery-3.4.1.slim.min.js' %}"></script>
+    <script src="{% static 'LibreBadge/js/bootstrap.bundle.min.js' %}"></script>
+    <script>
+        $(document).ready(function(){
+          $('.toast').toast('show');
+        });
     </script>
-  {% block jsFunctions %}
-  {% endblock %}
+    {% block js %}
+    {% endblock %}
+</body>
 </html>
