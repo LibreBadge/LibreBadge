@@ -59,7 +59,7 @@ Template not found
     $(document).ready(function(){
     $("#tableSearch").on("keyup", function() {
         var value = $(this).val().toLowerCase();
-        $("#resultsTable tr").filter(function() {
+        $("#resultsTable tr").not('thead tr').filter(function() {
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
     });
