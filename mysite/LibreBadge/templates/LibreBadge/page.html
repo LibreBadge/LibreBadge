@@ -17,15 +17,14 @@
     {% include "LibreBadge/components/messages.html" %}
       {% block content %}
       {% endblock %}
-
+    <script src="{% static 'LibreBadge/js/jquery-3.4.1.slim.min.js' %}"></script>
+    <script src="{% static 'LibreBadge/js/bootstrap.bundle.min.js' %}"></script>
+    <script>
+        $(document).ready(function(){
+          $('.toast').toast('show');
+        });
+    </script>
+    {% block js %}
+    {% endblock %}
 </body>
-<script src="{% static 'LibreBadge/js/jquery-3.4.1.slim.min.js' %}"></script>
-<script src="{% static 'LibreBadge/js/bootstrap.bundle.min.js' %}"></script>
-<script>
-    $(document).ready(function(){
-      $('.toast').toast('show');
-    });
-</script>
-{% block jsFunctions %}
-{% endblock %}
 </html>
