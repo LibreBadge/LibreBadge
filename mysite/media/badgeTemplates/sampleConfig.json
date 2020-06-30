@@ -38,6 +38,15 @@
 			"Database": "cardholders",
 			"DatabaseColumn": "AccessLevel"
 		}
+		{
+			"id": "FullName",
+			"DisplayName": "Access Level",
+			"FormElement": "dropdown",
+            "Options":["Red","Green","Blue"],
+			"ValidationRegex": "putregexhere",
+			"Database": "cardholders",
+			"DatabaseColumn": "AccessLevel"
+		}
 	],
 	"Card": [{
 		"id": "CombinedName",
@@ -45,6 +54,6 @@
 		"type": "text",
 		"FormattingRegex": "putregexhere",
 		"Database": "cardholders",
-		"DatabaseColumn": "CombinedName"
+		"FormField": "CombinedName"
 	}]
 }
