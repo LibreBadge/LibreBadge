@@ -1,8 +1,8 @@
 {% extends "LibreBadge/page.html" %}
 {% load include_anything %}
 {% block content %}
-{% for BadgeTemplate in BadgeTemplate %}
-{% ifequal BadgeTemplate.slug slug %}
+{% for BadgeTemplate in BadgeTemplate %} {% comment "BadgeTemplate Iterator" %} Iterates through badgetemplates{% endcomment %}
+{% ifequal BadgeTemplate.slug slug %}   {% comment "BadgeTemplate selector" %} Selects the badge template that matches the slug passed from the view{% endcomment %}
 <br>
 <div id="badgeTemplateTempWrapper" class="printme"></div>
 <div class="row justify-content-center">
@@ -37,11 +37,6 @@
 {% endblock %}
 <!-- Modal -->
 {% block modal %}
-{% endblock %}
-{% else %}
-Template not found
-{% endifequal %}
-{% endfor %}
 {% block js %}
     <script>
     function printRendering(){
@@ -70,4 +65,9 @@ Template not found
     }
     </script>
 {% endblock %}
+{% endblock %}
+{% else %}
+Template not found
+{% endifequal %}
+{% endfor %}
 {% endblock %}
