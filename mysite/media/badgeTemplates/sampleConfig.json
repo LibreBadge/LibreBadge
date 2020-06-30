@@ -37,23 +37,23 @@
 			"ValidationRegex": "putregexhere",
 			"Database": "cardholders",
 			"DatabaseColumn": "AccessLevel"
-		},
-		{
-			"id": "FullName",
-			"DisplayName": "FullName",
-			"FormElement": "",
-            "Options":["Red","Green","Blue"],
-			"ValidationRegex": "putregexhere",
-			"Database": "cardholders",
-			"DatabaseColumn": "FullName"
 		}
 	],
 	"Card": [{
-		"id": "CombinedName",
+		"id": "FirstName",
 		"SVGElementID": "101",
 		"type": "text",
 		"FormattingRegex": "putregexhere",
 		"Database": "cardholders",
-		"FormField": "CombinedName"
-	}]
+		"FormField": "FirstName"
+	},
+	{
+		"id": "LastName",
+		"SVGElementID": "101",
+		"type": "text",
+		"FormattingRegex": "putregexhere",
+		"Database": "cardholders",
+		"FormField": "LastName"
+	}
+]
 }
