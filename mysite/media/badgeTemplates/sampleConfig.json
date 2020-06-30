@@ -42,6 +42,7 @@
 	"Card": [{
 		"id": "CombinedName",
 		"SVGElementID": "101",
+		"type": "text",
 		"FormattingRegex": "putregexhere",
 		"Database": "cardholders",
 		"DatabaseColumn": "CombinedName"
