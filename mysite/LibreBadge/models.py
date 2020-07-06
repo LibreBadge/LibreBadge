@@ -28,7 +28,7 @@ def delete_old_template(sender, instance, *args, **kwargs):
 
 @receiver(pre_delete, sender=BadgeTemplate)
 def delete_orphaned_template_files(sender, instance, *args, **kwargs):
-    shutil.rmtree(settings.MEDIA_URL.strip("/")+'/badgeTemplates/'+instance.name+'/')
+    shutil.rmtree(settings.MEDIA_URL.replace("/","",1)+'badgeTemplates/'+instance.name+'/')
 
 class AlertMessage(models.Model):
     name = models.CharField(max_length=200)
