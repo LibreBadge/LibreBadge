@@ -4,8 +4,8 @@ def formQuery(db, columns, table, values):
     columnsComma = ', '.join(columns)
     valuesLike = [sub + '%' for sub in values]
     like = True
-    if values[0] != '':
-        like = False
+    if values[0] != '': #checks if primary key exists
+        like = False #search by primary key
         del valuesLike[0];
         valuesLike.insert(0,(values[0]))
     with connections[db].cursor() as cursor:
