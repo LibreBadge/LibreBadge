@@ -4,10 +4,10 @@ def formQuery(db, columns, table, values):
     columnsComma = ', '.join(columns)
     valuesLike = [sub + '%' for sub in values]
     like = True
-    if values[0] != '': #checks if primary key exists
+    if values[0] != '': #checks if primary key was submitted
         like = False #search by primary key
-        del valuesLike[0];
-        valuesLike.insert(0,(values[0]))
+        del valuesLike[0]; #removes primary key from values like
+        valuesLike.insert(0,(values[0])) #replaces primary key with the like operator wiht primary key without like operator
     with connections[db].cursor() as cursor:
                 qry = "SELECT "+ columnsComma + " FROM " + table + " "
                 for i, x in enumerate(columns):
