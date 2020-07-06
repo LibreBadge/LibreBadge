@@ -1,4 +1,8 @@
 from django.db import models
+from django.db.models.signals import pre_save, pre_delete
+from django.dispatch import receiver
+import shutil
+from django.conf import settings
 # Create your models here.
 
 class BadgeTemplate(models.Model):
@@ -10,6 +14,21 @@ class BadgeTemplate(models.Model):
     configFile = models.FileField(upload_to=upload_file_name,unique=True)
     def __str__(self):
         return self.name
+
+@receiver(pre_save, sender=BadgeTemplate) #deletes the old template when a new one is uploaded
+def delete_old_template(sender, instance, *args, **kwargs):
+    if instance.pk:
+        existing_template = BadgeTemplate.objects.get(pk=instance.pk)
+        if instance.template and existing_template.template != instance.template:
+            existing_template.template.delete(False)
+    if instance.pk:
+        existing_configFile = BadgeTemplate.objects.get(pk=instance.pk)
+        if instance.configFile and existing_configFile.configFile != instance.configFile:
+            existing_configFile.configFile.delete(False)
+
+@receiver(pre_delete, sender=BadgeTemplate)
+def delete_orphaned_template_files(sender, instance, *args, **kwargs):
+    shutil.rmtree(settings.MEDIA_URL.strip("/")+'/badgeTemplates/'+instance.name+'/')
 
 class AlertMessage(models.Model):
     name = models.CharField(max_length=200)
