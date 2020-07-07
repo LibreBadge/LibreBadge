@@ -5,7 +5,12 @@ def badgeTemplatingEngine (instance)
     tmp = svglue.load(file=instance.Template.url)
     for BadgeTemplateFormConfig in instance.BadgeTemplateConfigFile['Card']:
         if BadgeTemplateFormConfig['type'] == 'text':
-            tmp.set_text(BadgeTemplateFormConfig['SVGTemplateID'], SELECT 'databaseFields' WHERE BadgeTemplateConfigFile['FormFields'].0.'databaseField' = rows[0])
+            with connections[db].cursor() as cursor:
+                qry = "SELECT" + 'databaseFields' "WHERE" + BadgeTemplateConfigFile['FormFields'].0.'databaseField' = rows[0]
+                cursor.execute(qry,valuesLike)
+                return cursor.fetchall()
+                cursor.close()
+            tmp.set_text(BadgeTemplateFormConfig['SVGTemplateID'], )
         if 'type' =='image/png':
             tmp.set_image('pink-box', file='hello.png', mimetype='image/png')
         if 'type' == 'barcode/REGEX HERE'
