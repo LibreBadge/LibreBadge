@@ -1,6 +1,7 @@
 from .imports import *
 import json
 from .databaseFunctions import *
+from .svglue import *
 #Put all views that don't belong elsewere here
 @login_required
 def index(request):
