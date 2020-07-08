@@ -1,5 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="{% url 'LibreBadge:index' %}">LibreBadge</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    {% load static %}
+    <a class="navbar-brand bg-dark" href="{% url 'LibreBadge:index' %}"><img src="{% static 'LibreBadge/librebadge-text.svg' %}" height="30"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
