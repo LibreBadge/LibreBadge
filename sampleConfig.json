@@ -41,7 +41,7 @@
 	],
 	"Card": [{
 		"id": "CombinedName",
-		"SVGTemplate-ID": "CombinedName",
+		"SVGTemplateID": "CombinedName",
 		"Type": "text",
 		"FormattingRegex": "putregexhere",
 		"Database": "cardholders",

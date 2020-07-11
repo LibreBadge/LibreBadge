@@ -1,6 +1,7 @@
 from .imports import *
 import json
 from .databaseFunctions import *
+from .badgeTemplating import badgeTemplatingEngine
 #Put all views that don't belong elsewere here
 @login_required
 def index(request):
@@ -14,6 +15,7 @@ def productionSearch(request, slug):
         BadgeTemplateConfigFile = json.loads(BadgeTemplateInstance.configFile.read())
     except:
        BadgeTemplateConfigFile = None
+       BadgeTemplateInstance = None
     if request.method == 'POST':
         columns = list()
         values = list()
@@ -22,11 +24,12 @@ def productionSearch(request, slug):
             columns.append(BadgeTemplateFormConfig['DatabaseColumn'])
             values.append(postData)
         rows = formQuery('cardholders', columns, 'cardholders', values)
+        renderedBadgeTemplate = badgeTemplatingEngine(BadgeTemplate.objects.get(slug=slug), rows)
         return render(request, 'LibreBadge/productionSearch.html',
-        context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile,"rows":rows, "searchTab":"Active"})
+        context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile,"rows":rows, "searchTab":"Active", "renderedBadgeTemplate":renderedBadgeTemplate})
     else:
         return render(request, 'LibreBadge/productionSearch.html',
-        context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile, "searchTab":"Active"})
+        context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile, "searchTab":"Active", "renderedBadgeTemplate":BadgeTemplateInstance.template})
 
 @login_required
 def productionCreate(request, slug):

@@ -40,20 +40,11 @@
 		}
 	],
 	"Card": [{
-		"id": "FirstName",
-		"SVGElementID": "101",
-		"type": "text",
+		"id": "CombinedName",
+		"SVGTemplateID": "CombinedName",
+		"Type": "text",
 		"FormattingRegex": "putregexhere",
 		"Database": "cardholders",
-		"FormField": "FirstName"
-	},
-	{
-		"id": "LastName",
-		"SVGElementID": "101",
-		"type": "text",
-		"FormattingRegex": "putregexhere",
-		"Database": "cardholders",
-		"FormField": "LastName"
-	}
-]
+		"DatabaseColumn": "FirstName || ' ' || LastName"
+	}]
 }
