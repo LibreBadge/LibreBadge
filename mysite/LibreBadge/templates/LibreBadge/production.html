@@ -37,6 +37,7 @@
 {% endblock %}
 <!-- Modal -->
 {% block modal %}
+{% endblock %}
 {% block js %}
     <script>
     function printRendering(){
@@ -48,9 +49,6 @@
         $('.hiddenByPrint').show();
         $('#badgeTemplateWrapper').append( $('#badgeTemplateTempWrapper>*') );
     };
-    function replaceAttribute(id,attribute,value){
-        $("#badgeTemplate").children()('#'+id).attr(attribute, value);
-    }
     $(document).ready(function(){
     $("#tableSearch").on("keyup", function() {
         var value = $(this).val().toLowerCase();
@@ -65,7 +63,6 @@
     }
     var results = {}; //array that contains first results 
     </script>
-{% endblock %}
 {% endblock %}
 {% else %}
 Template not found

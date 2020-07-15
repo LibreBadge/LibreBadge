@@ -1,0 +1,32 @@
+{% extends "LibreBadge/productionbaseNEW.html" %}
+{% block interface %}
+        <table id="resultsTable" class="table table-sm table-bordered table-hover mt-1">
+            <thead>
+              <tr>
+                <th scope="col"># <input type="checkbox"></th>
+                {% for BadgeTemplateFormConfig in BadgeTemplateConfigFile.FormFields%}
+                    <th scope="col">{{ BadgeTemplateFormConfig.DisplayName}}</th>
+                {% endfor %}
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="cardholder, index in cardholders" :class="{editing: cardholder == editedcardholder}" v-cloak>
+                <th scope="row">#[[index + 1]]# <input type="checkbox"></th>
+                {% for BadgeTemplateFormConfig in BadgeTemplateConfigFile.FormFields%}
+                    <td @click="selctcardholder(cardholder)" @dblclick="editData(cardholder)" class="view">#[[cardholder.{{BadgeTemplateFormConfig.id}}]]#</td>
+                {% endfor %}
+                <form :id="{editing: cardholder == editedcardholder}" v-cloak>
+                    {% for BadgeTemplateFormConfig in BadgeTemplateConfigFile.FormFields%}
+                        <td class="edit">
+                            <input type="text" name="name" class="form-control form-control-sm" v-model="cardholder.{{BadgeTemplateFormConfig.id}}"/>
+                            {% if forloop.last %}
+                                <button class="btn btn-sm btn-primary" @click="saveData(cardholder)">save</button>
+                                <button class="btn btn-sm btn-danger" @click="cancelEditData(cardholder)">cancel</button>
+                            {% endif %}
+                        </td>
+                    {% endfor %}
+                </form>
+              </tr>
+            </tbody>
+          </table>
+{% endblock %}

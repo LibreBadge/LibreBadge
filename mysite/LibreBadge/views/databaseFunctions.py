@@ -1,5 +1,13 @@
 from django.db import connections
 
+def dictfetchall(cursor):
+    "Return all rows from a cursor as a dict"
+    columns = [col[0] for col in cursor.description]
+    return [
+        dict(zip(columns, row))
+        for row in cursor.fetchall()
+    ]
+
 def formQuery(db, columns, table, values):
     columnsComma = ', '.join(columns)
     valuesLike = [sub + '%' for sub in values]
@@ -24,6 +32,16 @@ def formQuery(db, columns, table, values):
                 return cursor.fetchall()
                 cursor.close()
 
+def query(db, columns, table):
+    columnsComma = ', '.join(columns)
+    like = True
+    with connections[db].cursor() as cursor:
+                qry = "SELECT "+ columnsComma + " FROM " + table
+                qry += ";"
+                cursor.execute(qry)
+                return dictfetchall(cursor)
+                cursor.close()
+
 def formCreate(db, columns, table, values):
     columnsComma = ', '.join(columns)
     noData = []
@@ -43,9 +61,7 @@ def formCreate(db, columns, table, values):
                 for i in enumerate(columns):
                         qry += "%s, "
                 qry = qry[:-2]
-                print(qry)
                 qry += ");"
-                print(qry)
                 cursor.execute(qry,values)
                 return cursor.fetchall()
                 cursor.close()
