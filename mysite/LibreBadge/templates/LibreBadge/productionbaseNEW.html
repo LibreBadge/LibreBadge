@@ -55,7 +55,7 @@
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
                     </svg>
-                    Batch Add
+                    Import
                 </button>
             </div>
         </li>
@@ -80,34 +80,36 @@
       </ul>
     </div>
   </nav>
-<div id="badgeTemplateTempWrapper" class="printme"></div>
-<div class="row">
-    <div class="col-1 border">
-        <ul class="nav flex-column nav-pills nav-fill h-100">
-            <li class="nav-item">
-              <a class="nav-link active h-100" href="#">Active</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link h-100" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link h-100" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link h-100" href="#">Disabled</a>
-            </li>
-          </ul>
-    </div>
-    <div class="col-9 border">
-        {% block interface %}
-        {% endblock %}
-    </div>
-    <div id="badgeTemplateWrapper" class="border col-2" style="width: fit-content;height:fit-content;">
-        <div id="badgeTemplate" class="printme" style="width: fit-content;height:fit-content;background-color: white!important;">
-            {{renderedBadgeTemplate | safe}}
+<div id="badgeTemplateTempWrapper" v-html="template" class="printme"></div>
+<div class="noprint">
+    <div class="row w-100">
+        <div class="col-1 border">
+            <ul class="nav flex-column nav-pills nav-fill h-100">
+                <li class="nav-item">
+                  <a class="nav-link active h-100" href="#">Active</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link h-100" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link h-100" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link h-100" href="#">Disabled</a>
+                </li>
+              </ul>
+        </div>
+        <div class="col-9 border">
+            {% block interface %}
+            {% endblock %}
+        </div>
+        <div id="badgeTemplateWrapper" class="border col-2" style="width: fit-content;height:fill-container;">
+            <div id="badgeTemplate" v-html="template" class="printme border" style="width: fit-content;height:fit-content;background-color: white!important;">
+            </div>
         </div>
     </div>
 </div>
+
 </div>
 {% else %}
 Template not found
@@ -115,21 +117,6 @@ Template not found
 {% endfor %}
 {% endblock %}
 {% block js %}
-    <script>
-    function printRendering(){
-        $('#badgeTemplateTempWrapper').append( $('#badgeTemplateWrapper>*') );
-        $(' *').not('.printme *,.printme,.modal *, .edit *, .edit, .modal,body,nav *,head *,style,script,html,visibility:hidden').addClass('hiddenByPrint');
-        $('.hiddenByPrint').hide();
-        }; 
-    function afterPrintRendering(){
-        $('.hiddenByPrint').show();
-        $('#badgeTemplateWrapper').append( $('#badgeTemplateTempWrapper>*') );
-    };
-    function rowClick(row) {
-        document.badgeForm.{{ BadgeTemplateConfigFile.FormFields.0.id }}.value = row;
-        document.badgeForm.submit();
-    }
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
@@ -141,7 +128,8 @@ Template not found
                 cardholders: [],
                 editedcardholder: null,
                 editedForm: null,
-                selectedcardholder: null
+                selectedcardholder: null,
+                template: null
             },
             methods: {
                 saveData () {
@@ -187,6 +175,16 @@ Template not found
                         // handle error
                         console.log(error);
                     });
+                axios.get('{% url 'LibreBadge:productionNEWrender' slug=slug %}')
+                    .then(response => {
+                        // handle success
+                        this.template = response.data;
+                        console.log(response);
+                    })
+                    .catch(error => {
+                        // handle error
+                        console.log(error);
+                    });
             }
         })
     </script>
@@ -202,6 +200,19 @@ Template not found
         }
         .editing .view {
             display: none;
+        }
+        @media screen {
+            #badgeTemplateTempWrapper {
+                display: none;
+            }
+        }
+        @media print {
+            #badgeTemplateTempWrapper {
+                display: block;
+            }
+            .noprint {
+                display: none;
+            }
         }
     </style>
 {% endblock %}

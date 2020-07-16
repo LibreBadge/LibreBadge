@@ -87,7 +87,9 @@ def productionNEWrender(request, slug):
             values.append(postData)
         rows = formQuery('cardholders', columns, 'cardholders', values)
         renderedBadgeTemplate = badgeTemplatingEngine(BadgeTemplate.objects.get(slug=slug), rows)
-        return render(request, renderedBadgeTemplate,)
+        return HttpResponse(renderedBadgeTemplate)
+    else:
+        return HttpResponse(BadgeTemplateInstance.template) 
 
 @login_required
 def productionCreate(request, slug):
