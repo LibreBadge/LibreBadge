@@ -120,6 +120,8 @@ Template not found
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
+        axios.defaults.xsrfCookieName = 'csrftoken'
+        axios.defaults.xsrfHeaderName = "X-CSRFTOKEN"
         var app = new Vue({
             delimiters: ['#[[', ']]#'],
             el: '#app',
@@ -147,6 +149,14 @@ Template not found
                 },
                 selectcardholder (cardholder) {
                 this.selectedcardholder = cardholder
+                console.log(this.selectedcardholder)
+                axios.post('{% url 'LibreBadge:productionNEWrender' slug=slug %}',JSON.stringify(this.selectedcardholder))
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
                 },
                 log (text) {
                 console.log(text)
