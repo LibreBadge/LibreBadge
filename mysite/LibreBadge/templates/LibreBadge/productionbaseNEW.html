@@ -151,15 +151,15 @@ Template not found
                 this.selectedcardholder = cardholder
                 console.log(this.selectedcardholder)
                 axios.post('{% url 'LibreBadge:productionNEWrender' slug=slug %}',JSON.stringify(this.selectedcardholder))
-                .then(function (response) {
-                    console.log(response);
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-                },
-                log (text) {
-                console.log(text)
+                    .then(response => {
+                        // handle success
+                        this.template = response.data;
+                        console.log(this.template)
+                    })
+                    .catch(error => {
+                        // handle error
+                        console.log(error);
+                    });
                 },
                 refreshData () {
                     axios.get('{% url 'LibreBadge:productionNEWCardholders' slug=slug %}')

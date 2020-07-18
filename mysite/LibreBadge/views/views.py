@@ -3,6 +3,7 @@ import json
 from .databaseFunctions import *
 from .badgeTemplating import badgeTemplatingEngine
 from django.http import JsonResponse
+import urllib.parse
 
 #Put all views that don't belong elsewere here
 @login_required
@@ -81,8 +82,9 @@ def productionNEWrender(request, slug):
     if request.method == 'POST':
         columns = list()
         values = list()
+        received_json_data=json.loads(request.body)
         for BadgeTemplateFormConfig in BadgeTemplateConfigFile['FormFields']:
-            postData = request.POST.get(BadgeTemplateFormConfig['id'])
+            postData = received_json_data.get(BadgeTemplateFormConfig['id'])
             columns.append(BadgeTemplateFormConfig['DatabaseColumn'])
             values.append(postData)
         rows = formQuery('cardholders', columns, 'cardholders', values)
