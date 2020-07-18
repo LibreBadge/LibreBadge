@@ -154,12 +154,10 @@ Template not found
             },
             selectcardholder(cardholder) {
                 this.selectedcardholder = cardholder
-                console.log(this.selectedcardholder)
                 axios.post('{% url 'LibreBadge:productionNEWrender' slug=slug %}', JSON.stringify(this.selectedcardholder))
                     .then(response => {
                         // handle success
                         this.template = response.data;
-                        console.log(this.template)
                     })
                     .catch(error => {
                         // handle error
@@ -171,7 +169,6 @@ Template not found
                     .then(response => {
                         // handle success
                         this.cardholders = response.data;
-                        console.log(response);
                     })
                     .catch(error => {
                         // handle error
@@ -184,7 +181,6 @@ Template not found
                 .then(response => {
                     // handle success
                     this.cardholders = response.data;
-                    console.log(response);
                 })
                 .catch(error => {
                     // handle error
@@ -194,7 +190,6 @@ Template not found
                 .then(response => {
                     // handle success
                     this.template = response.data;
-                    console.log(response);
                 })
                 .catch(error => {
                     // handle error
