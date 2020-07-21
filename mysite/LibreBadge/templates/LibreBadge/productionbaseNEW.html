@@ -140,6 +140,20 @@ Template not found
         },
         methods: {
             saveData() {
+                axios({
+                    method: 'post',
+                    url: 'myurl',
+                    data: bodyFormData,
+                    headers: {'Content-Type': 'multipart/form-data' }
+                    })
+                    .then(function (response) {
+                        //handle success
+                        console.log(response);
+                    })
+                    .catch(function (response) {
+                        //handle error
+                        console.log(response);
+                    });
                 document.getElementById("editedForm").submit();
                 this.beforEditCache = null
                 this.editedcardholder = null

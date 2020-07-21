@@ -1,5 +1,6 @@
 {% extends "LibreBadge/productionbaseNEW.html" %}
 {% block interface %}
+<form>
 <table id="resultsTable" class="table table-sm table-bordered table-hover">
   <thead>
     <tr>
@@ -16,9 +17,8 @@
       <td @click="selectcardholder(cardholder)" @dblclick="editData(cardholder)" class="view">
         #[[cardholder.{{BadgeTemplateFormConfig.id}}]]#</td>
       {% endfor %}
-      <form :id="{editing: cardholder == editedcardholder}" v-cloak>
         {% for BadgeTemplateFormConfig in BadgeTemplateConfigFile.FormFields%}
-        <td class="edit">
+        <td class="edit" v-if="cardholder == editedcardholder">
           <input type="text" name="name" class="form-control form-control-sm"
             v-model="cardholder.{{BadgeTemplateFormConfig.id}}" />
           {% if forloop.last %}
@@ -27,8 +27,8 @@
           {% endif %}
         </td>
         {% endfor %}
-      </form>
     </tr>
   </tbody>
 </table>
+</form>
 {% endblock %}
