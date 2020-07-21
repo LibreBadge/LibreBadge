@@ -63,3 +63,25 @@ def productionNEWrender(request, slug):
         return HttpResponse(renderedBadgeTemplate)
     else:
         return HttpResponse(BadgeTemplateInstance.template)
+
+@login_required
+def productionNEWcreate(request, slug):
+    try:
+        BadgeTemplateInstance = BadgeTemplate.objects.get(slug=slug)
+        BadgeTemplateConfigFile = json.loads(BadgeTemplateInstance.configFile.read())
+    except:
+       BadgeTemplateConfigFile = None
+       BadgeTemplateInstance = None
+    if request.method == 'POST':
+        columns = list()
+        values = list()
+        received_json_data=json.loads(request.body)
+        for BadgeTemplateFormConfig in BadgeTemplateConfigFile['FormFields']:
+            postData = received_json_data.get(BadgeTemplateFormConfig['id'])
+            columns.append(BadgeTemplateFormConfig['DatabaseColumn'])
+            values.append(postData)
+        rows = formCreate('cardholders', columns, 'cardholders', values)
+        renderedBadgeTemplate = badgeTemplatingEngine(BadgeTemplate.objects.get(slug=slug), rows)
+        return HttpResponse(renderedBadgeTemplate)
+    else:
+        return HttpResponse(BadgeTemplateInstance.template)
