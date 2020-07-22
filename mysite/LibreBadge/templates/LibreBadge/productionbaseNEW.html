@@ -31,7 +31,7 @@ slug passed from the view{% endcomment %}
                 <li class="nav-item border"></li>
                 <li class="nav-item active">
                     <div class="row m-1">
-                        <button class="btn btn-outline-secondary mx-1">
+                        <button onclick="print()" class="btn btn-outline-secondary mx-1">
                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-printer-fill"
                                 fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5z" />
@@ -103,11 +103,11 @@ slug passed from the view{% endcomment %}
     <div id="badgeTemplateTempWrapper" v-html="template" class="printme"></div>
     <div class="noprint h-100">
         <div class="row h-100 w-100">
-            <div class="col border" style="  resize:horizontal; overflow: auto;">
+            <div class="col" style="  resize:horizontal; overflow: auto;">
                 {% block interface %}
                 {% endblock %}
             </div>
-            <div id="badgeTemplateWrapper" class="border" style="width: fit-content;height:fill-container;">
+            <div id="badgeTemplateWrapper" class="" style="width: fit-content;height:fill-container;">
                 <div id="badgeTemplate" v-html="template" class="printme border"
                     style="width: fit-content;height:fit-content;background-color: white!important;">
                 </div>
@@ -140,9 +140,18 @@ Template not found
         },
         methods: {
             saveData() {
-                document.getElementById("editedForm").submit();
+                var formData = new FormData(document.getElementById("editForm"));
+                console.log(formData)
+                axios.post('', formData)
+                    .then((response) => {
+                        // success callback	
+                        console.log(response)
+                    }, (response) => {
+                        // error callback
+                    });
                 this.beforEditCache = null
                 this.editedcardholder = null
+                this.refreshData()
             },
             cancelEditData() {
                 this.beforEditCache = null
