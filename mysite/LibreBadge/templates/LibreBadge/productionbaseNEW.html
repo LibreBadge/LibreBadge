@@ -150,7 +150,7 @@ Template not found
                 var data = new FormData(form);
                 axios({
                     method: 'post',
-                    url: '',
+                    url: '{% url 'LibreBadge:productionNEWupdate' slug=slug %}',
                     data: data
                     })
                     .then(function (response) {

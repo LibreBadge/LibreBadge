@@ -60,11 +60,20 @@ def productionNEWcreate(request, slug):
     except:
        BadgeTemplateConfigFile = None
        BadgeTemplateInstance = None
-    columns = list()
-    for BadgeTemplateFormConfig in BadgeTemplateConfigFile['FormFields']:
-        columns.append(BadgeTemplateFormConfig['DatabaseColumn'])
-    rows = query('cardholders', columns, 'cardholders')
-    return JsonResponse(rows, safe=False)
+    if request.method == 'POST':
+        columns = list()
+        values = list()
+        received_json_data=json.loads(request.body)
+        for BadgeTemplateFormConfig in BadgeTemplateConfigFile['FormFields']:
+            postData = received_json_data.get(BadgeTemplateFormConfig['id'])
+            columns.append(BadgeTemplateFormConfig['DatabaseColumn'])
+            values.append(postData)    
+        for BadgeTemplateFormConfig in BadgeTemplateConfigFile['FormFields']:
+            columns.append(BadgeTemplateFormConfig['DatabaseColumn'])
+        for BadgeTemplateFormConfig in BadgeTemplateConfigFile['FormFields']:
+            columns.append(BadgeTemplateFormConfig['DatabaseColumn'])
+        rows = formCreate('cardholders', columns, 'cardholders')
+        return JsonResponse(rows, safe=False)
 
 @login_required
 def productionNEWupdate(request, slug):
@@ -74,8 +83,15 @@ def productionNEWupdate(request, slug):
     except:
        BadgeTemplateConfigFile = None
        BadgeTemplateInstance = None
-    columns = list()
-    for BadgeTemplateFormConfig in BadgeTemplateConfigFile['FormFields']:
-        columns.append(BadgeTemplateFormConfig['DatabaseColumn'])
-    rows = query('cardholders', columns, 'cardholders')
-    return JsonResponse(rows, safe=False)
+    if request.method == 'POST':
+        columns = list()
+        values = list()
+        received_json_data=json.loads(request.body)
+        for BadgeTemplateFormConfig in BadgeTemplateConfigFile['FormFields']:
+            postData = received_json_data.get(BadgeTemplateFormConfig['id'])
+            columns.append(BadgeTemplateFormConfig['DatabaseColumn'])
+            values.append(postData)    
+        for BadgeTemplateFormConfig in BadgeTemplateConfigFile['FormFields']:
+            columns.append(BadgeTemplateFormConfig['DatabaseColumn'])
+        rows = formUpdate('cardholders', columns, 'cardholders')
+        return HttpResponse(rows, safe=False)
