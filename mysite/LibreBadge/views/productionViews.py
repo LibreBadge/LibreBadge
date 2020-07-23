@@ -13,20 +13,8 @@ def productionNEW(request, slug):
     except:
        BadgeTemplateConfigFile = None
        BadgeTemplateInstance = None
-    if request.method == 'POST':
-        columns = list()
-        values = list()
-        for BadgeTemplateFormConfig in BadgeTemplateConfigFile['FormFields']:
-            postData = request.POST.get(BadgeTemplateFormConfig['id'])
-            columns.append(BadgeTemplateFormConfig['DatabaseColumn'])
-            values.append(postData)
-        rows = formQuery('cardholders', columns, 'cardholders', values)
-        renderedBadgeTemplate = badgeTemplatingEngine(BadgeTemplate.objects.get(slug=slug), rows)
-        return render(request, 'LibreBadge/productionNEW.html',
-        context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile, "renderedBadgeTemplate":renderedBadgeTemplate})
-    else:
-        return render(request, 'LibreBadge/productionNEW.html',
-        context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile, "renderedBadgeTemplate":BadgeTemplateInstance.template})
+    return render(request, 'LibreBadge/productionNEW.html',
+    context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile})
 
 @login_required
 def productionNEWCardholders(request, slug):

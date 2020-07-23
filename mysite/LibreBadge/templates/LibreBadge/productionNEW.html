@@ -1,6 +1,6 @@
 {% extends "LibreBadge/productionbaseNEW.html" %}
 {% block interface %}
-<form>
+<form id="editingForm">
 <table id="resultsTable" class="table table-sm table-bordered table-hover">
   <thead>
     <tr>
@@ -19,8 +19,19 @@
       {% endfor %}
         {% for BadgeTemplateFormConfig in BadgeTemplateConfigFile.FormFields%}
         <td class="edit" v-if="cardholder == editedcardholder">
-          <input type="text" name="name" class="form-control form-control-sm"
-            v-model="cardholder.{{BadgeTemplateFormConfig.id}}" />
+          {% if BadgeTemplateFormConfig.FormElement == "primaryKey" %}
+          <input type="text" name="{{BadgeTemplateFormConfig.id}}" class="form-control form-control-sm" v-model="cardholder.{{BadgeTemplateFormConfig.id}}" />
+          {% endif %}
+          {% if BadgeTemplateFormConfig.FormElement == "text" %}
+          <input type="text" name="{{BadgeTemplateFormConfig.id}}" class="form-control form-control-sm" v-model="cardholder.{{BadgeTemplateFormConfig.id}}" />
+          {% endif %}
+          {% if BadgeTemplateFormConfig.FormElement == "dropdown" %}
+          <select class="form-control form-control-sm" name="{{BadgeTemplateFormConfig.id}}" v-model="cardholder.{{BadgeTemplateFormConfig.id}}">
+            {% for option in BadgeTemplateFormConfig.Options%}
+            <option>{{option}}</option>
+            {% endfor %}
+          </select>
+          {% endif %}
           {% if forloop.last %}
           <button class="btn btn-sm btn-primary" @click="saveData(cardholder)">save</button>
           <button class="btn btn-sm btn-danger" @click="cancelEditData(cardholder)">cancel</button>
