@@ -3,6 +3,7 @@ import json
 from .databaseFunctions import *
 from .badgeTemplating import badgeTemplatingEngine
 from django.http import JsonResponse
+from django.http import Http404
 import urllib.parse
 
 @login_required
@@ -11,8 +12,7 @@ def productionNEW(request, slug):
         BadgeTemplateInstance = BadgeTemplate.objects.get(slug=slug)
         BadgeTemplateConfigFile = json.loads(BadgeTemplateInstance.configFile.read())
     except:
-       BadgeTemplateConfigFile = None
-       BadgeTemplateInstance = None
+        raise Http404("Badge Template Doesn't Exist")
     return render(request, 'LibreBadge/productionNEW.html',
     context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile})
 
@@ -22,8 +22,7 @@ def productionNEWCardholders(request, slug):
         BadgeTemplateInstance = BadgeTemplate.objects.get(slug=slug)
         BadgeTemplateConfigFile = json.loads(BadgeTemplateInstance.configFile.read())
     except:
-       BadgeTemplateConfigFile = None
-       BadgeTemplateInstance = None
+        raise Http404("Badge Template Doesn't Exist")
     columns = list()
     for BadgeTemplateFormConfig in BadgeTemplateConfigFile['FormFields']:
         columns.append(BadgeTemplateFormConfig['DatabaseColumn'])
@@ -36,8 +35,7 @@ def productionNEWrender(request, slug):
         BadgeTemplateInstance = BadgeTemplate.objects.get(slug=slug)
         BadgeTemplateConfigFile = json.loads(BadgeTemplateInstance.configFile.read())
     except:
-       BadgeTemplateConfigFile = None
-       BadgeTemplateInstance = None
+        raise Http404("Badge Template Doesn't Exist")
     if request.method == 'POST':
         columns = list()
         values = list()
@@ -58,8 +56,7 @@ def productionNEWcreate(request, slug):
         BadgeTemplateInstance = BadgeTemplate.objects.get(slug=slug)
         BadgeTemplateConfigFile = json.loads(BadgeTemplateInstance.configFile.read())
     except:
-       BadgeTemplateConfigFile = None
-       BadgeTemplateInstance = None
+        raise Http404("Badge Template Doesn't Exist")
     if request.method == 'POST':
         columns = list()
         values = list()
@@ -80,10 +77,15 @@ def productionNEWupdate(request, slug):
         BadgeTemplateInstance = BadgeTemplate.objects.get(slug=slug)
         BadgeTemplateConfigFile = json.loads(BadgeTemplateInstance.configFile.read())
     except:
-       BadgeTemplateConfigFile = None
-       BadgeTemplateInstance = None
-    columns = list()
-    for BadgeTemplateFormConfig in BadgeTemplateConfigFile['FormFields']:
-        columns.append(BadgeTemplateFormConfig['DatabaseColumn'])
-    rows = query('cardholders', columns, 'cardholders')
-    return JsonResponse(rows, safe=False)
+        raise Http404("Badge Template Doesn't Exist")
+    if request.method == 'POST':
+        columns = list()
+        values = list()
+        received_json_data=json.loads(request.body)
+        for BadgeTemplateFormConfig in BadgeTemplateConfigFile['FormFields']:
+            postData = received_json_data.get(BadgeTemplateFormConfig['id'])
+            columns.append(BadgeTemplateFormConfig['DatabaseColumn'])
+            values.append(postData)
+        rows = formUpdate('cardholders', columns, 'cardholders', values)
+        renderedBadgeTemplate = badgeTemplatingEngine(BadgeTemplate.objects.get(slug=slug), rows)
+        return JsonResponse(rows, safe=False)
