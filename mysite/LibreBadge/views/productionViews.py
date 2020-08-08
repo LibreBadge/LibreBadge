@@ -89,3 +89,5 @@ def productionNEWupdate(request, slug):
         rows = formUpdate('cardholders', columns, 'cardholders', values)
         renderedBadgeTemplate = badgeTemplatingEngine(BadgeTemplate.objects.get(slug=slug), rows)
         return JsonResponse(rows, safe=False)
+    else:
+        raise Http404()
