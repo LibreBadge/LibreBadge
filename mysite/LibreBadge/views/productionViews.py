@@ -39,7 +39,7 @@ def productionNEWrender(request, slug):
     if request.method == 'POST':
         columns = list()
         values = list()
-        received_json_data=json.loads(request.body)
+        received_json_data=(json.loads(request.body))[0]
         for BadgeTemplateFormConfig in BadgeTemplateConfigFile['FormFields']:
             postData = received_json_data.get(BadgeTemplateFormConfig['id'])
             columns.append(BadgeTemplateFormConfig['DatabaseColumn'])

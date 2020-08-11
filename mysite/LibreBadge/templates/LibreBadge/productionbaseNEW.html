@@ -142,7 +142,7 @@ Template not found
             editedcardholder: null,
             beforeEditedCardholder: null,
             editedForm: null,
-            selectedcardholder: null,
+            selectedcardholder: [],
             template: null
         },
         methods: {
@@ -171,7 +171,7 @@ Template not found
                 this.editedcardholder = cardholder
             },
             selectcardholder(cardholder) {
-                this.selectedcardholder = cardholder
+                this.selectedcardholder = [cardholder]
                 axios.post('{% url 'LibreBadge:productionNEWrender' slug=slug %}', JSON.stringify(this.selectedcardholder))
                     .then(response => {
                         // handle success

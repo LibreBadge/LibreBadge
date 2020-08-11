@@ -12,7 +12,7 @@
   </thead>
   <tbody>
     <tr v-for="cardholder, index in cardholders" :class="{editing: cardholder == editedcardholder}" v-cloak>
-      <th scope="row">#[[index + 1]]# <input type="checkbox"></th>
+      <th scope="row">#[[index + 1]]# <input type="checkbox" :value="cardholder" v-model="selectedcardholder"></th>
       {% for BadgeTemplateFormConfig in BadgeTemplateConfigFile.FormFields%}
       <td @click="selectcardholder(cardholder)" @dblclick="editData(cardholder)" class="view">
         #[[cardholder.{{BadgeTemplateFormConfig.id}}]]#</td>
