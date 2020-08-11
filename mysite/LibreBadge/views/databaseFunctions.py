@@ -66,15 +66,14 @@ def formCreate(db, columns, table, values):
                 return cursor.fetchall()
                 cursor.close()
 
-def formUpdate(db, columns, table, values):
-    setValuesVar = []
-    columnsComma = ', '.join(columns)
-    valuesLike = [sub + '%' for sub in values]
-    for column, i in columns:
-        setValuesVar.append(column + " = " + values[i])
-    setValuesVar = ', '.join(setValuesVar)
+def formUpdate(db, columns, table, oldValues, newValues):
+    qryValues = newValues + oldValues
     with connections[db].cursor() as cursor:
-                qry = "UPDATE " + table + "SET " + setValuesVar + " "
+                qry = "UPDATE " + table + " SET "
+                for i, column in enumerate(columns):
+                    qry += column + "= %s, "
+                qry = qry[:-2]
+                qry += " "
                 for i, x in enumerate(columns):
                     if not i:
                             qry += "WHERE " + x + " = %s "
@@ -82,6 +81,6 @@ def formUpdate(db, columns, table, values):
                         qry += "AND " + x + " = %s "
                 qry = qry[:-1]
                 qry += ";"
-                cursor.execute(qry,valuesLike)
+                cursor.execute(qry,qryValues)
                 return cursor.fetchall()
                 cursor.close()

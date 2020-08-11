@@ -140,19 +140,15 @@ Template not found
             editMode: false,
             cardholders: [],
             editedcardholder: null,
+            beforeEditedCardholder: null,
             editedForm: null,
             selectedcardholder: null,
             template: null
         },
         methods: {
             saveData() {
-                var form = document.getElementById('editingForm');
-                var data = new FormData(form);
-                axios({
-                    method: 'post',
-                    url: '{% url 'LibreBadge:productionNEWupdate' slug=slug %}',
-                    data: data
-                    })
+                console.log(this.beforeEditedCardholder)
+                axios.post('{% url 'LibreBadge:productionNEWupdate' slug=slug %}', ('[' + JSON.stringify(this.beforeEditedCardholder) + ',' + JSON.stringify(this.editedcardholder) + ']'))
                     .then(function (response) {
                         //handle success
                         console.log(response);
@@ -171,6 +167,7 @@ Template not found
             },
             editData(cardholder) {
                 this.beforEditCache = cardholder
+                this.beforeEditedCardholder = JSON.parse(JSON.stringify(cardholder));
                 this.editedcardholder = cardholder
             },
             selectcardholder(cardholder) {
