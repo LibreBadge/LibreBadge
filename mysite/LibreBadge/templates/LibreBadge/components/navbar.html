@@ -108,6 +108,14 @@
                 <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
             </div>
         </li>
+        <div class="user-panel d-flex">
+            <div class="image">
+                <img src="{% static 'LibreBadge/librebadge-icon.svg' %}" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="#" class="d-block">{{ user.username }}</a>
+            </div>
+        </div>
         <li class="nav-item">
             <a class="nav-link" href="/admin" role="button"><i class="fas fa-cog"></i></a>
         </li>
