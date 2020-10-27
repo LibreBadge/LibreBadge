@@ -1,0 +1,255 @@
+{% extends "LibreBadge/adminlte implementation/base.html" %}
+{% load include_anything %}
+{% block content %}
+{% for BadgeTemplate in BadgeTemplate %} {% comment "BadgeTemplate Iterator" %} Iterates through
+badgetemplates{% endcomment %}
+{% ifequal BadgeTemplate.slug slug %} {% comment "BadgeTemplate selector" %} Selects the badge template that matches the
+slug passed from the view{% endcomment %}
+<div class="h-100" id="app">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand">{{BadgeTemplate.name}}</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <div class="row m-1">
+                        <button class="btn btn-outline-danger mx-1" @click="refreshData()">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-repeat"
+                                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M2.854 7.146a.5.5 0 0 0-.708 0l-2 2a.5.5 0 1 0 .708.708L2.5 8.207l1.646 1.647a.5.5 0 0 0 .708-.708l-2-2zm13-1a.5.5 0 0 0-.708 0L13.5 7.793l-1.646-1.647a.5.5 0 0 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0 0-.708z" />
+                                <path fill-rule="evenodd"
+                                    d="M8 3a4.995 4.995 0 0 0-4.192 2.273.5.5 0 0 1-.837-.546A6 6 0 0 1 14 8a.5.5 0 0 1-1.001 0 5 5 0 0 0-5-5zM2.5 7.5A.5.5 0 0 1 3 8a5 5 0 0 0 9.192 2.727.5.5 0 1 1 .837.546A6 6 0 0 1 2 8a.5.5 0 0 1 .501-.5z" />
+                            </svg>
+                            Reload Data
+                        </button>
+                    </div>
+                </li>
+                <li class="nav-item border"></li>
+                <li class="nav-item active">
+                    <div class="row m-1">
+                        <button onclick="print()" class="btn btn-outline-secondary mx-1">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-printer-fill"
+                                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5z" />
+                                <path fill-rule="evenodd"
+                                    d="M11 9H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z" />
+                                <path fill-rule="evenodd"
+                                    d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2V7zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z" />
+                            </svg>
+                            Print
+                        </button>
+                    </div>
+                </li>
+                <li class="nav-item border"></li>
+                <li class="nav-item">
+                    <div class="row m-1">
+                        <button class="btn btn-outline-success mx-1">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-plus-fill"
+                                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7.5-3a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
+                                <path fill-rule="evenodd"
+                                    d="M13 7.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0v-2z" />
+                            </svg>
+                            Add
+                        </button>
+                        <button class="btn btn-outline-warning mx-1">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-lines-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7 1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm2 9a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+                              </svg>
+                            Modify
+                        </button>
+                        <button class="btn btn-outline-danger mx-1">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-dash-fill"
+                                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm5-.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5z" />
+                            </svg>
+                            Delete
+                        </button>
+                        <button class="btn btn-outline-primary mx-1">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-people-fill"
+                                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+                            </svg>
+                            Import
+                        </button>
+                    </div>
+                </li>
+                <li class="nav-item border"></li>
+                <li class="nav-item">
+                    <div class="row m-1">
+                        <button class="btn btn-outline-primary mx-1">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-camera-fill"
+                                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                                <path fill-rule="evenodd"
+                                    d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z" />
+                            </svg>
+                            Capture
+                        </button>
+                        <button class="btn btn-outline-warning mx-1">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-arrow-up-fill"
+                                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M12 15H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2zm-3.5-3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z" />
+                            </svg>
+                            Upload
+                        </button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    {% block print %}
+    <div id="badgeTemplateTempWrapper" v-html="template" class="printme"></div>
+    {% endblock %}
+    <div class="noprint h-100">
+        <div class="row h-100 w-100">
+            <div class="col" style="  resize:horizontal; overflow: auto;">
+                {% block interface %}
+                {% endblock %}
+            </div>
+            <div id="badgeTemplateWrapper" class="" style="width: fit-content;height:fill-container;">
+                <div id="badgeTemplate" v-html="template" class="printme border"
+                    style="width: fit-content;height:fit-content;background-color: white!important;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% else %}
+Template not found
+{% endifequal %}
+{% endfor %}
+{% endblock %}
+{% block js %}
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    axios.defaults.xsrfCookieName = 'csrftoken'
+    axios.defaults.xsrfHeaderName = "X-CSRFTOKEN"
+    var app = new Vue({
+        delimiters: ['#[[', ']]#'],
+        el: '#app',
+        data: {
+            editMode: false,
+            cardholders: [],
+            editedcardholder: null,
+            beforeEditedCardholder: null,
+            editedForm: null,
+            selectedcardholder: [],
+            template: null
+        },
+        methods: {
+            saveData() {
+                console.log(this.beforeEditedCardholder)
+                axios.post('{% url 'LibreBadge:productionNEWupdate' slug=slug %}', ('[' + JSON.stringify(this.beforeEditedCardholder) + ',' + JSON.stringify(this.editedcardholder) + ']'))
+                    .then(function (response) {
+                        //handle success
+                        console.log(response);
+                    })
+                    .catch(function (response) {
+                        //handle error
+                        console.log(response);
+                    });
+                this.beforEditCache = null
+                selectcardholder(this.editedcardholder)
+                this.editedcardholder = null
+                this.refreshData()
+            },
+            cancelEditData() {
+                this.beforEditCache = null
+                this.editedcardholder = null
+            },
+            editData(cardholder) {
+                this.beforEditCache = cardholder
+                this.beforeEditedCardholder = JSON.parse(JSON.stringify(cardholder));
+                this.editedcardholder = cardholder
+            },
+            selectcardholder(cardholder) {
+                this.selectedcardholder = [cardholder]
+                axios.post('{% url 'LibreBadge:productionNEWrender' slug=slug %}', JSON.stringify(this.selectedcardholder))
+                    .then(response => {
+                        // handle success
+                        this.template = response.data;
+                    })
+                    .catch(error => {
+                        // handle error
+                        console.log(error);
+                    });
+            },
+            refreshData() {
+                axios.get('{% url 'LibreBadge:productionNEWCardholders' slug=slug %}')
+                    .then(response => {
+                        // handle success
+                        this.cardholders = response.data;
+                    })
+                    .catch(error => {
+                        // handle error
+                        console.log(error);
+                    });
+            }
+        },
+        mounted: function () {
+            axios.get('{% url 'LibreBadge:productionNEWCardholders' slug=slug %}')
+                .then(response => {
+                    // handle success
+                    this.cardholders = response.data;
+                })
+                .catch(error => {
+                    // handle error
+                    console.log(error);
+                });
+            axios.get('{% url 'LibreBadge:productionNEWrender' slug=slug %}')
+                .then(response => {
+                    // handle success
+                    this.template = response.data;
+                })
+                .catch(error => {
+                    // handle error
+                    console.log(error);
+                });
+        }
+    })
+</script>
+<style>
+    [v-cloak] {
+        display: none;
+    }
+
+    .edit {
+        display: none;
+    }
+
+    .editing .edit {
+        display: table-cell
+    }
+
+    .editing .view {
+        display: none;
+    }
+
+    @media screen {
+        #badgeTemplateTempWrapper {
+            display: none;
+        }
+    }
+
+    @media print {
+        #badgeTemplateTempWrapper {
+            display: block;
+        }
+
+        .noprint {
+            display: none;
+        }
+    }
+</style>
+{% endblock %}

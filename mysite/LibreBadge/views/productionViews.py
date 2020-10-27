@@ -13,7 +13,7 @@ def productionNEW(request, slug):
         BadgeTemplateConfigFile = json.loads(BadgeTemplateInstance.configFile.read())
     except:
         raise Http404("Badge Template Doesn't Exist")
-    return render(request, 'LibreBadge/productionNEW.html',
+    return render(request, 'LibreBadge/adminlte implementation/production/productionNEW.html',
     context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile})
 
 @login_required

@@ -8,7 +8,7 @@ import urllib.parse
 #Put all views that don't belong elsewere here
 @login_required
 def index(request):
-    return render(request, 'LibreBadge/home.html',
+    return render(request, 'LibreBadge/adminlte implementation/starter.html',
     context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all})
 
 @login_required
@@ -54,3 +54,6 @@ def productionCreate(request, slug):
     else:
         return render(request, 'LibreBadge/productionCreate.html',
         context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile, "createTab":"Active"})
+
+def adminlte(request):
+    return render(request, 'LibreBadge/adminlte implementation/starter.html')
