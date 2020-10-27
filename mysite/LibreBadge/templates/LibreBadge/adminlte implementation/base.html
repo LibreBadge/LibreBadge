@@ -21,7 +21,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </head>
 
 <body class="hold-transition sidebar-mini">
-  <div class="wrapper">
+  <div id="app" class="wrapper">
 
     <!-- Navbar -->
     {% include 'LibreBadge/adminlte implementation/components/navbar.html' %}
@@ -38,9 +38,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- /.content-wrapper -->
     <!-- Main Footer -->
     {% include 'LibreBadge/adminlte implementation/components/footer.html' %}
+      {% block print %}{% endblock %}
   </div>
   <!-- ./wrapper -->
-  {% block print %}{% endblock %}
   <!-- REQUIRED SCRIPTS -->
 
   <!-- jQuery -->

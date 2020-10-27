@@ -5,7 +5,7 @@
 badgetemplates{% endcomment %}
 {% ifequal BadgeTemplate.slug slug %} {% comment "BadgeTemplate selector" %} Selects the badge template that matches the
 slug passed from the view{% endcomment %}
-<div class="h-100" id="app">
+<div class="h-100">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand">{{BadgeTemplate.name}}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
@@ -106,17 +106,15 @@ slug passed from the view{% endcomment %}
             </ul>
         </div>
     </nav>
-    {% block print %}
-    <div id="badgeTemplateTempWrapper" v-html="template" class="printme"></div>
-    {% endblock %}
     <div class="noprint h-100">
         <div class="row h-100 w-100">
             <div class="col" style="  resize:horizontal; overflow: auto;">
                 {% block interface %}
                 {% endblock %}
             </div>
-            <div id="badgeTemplateWrapper" class="" style="width: fit-content;height:fill-container;">
-                <div id="badgeTemplate" v-html="template" class="printme border"
+            <div id="badgeTemplateWrapper" class="card" style="width: fit-content;height:fill-container;">
+                <div class="card-header"><h3 class="card-title">Preview</h3></div>
+                <div id="badgeTemplate" v-html="template" class="cardbody elevation-2"
                     style="width: fit-content;height:fit-content;background-color: white!important;">
                 </div>
             </div>
@@ -128,6 +126,9 @@ slug passed from the view{% endcomment %}
 Template not found
 {% endifequal %}
 {% endfor %}
+{% endblock %}
+{% block print %}
+    <div id="badgeTemplateTempWrapper" v-html="template" class="printme"></div>
 {% endblock %}
 {% block js %}
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
