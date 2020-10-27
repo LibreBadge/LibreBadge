@@ -7,17 +7,17 @@ from django.http import Http404
 import urllib.parse
 
 @login_required
-def productionNEW(request, slug):
+def production(request, slug):
     try:
         BadgeTemplateInstance = BadgeTemplate.objects.get(slug=slug)
         BadgeTemplateConfigFile = json.loads(BadgeTemplateInstance.configFile.read())
     except:
         raise Http404("Badge Template Doesn't Exist")
-    return render(request, 'LibreBadge/adminlte implementation/production/productionNEW.html',
+    return render(request, 'LibreBadge/production/production.html',
     context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile})
 
 @login_required
-def productionNEWCardholders(request, slug):
+def productionCardholders(request, slug):
     try:
         BadgeTemplateInstance = BadgeTemplate.objects.get(slug=slug)
         BadgeTemplateConfigFile = json.loads(BadgeTemplateInstance.configFile.read())
@@ -30,7 +30,7 @@ def productionNEWCardholders(request, slug):
     return JsonResponse(rows, safe=False)
 
 @login_required
-def productionNEWrender(request, slug):
+def productionRender(request, slug):
     try:
         BadgeTemplateInstance = BadgeTemplate.objects.get(slug=slug)
         BadgeTemplateConfigFile = json.loads(BadgeTemplateInstance.configFile.read())
@@ -51,7 +51,7 @@ def productionNEWrender(request, slug):
         return HttpResponse(BadgeTemplateInstance.template)
 
 @login_required
-def productionNEWcreate(request, slug):
+def productionCreate(request, slug):
     try:
         BadgeTemplateInstance = BadgeTemplate.objects.get(slug=slug)
         BadgeTemplateConfigFile = json.loads(BadgeTemplateInstance.configFile.read())
@@ -72,7 +72,7 @@ def productionNEWcreate(request, slug):
         return HttpResponse(BadgeTemplateInstance.template)
 
 @login_required
-def productionNEWupdate(request, slug):
+def productionUpdate(request, slug):
     try:
         BadgeTemplateInstance = BadgeTemplate.objects.get(slug=slug)
         BadgeTemplateConfigFile = json.loads(BadgeTemplateInstance.configFile.read())

@@ -10,14 +10,10 @@ urlpatterns = [
     url('^$', views.index, name='index'),
     url('login/', views.login_request, name='login'),
     url("logout/", views.logout_request, name="logout"),
-    url(r'^production/search/(?P<slug>[-\w]+)/$', views.productionSearch, name="productionSearch"),
-    url(r'^production/create/(?P<slug>[-\w]+)/$', views.productionCreate, name="productionCreate"),
-    url(r'^productionNEW/(?P<slug>[-\w]+)/$', views.productionNEW, name="productionNEW"),
-    url(r'^productionNEW/(?P<slug>[-\w]+)/cardholders/$', views.productionNEWCardholders, name="productionNEWCardholders"),
-    url(r'^productionNEW/(?P<slug>[-\w]+)/render/$', views.productionNEWrender, name="productionNEWrender"),
-    url(r'^productionNEW/(?P<slug>[-\w]+)/update/$', views.productionNEWupdate, name="productionNEWupdate"),
-    url('adminlte/', views.adminlte, name="adminlte"),
-
+    url(r'^production/(?P<slug>[-\w]+)/$', views.production, name="production"),
+    url(r'^production/(?P<slug>[-\w]+)/cardholders/$', views.productionCardholders, name="productionCardholders"),
+    url(r'^production/(?P<slug>[-\w]+)/render/$', views.productionRender, name="productionRender"),
+    url(r'^production/(?P<slug>[-\w]+)/update/$', views.productionUpdate, name="productionUpdate"),
 
 ]
 

@@ -1,4 +1,4 @@
-{% extends "LibreBadge/adminlte implementation/base.html" %}
+{% extends "LibreBadge/base.html" %}
 {% load include_anything %}
 {% block content %}
 {% for BadgeTemplate in BadgeTemplate %} {% comment "BadgeTemplate Iterator" %} Iterates through
@@ -58,9 +58,11 @@ slug passed from the view{% endcomment %}
                             Add
                         </button>
                         <button class="btn btn-outline-warning mx-1">
-                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-lines-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7 1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm2 9a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
-                              </svg>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-lines-fill"
+                                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7 1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm2 9a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z" />
+                            </svg>
                             Modify
                         </button>
                         <button class="btn btn-outline-danger mx-1">
@@ -113,7 +115,9 @@ slug passed from the view{% endcomment %}
                 {% endblock %}
             </div>
             <div id="badgeTemplateWrapper" class="card" style="width: fit-content;height:fill-container;">
-                <div class="card-header"><h3 class="card-title">Preview</h3></div>
+                <div class="card-header">
+                    <h3 class="card-title">Preview</h3>
+                </div>
                 <div id="badgeTemplate" v-html="template" class="cardbody elevation-2"
                     style="width: fit-content;height:fit-content;background-color: white!important;">
                 </div>
@@ -128,7 +132,7 @@ Template not found
 {% endfor %}
 {% endblock %}
 {% block print %}
-    <div id="badgeTemplateTempWrapper" v-html="template" class="printme"></div>
+<div id="badgeTemplateTempWrapper" v-html="template" class="printme"></div>
 {% endblock %}
 {% block js %}
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -151,7 +155,7 @@ Template not found
         methods: {
             saveData() {
                 console.log(this.beforeEditedCardholder)
-                axios.post('{% url 'LibreBadge:productionNEWupdate' slug=slug %}', ('[' + JSON.stringify(this.beforeEditedCardholder) + ',' + JSON.stringify(this.editedcardholder) + ']'))
+                axios.post('{% url 'LibreBadge:productionUpdate' slug=slug %}', ('[' + JSON.stringify(this.beforeEditedCardholder) + ',' + JSON.stringify(this.editedcardholder) + ']'))
                     .then(function (response) {
                         //handle success
                         console.log(response);
@@ -176,7 +180,7 @@ Template not found
             },
             selectcardholder(cardholder) {
                 this.selectedcardholder = [cardholder]
-                axios.post('{% url 'LibreBadge:productionNEWrender' slug=slug %}', JSON.stringify(this.selectedcardholder))
+                axios.post('{% url 'LibreBadge:productionRender' slug=slug %}', JSON.stringify(this.selectedcardholder))
                     .then(response => {
                         // handle success
                         this.template = response.data;
@@ -187,7 +191,7 @@ Template not found
                     });
             },
             refreshData() {
-                axios.get('{% url 'LibreBadge:productionNEWCardholders' slug=slug %}')
+                axios.get('{% url 'LibreBadge:productionCardholders' slug=slug %}')
                     .then(response => {
                         // handle success
                         this.cardholders = response.data;
@@ -199,7 +203,7 @@ Template not found
             }
         },
         mounted: function () {
-            axios.get('{% url 'LibreBadge:productionNEWCardholders' slug=slug %}')
+            axios.get('{% url 'LibreBadge:productionCardholders' slug=slug %}')
                 .then(response => {
                     // handle success
                     this.cardholders = response.data;
@@ -208,7 +212,7 @@ Template not found
                     // handle error
                     console.log(error);
                 });
-            axios.get('{% url 'LibreBadge:productionNEWrender' slug=slug %}')
+            axios.get('{% url 'LibreBadge:productionRender' slug=slug %}')
                 .then(response => {
                     // handle success
                     this.template = response.data;

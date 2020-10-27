@@ -23,11 +23,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <body class="hold-transition sidebar-mini">
   <div id="app" class="wrapper">
 
-    <!-- Navbar -->
-    {% include 'LibreBadge/adminlte implementation/components/navbar.html' %}
-    <!-- /.navbar -->
-
-    {% include 'LibreBadge/adminlte implementation/components/sidebar.html' %}
+    {% include "LibreBadge/components/alert.html" %}
+    {% include "LibreBadge/components/messages.html" %}
+    {% include 'LibreBadge/components/navbar.html' %}
+    {% include 'LibreBadge/components/sidebar.html' %}
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -37,8 +36,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </div>
     <!-- /.content-wrapper -->
     <!-- Main Footer -->
-    {% include 'LibreBadge/adminlte implementation/components/footer.html' %}
-      {% block print %}{% endblock %}
+    {% include 'LibreBadge/components/footer.html' %}
+    {% block print %}{% endblock %}
   </div>
   <!-- ./wrapper -->
   <!-- REQUIRED SCRIPTS -->
