@@ -13,8 +13,18 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+                <li class="nav-item">
+                    {% url 'LibreBadge:index' as url %}
+                    <a href="{{ url }}" class="nav-link {% if request.path == url %}active{% endif %}">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>
+                            Home
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-item has-treeview menu-open">
-                    <a href="#" class="nav-link active">
+                    {% url 'LibreBadge:production' slug="" as url %}
+                    <a href="#" class="nav-link {% if request.path == url %}active{% endif %}">
                         <i class="nav-icon far fa-id-card"></i>
                         <p>
                             Templates
@@ -24,8 +34,9 @@
                     <ul class="nav nav-treeview">
 
                         {% for BadgeTemplate in BadgeTemplate %}
+                        {% url 'LibreBadge:production' slug=BadgeTemplate.slug as url %}
                         <li class="nav-item">
-                            <a href="{% url 'LibreBadge:production' slug=BadgeTemplate.slug %}" class="nav-link active">
+                            <a href="{{ url }}" class="nav-link {% if request.path == url %}active{% endif %} ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>{{BadgeTemplate.name|truncatechars:20}}</p>
                             </a>
@@ -38,15 +49,6 @@
                             </a>
                         </li>
                     </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Simple Link
-                            <span class="right badge badge-danger">New</span>
-                        </p>
-                    </a>
                 </li>
             </ul>
         </nav>
