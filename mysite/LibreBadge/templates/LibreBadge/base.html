@@ -10,8 +10,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>LibreBadge | Starter</title>
+  <title>LibreBadge | {% block title %}{% endblock%}</title>
   {% load static %}
+  <link rel="icon" type="image/png" href="{% static 'LibreBadge/librebadge-icon.svg' %}">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="{% static 'LibreBadge/plugins/fontawesome-free/css/all.min.css' %}">
   <!-- Theme style -->
