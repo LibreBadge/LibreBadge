@@ -35,15 +35,13 @@
                     <i class="fas fa-sign-out-alt mr-2"></i> Sign Out
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
+                <a href="{% url 'admin:password_change' %}" class="dropdown-item">
                     <i class="fas fa-key mr-2"></i> Change Your Password
                 </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item dropdown-footer">See More Settings</a>
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/admin" role="button"><i class="fas fa-cog"></i></a>
+            <a class="nav-link" href="{% url 'admin:index' %}" role="button"><i class="fas fa-cog"></i></a>
         </li>
     </ul>
 </nav>
