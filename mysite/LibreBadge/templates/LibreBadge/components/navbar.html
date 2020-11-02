@@ -34,10 +34,12 @@
                 <a href="{% url 'LibreBadge:logout' %}" class="dropdown-item">
                     <i class="fas fa-sign-out-alt mr-2"></i> Sign Out
                 </a>
+                {% if user.has_usable_password %}
                 <div class="dropdown-divider"></div>
                 <a href="{% url 'admin:password_change' %}" class="dropdown-item">
                     <i class="fas fa-key mr-2"></i> Change Your Password
                 </a>
+                {% endif %}
             </div>
         </li>
         <li class="nav-item">
