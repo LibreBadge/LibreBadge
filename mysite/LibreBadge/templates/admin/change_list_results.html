@@ -1,0 +1,70 @@
+{% load i18n static %}
+{% if result_hidden_fields %}
+<div class="hiddenfields">{# DIV for HTML validation #}
+{% for item in result_hidden_fields %}{{ item }}{% endfor %}
+</div>
+{% endif %}
+{% if results %}
+<div class="results">
+<table id="result_list">
+<thead>
+<tr>
+{% for header in result_headers %}
+<th scope="col" {{ header.class_attrib }}>
+   {% if header.sortable %}
+     {% if header.sort_priority > 0 %}
+       <div class="sortoptions">
+         <a class="sortremove" href="{{ header.url_remove }}" title="{% trans "Remove from sorting" %}"></a>
+         {% if num_sorted_fields > 1 %}<span class="sortpriority" title="{% blocktrans with priority_number=header.sort_priority %}Sorting priority: {{ priority_number }}{% endblocktrans %}">{{ header.sort_priority }}</span>{% endif %}
+         <a href="{{ header.url_toggle }}" class="toggle {% if header.ascending %}ascending{% else %}descending{% endif %}" title="{% trans "Toggle sorting" %}"></a>
+       </div>
+     {% endif %}
+   {% endif %}
+   <div class="text">{% if header.sortable %}<a href="{{ header.url_primary }}">{{ header.text|capfirst }}</a>{% else %}<span>{{ header.text|capfirst }}</span>{% endif %}</div>
+   <div class="clear"></div>
+</th>{% endfor %}
+</tr>
+</thead>
+</table>
+</div>
+{% endif %}
+<div class="col-12">
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">Responsive Hover Table</h3>
+
+      <div class="card-tools">
+        <div class="input-group input-group-sm" style="width: 150px;">
+          <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+          <div class="input-group-append">
+            <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body table-responsive p-0">
+      <table class="table table-hover text-nowrap">
+        <thead>
+          <tr>
+            {% for header in result_headers%}
+            <th>{{ header.text|capfirst }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for result in results %}
+          <tr>
+            {% for item in result %}
+            {{item}}
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <!-- /.card-body -->
+  </div>
+  <!-- /.card -->
+</div>

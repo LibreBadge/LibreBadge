@@ -31,59 +31,32 @@
         <div class="container-fluid">
                 <h5 class="mb-2">{{ app.name }}</h5>
 
-        <table>
+        <div class="row">
         {% for model in app.models %}
-        <div class="col-md-3">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">{{ model.name }}</h3>
-        
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="card-refresh" data-source="widgets.html"
-                            data-source-selector="#card-refresh-content" data-load-on-init="false"><i
-                                class="fas fa-sync-alt"></i></button>
-                        <button type="button" class="btn btn-tool" data-card-widget="maximize"><i
-                                class="fas fa-expand"></i></button>
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
-                                class="fas fa-minus"></i></button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i
-                                class="fas fa-times"></i></button>
+        <div class="col-md-3 col-sm-6 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            {% if model.admin_url %}
+                            <a href="{{ model.admin_url }}">{{ model.name }}</a>
+                            {% else %}
+                            <th scope="row"></th>{{ model.name }}
+                            {% endif %}
+                        </h3>
+                        <div class="card-tools">
+                        </div>
+                        <!-- /.card-tools -->
                     </div>
-                    <!-- /.card-tools -->
+                    <!-- /.card-header -->
+                    <div class="card-body text-center">
+                            <span style="font-size:4em;" class="fas fa-users"></span>
+                    </div>
+                    <!-- /.card-body -->
                 </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                    The body of the card
-                </div>
-                <!-- /.card-body -->
-            </div>
             <!-- /.card -->
         </div>
-            <tr class="model-{{ model.object_name|lower }}">
-            {% if model.admin_url %}
-                <th scope="row"><a href="{{ model.admin_url }}">{{ model.name }}</a></th>
-            {% else %}
-                <th scope="row">{{ model.name }}</th>
-            {% endif %}
-
-            {% if model.add_url %}
-                <td><a href="{{ model.add_url }}" class="addlink">{% trans 'Add' %}</a></td>
-            {% else %}
-                <td>&nbsp;</td>
-            {% endif %}
-
-            {% if model.admin_url %}
-                {% if model.view_only %}
-                <td><a href="{{ model.admin_url }}" class="viewlink">{% trans 'View' %}</a></td>
-                {% else %}
-                <td><a href="{{ model.admin_url }}" class="changelink">{% trans 'Change' %}</a></td>
-                {% endif %}
-            {% else %}
-                <td>&nbsp;</td>
-            {% endif %}
-            </tr>
         {% endfor %}
-        </table>
+        </div>
         </div>
     {% endfor %}
 {% else %}
