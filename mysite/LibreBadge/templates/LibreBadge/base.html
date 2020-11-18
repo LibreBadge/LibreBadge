@@ -30,11 +30,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     {% include "LibreBadge/components/messages.html" %}
     {% include 'LibreBadge/components/navbar.html' %}
     {% include 'LibreBadge/components/sidebar.html' %}
-
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <div class="container-fluid">
-        {% block content %}{% endblock %}
+        {% block maincontent %}{% endblock %}
       </div>
     </div>
     <!-- /.content-wrapper -->
