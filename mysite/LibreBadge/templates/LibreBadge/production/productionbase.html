@@ -156,7 +156,7 @@ Template not found
         methods: {
             saveData() {
                 console.log(this.beforeEditedCardholder)
-                axios.post('{% url 'LibreBadge: productionUpdate' slug=slug %}', ('[' + JSON.stringify(this.beforeEditedCardholder) + ',' + JSON.stringify(this.editedcardholder) + ']'))
+                axios.post('{% url 'LibreBadge:productionUpdate' slug=slug %}', ('[' + JSON.stringify(this.beforeEditedCardholder) + ',' + JSON.stringify(this.editedcardholder) + ']'))
                     .then(function (response) {
                         //handle success
                         console.log(response);
@@ -181,7 +181,7 @@ Template not found
             },
             selectcardholder(cardholder) {
                 this.selectedcardholder = [cardholder]
-                axios.post('{% url 'LibreBadge: productionRender' slug=slug %}', JSON.stringify(this.selectedcardholder))
+                axios.post('{% url 'LibreBadge:productionRender' slug=slug %}', JSON.stringify(this.selectedcardholder))
                     .then(response => {
                         // handle success
                         this.template = response.data;
@@ -192,7 +192,7 @@ Template not found
                     });
             },
             refreshData() {
-                axios.get('{% url 'LibreBadge: productionCardholders' slug=slug %}')
+                axios.get('{% url 'LibreBadge:productionCardholders' slug=slug %}')
                     .then(response => {
                         // handle success
                         this.cardholders = response.data;
@@ -204,7 +204,7 @@ Template not found
             }
         },
         mounted: function () {
-            axios.get('{% url 'LibreBadge: productionCardholders' slug=slug %}')
+            axios.get('{% url 'LibreBadge:productionCardholders' slug=slug %}')
                 .then(response => {
                     // handle success
                     this.cardholders = response.data;
@@ -213,7 +213,7 @@ Template not found
                     // handle error
                     console.log(error);
                 });
-            axios.get('{% url 'LibreBadge: productionRender' slug=slug %}')
+            axios.get('{% url 'LibreBadge:productionRender' slug=slug %}')
                 .then(response => {
                     // handle success
                     this.template = response.data;

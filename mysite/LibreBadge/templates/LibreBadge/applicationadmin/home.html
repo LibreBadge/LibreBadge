@@ -1,0 +1,22 @@
+{% extends 'LibreBadge/applicationadmin/applicationadminbase.html' %}
+{% block applicationadmincontent %}
+<div class="row">
+    {% for item in AdminItems %}
+    <div class="col-md-3">
+        <div class="small-box bg-white">
+            <div class="inner">
+                <h4>{{item.title}}</h4>
+                <p>{{item.description}}</p>
+                <br>
+            </div>
+            <div class="icon">
+                <i class="{{item.icon}}"></i>
+            </div>
+            <a href="{% url item.url slug=item.model %}" class="small-box-footer">
+                <i class="fas fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

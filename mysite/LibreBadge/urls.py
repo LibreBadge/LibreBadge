@@ -14,6 +14,8 @@ urlpatterns = [
     url(r'^production/(?P<slug>[-\w]+)/cardholders/$', views.productionCardholders, name="productionCardholders"),
     url(r'^production/(?P<slug>[-\w]+)/render/$', views.productionRender, name="productionRender"),
     url(r'^production/(?P<slug>[-\w]+)/update/$', views.productionUpdate, name="productionUpdate"),
+    url('applicationadmin/home', views.applicationadmin, name='applicationadmin'),
+    url(r'^applicationadmin/(?P<slug>[-\w]+)/$', views.itemadmin, name='itemadmin'),
 
 ]
 
