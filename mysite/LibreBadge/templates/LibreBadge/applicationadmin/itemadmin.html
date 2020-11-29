@@ -18,7 +18,23 @@
                 {% for result in results %}
                 <tr>
                     {% for value, fieldType in result %}
-                    <td>{{value}}, {{fieldType}}</td>
+                    {% if fieldType == "AutoField" or fieldType == "CharField" or fieldType == "TextField" %}
+                        <td>{{value}}</td>
+                    {% endif %}
+                    {% if fieldType == "BooleanField" %}
+                        {% if value == True %}
+                            <td><span class="fas fa-check"></span></td>
+                        {% endif %}
+                        {% if value == False %}
+                            <td><span class="fas fa-times"></span></td>
+                        {% endif %}
+                    {% endif %}
+                    {% if fieldType == "SlugField"%}
+                        <td><a href="{% url 'LibreBadge:production' slug=value %}">{{value}}</a></td>
+                    {% endif %}
+                    {% if fieldType == "FileField" %}
+                        <td>{{value}}</td>
+                    {% endif %}
                     {% endfor %}
                 </tr>
                 {% endfor %}
