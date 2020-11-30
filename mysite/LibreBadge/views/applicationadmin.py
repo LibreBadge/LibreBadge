@@ -51,7 +51,9 @@ def itemadmin(request,modelslug,itemslug):
     for item in AdminItems:
         if item.get('model') == modelslug:
             AdminItem = item
-    values = list(eval(AdminItem.get('model')+ ".objects.filter(pk=" + itemslug + ").values()"))
+    values = []
+    for value in list(eval(AdminItem.get('model')+ ".objects.filter(pk=" + itemslug + ").values_list()"))[0]:
+        values.append(value)
     fields = []
     fieldTypes = []
     for field in eval(AdminItem.get('model') + '._meta.get_fields()'):
@@ -63,4 +65,4 @@ def itemadmin(request,modelslug,itemslug):
     except:
         raise Http404("Badge Template Doesn't Exist")
     return render(request, 'LibreBadge/applicationadmin/itemadmin.html',
-    context = {"results":results, "BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,})
+    context = {"results":results, "BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"title":AdminItem.get('title')})
