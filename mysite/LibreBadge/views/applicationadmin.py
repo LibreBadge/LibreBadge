@@ -51,7 +51,6 @@ def itemadmin(request,modelslug,itemslug):
     for item in AdminItems:
         if item.get('model') == modelslug:
             AdminItem = item
-    print(eval(AdminItem.get('model') + "._meta.get_field('" + 'color' +"').choices"))
     values = []
     for value in list(eval(AdminItem.get('model')+ ".objects.filter(pk=" + itemslug + ").values_list()"))[0]:
         values.append(value)
