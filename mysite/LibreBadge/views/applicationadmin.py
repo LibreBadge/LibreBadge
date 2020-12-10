@@ -61,9 +61,5 @@ def itemadmin(request,modelslug,itemslug):
         fieldTypes.append(field.get_internal_type())
         fieldChoices.append(eval(AdminItem.get('model') + "._meta.get_field('" + field.name +"').choices"))
     results = zip(fields, fieldTypes, fieldChoices, values)
-    try:
-        True
-    except:
-        raise Http404("Badge Template Doesn't Exist")
     return render(request, 'LibreBadge/applicationadmin/itemadmin.html',
     context = {"results":results, "BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"title":AdminItem.get('title')})
