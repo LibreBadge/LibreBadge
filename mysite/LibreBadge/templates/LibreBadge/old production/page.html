@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>LibreBadge</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    {% load static %}
+    <link rel="shortcut icon" type="image/svg" href="{% static 'LibreBadge/librebadge-icon.svg' %}"/>
+    <link rel="stylesheet" href="{% static 'LibreBadge/css/bootstrap.min.css' %}" type = "text/css"/>
+</head>
+
+<body style="height: 100vh" onbeforeprint="printRendering()" onafterprint="afterPrintRendering()">
+    {% include "LibreBadge/components/navbar.html" %}
+    {% include "LibreBadge/components/alert.html" %}
+    {% include "LibreBadge/components/messages.html" %}
+      {% block content %}
+      {% endblock %}
+    <script src="{% static 'LibreBadge/js/jquery-3.5.1.min.js' %}"></script>
+    <script src="{% static 'LibreBadge/js/bootstrap.bundle.min.js' %}"></script>
+    <script>
+        $(document).ready(function(){
+          $('.toast').toast('show');
+        });
+    </script>
+    {% block js %}
+    {% endblock %}
+</body>
+</html>

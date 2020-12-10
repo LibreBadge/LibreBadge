@@ -1,0 +1,58 @@
+{% extends 'LibreBadge/applicationadmin/applicationadminbase.html' %}
+{% block applicationadmincontent %}
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">{{title}}</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    {% for field in fields %}
+                    <th{% if forloop.first %} style="width: 70px;"{% endif %}>{{field|title}}</th>
+                    {% endfor %}
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in results %}
+                {% firstof result.0 as primarykey%}
+                <tr>
+                    {% for value, fieldType in result %}
+                    {% if fieldType == "AutoField" or fieldType == "CharField" or fieldType == "TextField" %}
+                        <td>{{value}}</td>
+                    {% endif %}
+                    {% if fieldType == "BooleanField" %}
+                        {% if value == True %}
+                            <td><span class="fas fa-check"></span></td>
+                        {% endif %}
+                        {% if value == False %}
+                            <td><span class="fas fa-times"></span></td>
+                        {% endif %}
+                    {% endif %}
+                    {% if fieldType == "SlugField"%}
+                        <td><a href="{% url 'LibreBadge:production' slug=value %}">{{value}}</a></td>
+                    {% endif %}
+                    {% if fieldType == "FileField" %}
+                        <td>{{value}}</td>
+                    {% endif %}
+                    {% endfor %}
+                    <td><a href="{% url 'LibreBadge:itemadmin' modelslug=slug itemslug=primarykey.1 %}"><span style="font-size: 1.5em;" class="fa fa-edit"></span></a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer clearfix">
+        <ul class="pagination pagination-sm m-0 float-right">
+            <li class="page-item"><a class="page-link" href="#">«</a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">»</a></li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

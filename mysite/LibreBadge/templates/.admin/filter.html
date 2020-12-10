@@ -1,0 +1,16 @@
+{% load i18n %}
+<div class="col-md-3">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">{% blocktrans with filter_title=title %} By {{ filter_title }} {% endblocktrans %}</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+{% for choice in choices %}
+<li{% if choice.selected %} class="selected" {% endif %}>
+    <a href="{{ choice.query_string|iriencode }}" title="{{ choice.display }}">{{ choice.display }}</a></li>
+    {% endfor %}        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</div>

@@ -1,5 +1,13 @@
 from django.db import connections
 
+def dictfetchall(cursor):
+    "Return all rows from a cursor as a dict"
+    columns = [col[0] for col in cursor.description]
+    return [
+        dict(zip(columns, row))
+        for row in cursor.fetchall()
+    ]
+
 def formQuery(db, columns, table, values):
     columnsComma = ', '.join(columns)
     valuesLike = [sub + '%' for sub in values]
@@ -24,6 +32,16 @@ def formQuery(db, columns, table, values):
                 return cursor.fetchall()
                 cursor.close()
 
+def query(db, columns, table):
+    columnsComma = ', '.join(columns)
+    like = True
+    with connections[db].cursor() as cursor:
+                qry = "SELECT "+ columnsComma + " FROM " + table
+                qry += ";"
+                cursor.execute(qry)
+                return dictfetchall(cursor)
+                cursor.close()
+
 def formCreate(db, columns, table, values):
     columnsComma = ', '.join(columns)
     noData = []
@@ -43,9 +61,26 @@ def formCreate(db, columns, table, values):
                 for i in enumerate(columns):
                         qry += "%s, "
                 qry = qry[:-2]
-                print(qry)
                 qry += ");"
-                print(qry)
                 cursor.execute(qry,values)
+                return cursor.fetchall()
+                cursor.close()
+
+def formUpdate(db, columns, table, oldValues, newValues):
+    qryValues = newValues + oldValues
+    with connections[db].cursor() as cursor:
+                qry = "UPDATE " + table + " SET "
+                for i, column in enumerate(columns):
+                    qry += column + "= %s, "
+                qry = qry[:-2]
+                qry += " "
+                for i, x in enumerate(columns):
+                    if not i:
+                            qry += "WHERE " + x + " = %s "
+                    else:
+                        qry += "AND " + x + " = %s "
+                qry = qry[:-1]
+                qry += ";"
+                cursor.execute(qry,qryValues)
                 return cursor.fetchall()
                 cursor.close()
