@@ -13,10 +13,6 @@ AdminItems = [
 
 @login_required
 def applicationadmin(request):
-    try:
-        True
-    except:
-        raise Http404("Badge Template Doesn't Exist")
     return render(request, 'LibreBadge/applicationadmin/home.html',
     context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all, "AdminItems":AdminItems, })
 
@@ -26,6 +22,8 @@ def modeladmin(request,slug):
     for item in AdminItems:
         if item.get('model') == slug:
             AdminItem = item
+    if not AdminItem:
+        raise Http404
     fields = []
     for field in eval(AdminItem.get('model') + '._meta.get_fields()'):
         fields.append(field.name)
@@ -38,10 +36,6 @@ def modeladmin(request,slug):
         for item in list(value.values()):
             values.append(item)
         results.append(list(zip(values, fieldTypes)))
-    try:
-        True
-    except:
-        raise Http404("Badge Template Doesn't Exist")
     return render(request, 'LibreBadge/applicationadmin/modeladmin.html',
     context = {"slug":slug, "fields":fields, "results":results, "BadgeTemplate":BadgeTemplate.objects.all, "AlertMessage":AlertMessage.objects.all,"title":AdminItem.get('title')})
 
@@ -51,9 +45,14 @@ def itemadmin(request,modelslug,itemslug):
     for item in AdminItems:
         if item.get('model') == modelslug:
             AdminItem = item
+    if not AdminItem:
+        raise Http404('A record with the requested model name does not exist')
     values = []
-    for value in list(eval(AdminItem.get('model')+ ".objects.filter(pk=" + itemslug + ").values_list()"))[0]:
-        values.append(value)
+    try:
+        for value in list(eval(AdminItem.get('model')+ ".objects.filter(pk=" + itemslug + ").values_list()"))[0]:
+            values.append(value)
+    except:
+        raise Http404('A record with the requested primary key does not exist')
     fields = []
     fieldTypes = []
     fieldChoices = []
