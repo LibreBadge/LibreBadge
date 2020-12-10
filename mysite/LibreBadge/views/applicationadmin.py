@@ -61,5 +61,8 @@ def itemadmin(request,modelslug,itemslug):
         fieldTypes.append(field.get_internal_type())
         fieldChoices.append(eval(AdminItem.get('model') + "._meta.get_field('" + field.name +"').choices"))
     results = zip(fields, fieldTypes, fieldChoices, values)
+    if request.method == 'POST':
+        for field in fields:
+            print(eval('request.POST.get("' + field + '")'))
     return render(request, 'LibreBadge/applicationadmin/itemadmin.html',
     context = {"results":results, "BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"title":AdminItem.get('title')})

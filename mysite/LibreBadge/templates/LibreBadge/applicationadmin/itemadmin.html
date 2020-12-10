@@ -1,6 +1,8 @@
 {% extends 'LibreBadge/applicationadmin/applicationadminbase.html' %}
 {% block applicationadmincontent %}
 <div class="col-6">
+    <form action="" method="POST">
+    {% csrf_token %}
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">{{title}}</h3>
@@ -12,13 +14,13 @@
                     {% if fieldType == "CharField" and fieldChoices == None  %}
                         <div class="form-group">
                             <label>{{field|title}}</label>
-                            <input type="text" id="{{field}}" value="{{value}}" class="form-control" placeholder="{{value}}">
+                            <input type="text" id="{{field}}" name="{{field}}" value="{{value}}" class="form-control" placeholder="{{value}}">
                         </div>
                     {% endif %}
                     {% if fieldType == "CharField" and fieldChoices != None  %}
                     <div class="form-group">
                         <label>{{field|title}}</label>
-                        <select id="{{field}}" class="form-control">
+                        <select id="{{field}}" name="{{field}}" class="form-control">
                             {% for fieldChoice in fieldChoices %}
                             <option {% if fieldChoice.0 == value  %}selected="selected"{% endif %} value="{{fieldChoice.0}}" >{{fieldChoice.1|title}}</option>
                             {% endfor %}
@@ -28,7 +30,7 @@
                     {% if fieldType == "TextField" %}
                     <div class="form-group">
                         <label>{{field|title}}</label>
-                        <textarea id="{{field}}" class="form-control" rows="3" placeholder="{{value}}">{{value}}</textarea>
+                        <textarea id="{{field}}" name="{{field}}" class="form-control" rows="3" placeholder="{{value}}">{{value}}</textarea>
                     </div>
                     {% endif %}
                 {% endfor %}
@@ -41,5 +43,6 @@
             <button class="btn btn-danger float-right">Delete</button>
         </div>
     </div>
+    </form>
 </div>
 {% endblock %}
