@@ -1,4 +1,4 @@
-from ..models import BadgeTemplate
+from ...models import BadgeTemplate
 from .svglue import *
 from .databaseFunctions import *
 import json

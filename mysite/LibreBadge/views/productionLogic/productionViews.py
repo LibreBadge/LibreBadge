@@ -1,4 +1,4 @@
-from .imports import *
+from ..imports import *
 import json
 from .databaseFunctions import *
 from .badgeTemplating import badgeTemplatingEngine
@@ -97,3 +97,25 @@ def productionUpdate(request, slug):
         return JsonResponse(rows, safe=False)
     else:
         raise Http404()
+
+# old production create view, need to rework it to work with and like the other views
+    @login_required
+    def productionCreate(request, slug):
+        try:
+            BadgeTemplateInstance = BadgeTemplate.objects.get(slug=slug)
+            BadgeTemplateConfigFile = json.loads(BadgeTemplateInstance.configFile.read())
+        except:
+            BadgeTemplateConfigFile = None
+        if request.method == 'POST':
+            columns = list()
+            values = list()
+            for BadgeTemplateFormConfig in BadgeTemplateConfigFile['FormFields']:
+                postData = request.POST.get(BadgeTemplateFormConfig['id'])
+                columns.append(BadgeTemplateFormConfig['DatabaseColumn'])
+                values.append(postData)
+            formCreate('cardholders', columns, 'cardholders', values)
+            return render(request, 'LibreBadge/productionCreate.html',
+            context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile,"createTab":"Active"})
+        else:
+            return render(request, 'LibreBadge/productionCreate.html',
+            context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile, "createTab":"Active"})
