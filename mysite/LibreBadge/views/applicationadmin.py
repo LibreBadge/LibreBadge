@@ -21,6 +21,11 @@ class AlertMessageUpdate(LoginRequiredMixin, UpdateView):
     model = AlertMessage
     fields = "__all__"
 
+class AlertMessageCreate(LoginRequiredMixin, CreateView):
+    template_name = "LibreBadge/applicationadmin/AlertMessage/alertMessageForm.html"
+    model = AlertMessage
+    fields = "__all__"
+
 class AlertMessageList(LoginRequiredMixin, ListView):
     template_name = "LibreBadge/applicationadmin/AlertMessage/alertMessageList.html"
     model = AlertMessage
@@ -29,6 +34,10 @@ class BadgeTemplateUpdate(LoginRequiredMixin, UpdateView):
     template_name = "LibreBadge/applicationadmin/BadgeTemplate/badgeTemplateForm.html"
     model = BadgeTemplate
     fields = "__all__"
+
+class BadgeTemplateCreate(LoginRequiredMixin, CreateView):
+    template_name = "LibreBadge/applicationadmin/BadgeTemplate/badgeTemplateList.html"
+    model = BadgeTemplate
 
 class BadgeTemplateList(LoginRequiredMixin, ListView):
     template_name = "LibreBadge/applicationadmin/BadgeTemplate/badgeTemplateList.html"
