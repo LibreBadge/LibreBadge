@@ -3,6 +3,7 @@ from django.db.models.signals import pre_save, pre_delete
 from django.dispatch import receiver
 import shutil
 from django.conf import settings
+from django.urls import reverse
 # Create your models here.
 
 class BadgeTemplate(models.Model):
@@ -14,6 +15,8 @@ class BadgeTemplate(models.Model):
     configFile = models.FileField(upload_to=upload_file_name,unique=True)
     def __str__(self):
         return self.name
+    def get_absolute_url(self):
+        return reverse('LibreBadge:BadgeTemplateList')
 
 @receiver(pre_save, sender=BadgeTemplate) #deletes the old template when a new one is uploaded
 def delete_old_template(sender, instance, *args, **kwargs):
@@ -38,3 +41,5 @@ class AlertMessage(models.Model):
 
     def __str__(self):
         return self.name
+    def get_absolute_url(self):
+        return reverse('LibreBadge:AlertMessageList')

@@ -15,8 +15,10 @@ urlpatterns = [
     url(r'^production/(?P<slug>[-\w]+)/render/$', views.productionRender, name="productionRender"),
     url(r'^production/(?P<slug>[-\w]+)/update/$', views.productionUpdate, name="productionUpdate"),
     url('applicationadmin/$', views.applicationadmin, name='applicationadmin'),
-    url(r'^applicationadmin/(?P<slug>[-\w]+)/$', views.modeladmin, name='modeladmin'),
-    url(r'^applicationadmin/(?P<modelslug>[-\w]+)/(?P<itemslug>[-\w]+)/$', views.itemadmin, name='itemadmin'),
+    url(r'^applicationadmin/alertmessages/update/(?P<pk>[-\w]+)/$', views.AlertMessageUpdate.as_view(), name='AlertMessageUpdate'),
+    url('applicationadmin/alertmessages/$', views.AlertMessageList.as_view(), name='AlertMessageList'),
+    url(r'^applicationadmin/badgetemplates/update/(?P<pk>[-\w]+)/$', views.BadgeTemplateUpdate.as_view(), name='BadgeTemplateUpdate'),
+    url('applicationadmin/badgetemplates/$', views.BadgeTemplateList.as_view(), name='BadgeTemplateList'),
 
 ]
 

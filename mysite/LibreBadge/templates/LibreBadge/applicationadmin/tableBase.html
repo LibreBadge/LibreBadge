@@ -1,0 +1,28 @@
+{% extends 'LibreBadge/applicationadmin/applicationadminbase.html' %}
+{% block applicationadmincontent %}
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">{% block title %}{% endblock %}</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    {% block tableHeader %}
+                    {% endblock %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in object_list %}
+                <tr>
+                    {% block tableRow %}
+                    {% endblock %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <!-- /.card-body -->
+</div>
+{% endblock %}

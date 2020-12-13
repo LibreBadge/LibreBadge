@@ -1,0 +1,18 @@
+{% extends 'LibreBadge/applicationadmin/tableBase.html' %}
+{% block title %}
+    Alert Messages
+{% endblock %}
+{% block tableHeader %}
+    <th>Name</th>
+    <th>Slug</th>
+    <th>Template</th>
+    <th>Config File</th>
+    <th>Edit</th>
+{% endblock %}
+{% block tableRow %}
+    <td>{{ item.name }}</td>
+    <td><a href="{% url 'LibreBadge:production' slug=item.slug %}">{{item.slug}}</a></td>
+    <td>{{ item.template }}</td>
+    <td>{{ item.configFile }}</td>
+    <td><a href="{% url 'LibreBadge:BadgeTemplateUpdate' pk=item.pk%}"><span style="font-size: 1.5em;" class="fa fa-edit"></span></a> </td>
+{% endblock %}    

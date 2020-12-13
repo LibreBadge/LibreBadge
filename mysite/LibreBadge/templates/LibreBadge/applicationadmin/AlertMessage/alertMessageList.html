@@ -1,0 +1,25 @@
+{% extends 'LibreBadge/applicationadmin/tableBase.html' %}
+{% block title %}
+    Alert Messages
+{% endblock %}
+{% block tableHeader %}
+    <th>Name</th>
+    <th>Color</th>
+    <th>Content</th>
+    <th>Dismissable</th>
+    <th>Edit</th>
+{% endblock %}
+{% block tableRow %}
+    <td>{{ item.name }}</td>
+    <td>{{ item.color }}</td>
+    <td>{{ item.content|truncatechars:10 }}</td>
+    <td>
+        {% if item.dismissable == True %}
+        <span class="fas fa-check text-success"></span>
+        {% endif %}
+        {% if item.dismissable == False %}
+        <span class="fas fa-times text-danger"></span>
+        {% endif %}
+    </td>
+    <td><a href="{% url 'LibreBadge:AlertMessageUpdate' pk=item.pk%}"><span style="font-size: 1.5em;" class="fa fa-edit"></span></a> </td>
+{% endblock %}    
