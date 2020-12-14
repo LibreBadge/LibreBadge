@@ -14,7 +14,7 @@ AdminItems = [
 @login_required
 def applicationadmin(request):
     return render(request, 'LibreBadge/applicationadmin/home.html',
-    context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all, "AdminItems":AdminItems,})
+    context = {"AdminItems":AdminItems,})
 
 class AlertMessageUpdate(LoginRequiredMixin, UpdateView):
     template_name = "LibreBadge/applicationadmin/AlertMessage/alertMessageForm.html"

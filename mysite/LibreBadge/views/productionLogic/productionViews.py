@@ -14,7 +14,7 @@ def production(request, slug):
     except:
         raise Http404("Badge Template Doesn't Exist")
     return render(request, 'LibreBadge/production/production.html',
-    context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all,"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile})
+    context = {"slug":slug,"BadgeTemplateConfigFile":BadgeTemplateConfigFile})
 
 @login_required
 def productionCardholders(request, slug):

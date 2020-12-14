@@ -4,4 +4,4 @@ from .imports import *
 @login_required
 def index(request):
     return render(request, 'LibreBadge/home.html',
-    context = {"BadgeTemplate":BadgeTemplate.objects.all,"AlertMessage":AlertMessage.objects.all})
+    context = {})
