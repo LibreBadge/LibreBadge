@@ -3,20 +3,60 @@
 {% block applicationadmincontent %}
 <form action="" method="POST">
     {% csrf_token %}
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Edit Alert Message</h3>
+    <div class="row">
+        <div class="col-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Edit Alert Message</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button class="btn btn-warning">Cancel</button>
+                    <button class="btn btn-danger float-right">Delete</button>
+                </div>
+            </div>
         </div>
-        <!-- /.card-header -->
-        <div class="card-body">
-            {% csrf_token %}
-            {{ form|crispy }}
-        </div>
-        <!-- /.card-body -->
-        <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Save</button>
-            <button class="btn btn-warning">Cancel</button>
-            <button class="btn btn-danger float-right">Delete</button>
+        <div class="col">
+            <div class="row">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Upload Template</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+    
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button class="btn btn-warning">Cancel</button>
+                        <button class="btn btn-danger float-right">Delete</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Database Configuration</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button class="btn btn-warning">Cancel</button>
+                        <button class="btn btn-danger float-right">Delete</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </form>
