@@ -1,23 +1,77 @@
 {% extends 'LibreBadge/applicationadmin/applicationadminbase.html' %}
 {% load crispy_forms_tags %}
 {% block applicationadmincontent %}
-<form action="" method="POST">
+<form enctype="multipart/form-data" action="" method="POST">
     {% csrf_token %}
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Edit Alert Message</h3>
-        </div>
-        <!-- /.card-header -->
-        <div class="card-body">
-            {% csrf_token %}
-            {{ form|crispy }}
-        </div>
-        <!-- /.card-body -->
-        <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Save</button>
-            <button class="btn btn-warning">Cancel</button>
-            <button class="btn btn-danger float-right">Delete</button>
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Edit Badge Template</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-6 mb-0">
+                            {{ form.name|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-6 mb-0">
+                            {{ form.slug|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4 mb-0">
+                            <div class="form-group">
+                                <label for="exampleInputFile">{{ form.template.name | title }}</label>
+                                <div class="card col-4">
+                                    <img src="/media/{{ form.template.value }}" class="card-img-top elevation-1" alt="">
+                                    <div class="card-body">
+                                        <a class="card-link" href="/media/{{ form.template.value }}" download="">Download</a>
+                                    </div>
+                                </div>
+                                    <div class="custom-file">
+                                        <input type="file" name="template" class="custom-file-input" id="id_template">
+                                        <label class="custom-file-label" for="id_template">Choose file</label>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-8 mb-0">
+                                <div class="form-group">
+                                    <label>Data Sources</label>
+                                    <div id="selectbox" class="bootstrap-duallistbox-container row moveonselect moveondoubleclick">
+                                        <div class="box1 col-md-6"> 
+                                            <select multiple="multiple" id="bootstrap-duallistbox-nonselected-list_" name="_helper1" style="height: 102px;">
+                                                <option selected="">Alabama</option>
+                                                <option>Alaska</option>
+                                                <option>California</option>
+                                                <option>Delaware</option>
+                                                <option>Tennessee</option>
+                                                <option>Texas</option>
+                                                <option>Washington</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button class="btn btn-warning">Cancel</button>
+                    <button class="btn btn-danger float-right">Delete</button>
+                </div>
+            </div>
         </div>
     </div>
 </form>
+{% endblock %}
+{% block js %}
+<script>
+    $("#selectbox").bootstrapDualListbox();
+    $(document).ready(function () {
+            bsCustomFileInput.init()
+        })
+</script>
 {% endblock %}
