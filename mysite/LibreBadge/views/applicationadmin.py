@@ -42,3 +42,26 @@ class BadgeTemplateCreate(LoginRequiredMixin, CreateView):
 class BadgeTemplateList(LoginRequiredMixin, ListView):
     template_name = "LibreBadge/applicationadmin/BadgeTemplate/badgeTemplateList.html"
     model = BadgeTemplate
+
+class applicationAdminCRUD(object):
+    def __init__(self, model, fields):
+        self = model.name
+        self.model = model
+        self.fields = fields
+        globals()[self.model.name + 'Views'] = {}
+        globals()[self.model.name][eval(self.model.name + 'Update')] = type(self.model.name + 'Update', (LoginRequiredMixin, UpdateView),{
+            'template_name':"LibreBadge/applicationadmin/" + self.model.name + "/" + self.model.name + "Form.html",
+            'model':self.model,
+            'fields':self.fields
+        })
+        globals()[self.model.name][eval(self.model.name + 'Create')] = type(self.model.name + 'Update', (LoginRequiredMixin, CreateView),{
+            'template_name':"LibreBadge/applicationadmin/" + self.model.name + "/" + self.model.name + "Form.html",
+            'model':self.model,
+            'fields':self.fields
+        })
+        globals()[self.model.name][eval(self.model.name + 'Create')] = type(self.model.name + 'Update', (LoginRequiredMixin, ListView),{
+            'template_name':"LibreBadge/applicationadmin/" + self.model.name + "/" + self.model.name + "List.html",
+            'model':self.model,
+        })
+
+BadgeTemplateViewsClass = applicationAdminCRUD(BadgeTemplate, "__all__")

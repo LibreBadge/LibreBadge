@@ -6,6 +6,9 @@ from django.conf import settings
 from . import views
 
 app_name = "LibreBadge"
+applicationadminpatterns = [
+    
+]
 urlpatterns = [
     url('^$', views.index, name='index'),
     url('login/', views.login_request, name='login'),
