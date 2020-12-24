@@ -47,14 +47,15 @@ class BadgeTemplateList(LoginRequiredMixin, ListView):
 def applicationAdminCRUDFunction(model, modelName, fields):
     def templateNameGenerator(suffix):
         return("LibreBadge/applicationadmin/" + modelName + "/" + modelName + suffix + ".html")
-    globals()[modelName] = {}
-    globals()[modelName]['CreateView'] = type(modelName, (CreateView,), {'template_name': templateNameGenerator('Form'),'model': model, 'fields': fields})
-    globals()[modelName]['ListView'] = type(modelName, (ListView,), {'template_name': templateNameGenerator('List'),'model': model})
-    globals()[modelName]['UpdateView'] = type(modelName, (UpdateView,), {'template_name': templateNameGenerator('Form'),'model': model, 'fields': fields})
-    globals()[modelName]['DeleteView'] = type(modelName, (CreateView,), {'success_url': reverse_lazy(modelName + 'Create'),'model': model})
-    return(globals()[modelName])
+    viewsDictionary = {}
+    viewsDictionary['CreateView'] = type(modelName + 'CreateView', (CreateView,), {'template_name': templateNameGenerator('Form'),'model': model, 'fields': fields})
+    viewsDictionary['ListView'] = type(modelName + 'ListView', (ListView,), {'template_name': templateNameGenerator('List'),'model': model})
+    viewsDictionary['UpdateView'] = type(modelName + 'UpdateView', (UpdateView,), {'template_name': templateNameGenerator('Form'),'model': model, 'fields': fields})
+    viewsDictionary['DeleteView'] = type(modelName + 'DeleteView', (CreateView,), {'success_url': reverse_lazy(modelName + 'Create'),'model': model})
+    return(viewsDictionary)
 
-applicationAdminCRUDFunction(AlertMessage, 'AlertMessage', '__all__')
+AlertMessageViews = applicationAdminCRUDFunction(AlertMessage, 'AlertMessage', '__all__')
+print(AlertMessageViews)
 
 # class applicationAdminCRUD(object):
 #     def __init__(self, model, fields):
