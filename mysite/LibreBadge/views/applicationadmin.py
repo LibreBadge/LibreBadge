@@ -5,6 +5,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 
 AdminItems = [
     {"model":"BadgeTemplate", "title":"Badge Templates", "description":"Add or modify badge templates", "icon":"fas fa-id-badge", "url":"LibreBadge:BadgeTemplateList"},
@@ -43,25 +44,34 @@ class BadgeTemplateList(LoginRequiredMixin, ListView):
     template_name = "LibreBadge/applicationadmin/BadgeTemplate/badgeTemplateList.html"
     model = BadgeTemplate
 
-class applicationAdminCRUD(object):
-    def __init__(self, model, fields):
-        self = model.name
-        self.model = model
-        self.fields = fields
-        globals()[self.model.name + 'Views'] = {}
-        globals()[self.model.name][eval(self.model.name + 'Update')] = type(self.model.name + 'Update', (LoginRequiredMixin, UpdateView),{
-            'template_name':"LibreBadge/applicationadmin/" + self.model.name + "/" + self.model.name + "Form.html",
-            'model':self.model,
-            'fields':self.fields
-        })
-        globals()[self.model.name][eval(self.model.name + 'Create')] = type(self.model.name + 'Update', (LoginRequiredMixin, CreateView),{
-            'template_name':"LibreBadge/applicationadmin/" + self.model.name + "/" + self.model.name + "Form.html",
-            'model':self.model,
-            'fields':self.fields
-        })
-        globals()[self.model.name][eval(self.model.name + 'Create')] = type(self.model.name + 'Update', (LoginRequiredMixin, ListView),{
-            'template_name':"LibreBadge/applicationadmin/" + self.model.name + "/" + self.model.name + "List.html",
-            'model':self.model,
-        })
+def applicationAdminCRUDFunction(model, modelName, fields):
+    def templateNameGenerator(suffix):
+        return("LibreBadge/applicationadmin/" + modelName + "/" + modelName + suffix + ".html")
+    globals()[modelName] = {}
+    globals()[modelName]['CreateView'] = type(modelName, (CreateView), {'template_name': templateNameGenerator('Form'),'model': model, 'fields': fields})
+    globals()[modelName]['ListView'] = type(modelName, (ListView), {'template_name': templateNameGenerator('List'),'model': model})
+    globals()[modelName]['UpdateView'] = type(modelName, (UpdateView), {'template_name': templateNameGenerator('Form'),'model': model, 'fields': fields})
+    globals()[modelName]['DeleteView'] = type(modelName, (CreateView), {'success_url': reverse_lazy(modelName + 'Create'),'model': model})
+    return(globals()[modelName])
 
-BadgeTemplateViewsClass = applicationAdminCRUD(BadgeTemplate, "__all__")
+applicationAdminCRUDFunction(AlertMessage, 'AlertMessage', '__all__')
+
+# class applicationAdminCRUD(object):
+#     def __init__(self, model, fields):
+#         class CreateView(LoginRequiredMixin, CreateView)
+#         globals()[self.model.name][eval(self.model.name + 'Update')] = type(self.model.name + 'Update', (LoginRequiredMixin, UpdateView),{
+#             'template_name':"LibreBadge/applicationadmin/" + self.model.name + "/" + self.model.name + "Form.html",
+#             'model':self.model,
+#             'fields':self.fields
+#         })
+#         globals()[self.model.name][eval(self.model.name + 'Create')] = type(self.model.name + 'Update', (LoginRequiredMixin, CreateView),{
+#             'template_name':"LibreBadge/applicationadmin/" + self.model.name + "/" + self.model.name + "Form.html",
+#             'model':self.model,
+#             'fields':self.fields
+#         })
+#         globals()[self.model.name][eval(self.model.name + 'Create')] = type(self.model.name + 'Update', (LoginRequiredMixin, ListView),{
+#             'template_name':"LibreBadge/applicationadmin/" + self.model.name + "/" + self.model.name + "List.html",
+#             'model':self.model,
+#         })
+
+# BadgeTemplateViewsClass = applicationAdminCRUD(BadgeTemplate, "__all__")
