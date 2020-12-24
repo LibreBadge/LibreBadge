@@ -17,33 +17,6 @@ def applicationadmin(request):
     return render(request, 'LibreBadge/applicationadmin/home.html',
     context = {"AdminItems":AdminItems,})
 
-class AlertMessageUpdate(LoginRequiredMixin, UpdateView):
-    template_name = "LibreBadge/applicationadmin/AlertMessage/alertMessageForm.html"
-    model = AlertMessage
-    fields = "__all__"
-
-class AlertMessageCreate(LoginRequiredMixin, CreateView):
-    template_name = "LibreBadge/applicationadmin/AlertMessage/alertMessageForm.html"
-    model = AlertMessage
-    fields = "__all__"
-
-class AlertMessageList(LoginRequiredMixin, ListView):
-    template_name = "LibreBadge/applicationadmin/AlertMessage/alertMessageList.html"
-    model = AlertMessage
-
-class BadgeTemplateUpdate(LoginRequiredMixin, UpdateView):
-    template_name = "LibreBadge/applicationadmin/BadgeTemplate/badgeTemplateForm.html"
-    model = BadgeTemplate
-    fields = "__all__"
-
-class BadgeTemplateCreate(LoginRequiredMixin, CreateView):
-    template_name = "LibreBadge/applicationadmin/BadgeTemplate/badgeTemplateList.html"
-    model = BadgeTemplate
-
-class BadgeTemplateList(LoginRequiredMixin, ListView):
-    template_name = "LibreBadge/applicationadmin/BadgeTemplate/badgeTemplateList.html"
-    model = BadgeTemplate
-
 def applicationAdminCRUDFunction(model, modelName, fields):
     def templateNameGenerator(suffix):
         return("LibreBadge/applicationadmin/" + modelName + "/" + modelName + suffix + ".html")
@@ -55,24 +28,4 @@ def applicationAdminCRUDFunction(model, modelName, fields):
     return(viewsDictionary)
 
 AlertMessageViews = applicationAdminCRUDFunction(AlertMessage, 'AlertMessage', '__all__')
-print(AlertMessageViews)
-
-# class applicationAdminCRUD(object):
-#     def __init__(self, model, fields):
-#         class CreateView(LoginRequiredMixin, CreateView)
-#         globals()[self.model.name][eval(self.model.name + 'Update')] = type(self.model.name + 'Update', (LoginRequiredMixin, UpdateView),{
-#             'template_name':"LibreBadge/applicationadmin/" + self.model.name + "/" + self.model.name + "Form.html",
-#             'model':self.model,
-#             'fields':self.fields
-#         })
-#         globals()[self.model.name][eval(self.model.name + 'Create')] = type(self.model.name + 'Update', (LoginRequiredMixin, CreateView),{
-#             'template_name':"LibreBadge/applicationadmin/" + self.model.name + "/" + self.model.name + "Form.html",
-#             'model':self.model,
-#             'fields':self.fields
-#         })
-#         globals()[self.model.name][eval(self.model.name + 'Create')] = type(self.model.name + 'Update', (LoginRequiredMixin, ListView),{
-#             'template_name':"LibreBadge/applicationadmin/" + self.model.name + "/" + self.model.name + "List.html",
-#             'model':self.model,
-#         })
-
-# BadgeTemplateViewsClass = applicationAdminCRUD(BadgeTemplate, "__all__")
+BadgeTemplateViews = applicationAdminCRUDFunction(BadgeTemplate, 'BadgeTemplate', '__all__')
