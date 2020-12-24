@@ -48,10 +48,10 @@ def applicationAdminCRUDFunction(model, modelName, fields):
     def templateNameGenerator(suffix):
         return("LibreBadge/applicationadmin/" + modelName + "/" + modelName + suffix + ".html")
     globals()[modelName] = {}
-    globals()[modelName]['CreateView'] = type(modelName, (CreateView), {'template_name': templateNameGenerator('Form'),'model': model, 'fields': fields})
-    globals()[modelName]['ListView'] = type(modelName, (ListView), {'template_name': templateNameGenerator('List'),'model': model})
-    globals()[modelName]['UpdateView'] = type(modelName, (UpdateView), {'template_name': templateNameGenerator('Form'),'model': model, 'fields': fields})
-    globals()[modelName]['DeleteView'] = type(modelName, (CreateView), {'success_url': reverse_lazy(modelName + 'Create'),'model': model})
+    globals()[modelName]['CreateView'] = type(modelName, (CreateView,), {'template_name': templateNameGenerator('Form'),'model': model, 'fields': fields})
+    globals()[modelName]['ListView'] = type(modelName, (ListView,), {'template_name': templateNameGenerator('List'),'model': model})
+    globals()[modelName]['UpdateView'] = type(modelName, (UpdateView,), {'template_name': templateNameGenerator('Form'),'model': model, 'fields': fields})
+    globals()[modelName]['DeleteView'] = type(modelName, (CreateView,), {'success_url': reverse_lazy(modelName + 'Create'),'model': model})
     return(globals()[modelName])
 
 applicationAdminCRUDFunction(AlertMessage, 'AlertMessage', '__all__')
