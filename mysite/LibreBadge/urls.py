@@ -6,14 +6,17 @@ from django.conf import settings
 from . import views
 
 app_name = "LibreBadge"
+def applicationAdminURLS(modelName):
+    return[
+        path(modelName + '/create', eval('views.' + modelName + 'Views' + ".get('CreateView').as_view()"), name= modelName + 'Create'),
+        path('', eval('views.' + modelName + 'Views' + ".get('ListView').as_view()"), name= modelName + 'List'),
+        path(modelName + '/update/(<int:pk>/', eval('views.' + modelName + 'Views' + ".get('UpdateView').as_view()"), name= modelName + 'Update'),
+        ]
+    
 applicationadminpatterns = [
     path('', views.applicationadmin, name='applicationadmin'),
-    url(r'^alertmessages/update/(?P<pk>[-\w]+)/$', views.AlertMessageViews.get('UpdateView').as_view(), name='AlertMessageUpdate'),
-    url(r'^alertmessages/create/', views.AlertMessageViews.get('CreateView').as_view(), name='AlertMessageCreate'),
-    url('alertmessages/$', views.AlertMessageViews.get('ListView').as_view(), name='AlertMessageList'),
-    url(r'^badgetemplates/update/(?P<pk>[-\w]+)/$', views.BadgeTemplateViews.get('UpdateView').as_view(), name='BadgeTemplateUpdate'),
-    url(r'^badgetemplates/create/', views.BadgeTemplateViews.get('CreateView').as_view(), name='BadgeTemplateCreate'),
-    url('badgetemplates/', views.BadgeTemplateViews.get('ListView').as_view(), name='BadgeTemplateList'),
+    path('alertmessages/', include(applicationAdminURLS('AlertMessage')), name='alertmessages'),
+    path('badgetemplates/', include(applicationAdminURLS('BadgeTemplate')), name='badgetemplates'),
 ]
 urlpatterns = [
     path('', views.index, name='index'),
