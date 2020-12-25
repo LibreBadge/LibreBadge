@@ -8,9 +8,9 @@ from . import views
 app_name = "LibreBadge"
 def applicationAdminURLS(modelName):
     return[
-        path(modelName + '/create', eval('views.' + modelName + 'Views' + ".get('CreateView').as_view()"), name= modelName + 'Create'),
+        path('/create', eval('views.' + modelName + 'Views' + ".get('CreateView').as_view()"), name= modelName + 'Create'),
         path('', eval('views.' + modelName + 'Views' + ".get('ListView').as_view()"), name= modelName + 'List'),
-        path(modelName + '/update/(<int:pk>/', eval('views.' + modelName + 'Views' + ".get('UpdateView').as_view()"), name= modelName + 'Update'),
+        path('/update/(<int:pk>/', eval('views.' + modelName + 'Views' + ".get('UpdateView').as_view()"), name= modelName + 'Update'),
         ]
     
 applicationadminpatterns = [
