@@ -1,0 +1,54 @@
+{% extends 'LibreBadge/applicationadmin/applicationadminbase.html' %}
+{% load crispy_forms_tags %}
+{% block applicationadmincontent %}
+<form action="" {% block formExtras %}{% endblock %} method="POST">
+    {% csrf_token %}
+    {% block body %}
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">{% block cardTitle %}{% endblock %}</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            {% block form %}
+            {{ form|crispy }}
+            {% endblock %}
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" onclick="history.back()" class="btn btn-secondary">Cancel</button>
+            {% if object %}
+            <button type="button" class="btn btn-danger float-right" data-toggle="modal" data-target="#deleteConfirmModal">Delete</button>
+            {% endif %}
+        </div>
+    </div>
+    {% endblock %}
+</form>
+{% if object %}
+<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {% block modalBody %}
+                Are you sure you want to delete <b>{{ object.name }}</b>?
+                {% endblock %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                <form method="POST" action="{% block formAction %}{% endblock %}">
+                    {% csrf_token %}
+                    <button type="submit" value="Confirm" class="btn btn-danger">Yes, I'm Sure</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

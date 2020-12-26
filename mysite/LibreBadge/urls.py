@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
@@ -6,22 +6,28 @@ from django.conf import settings
 from . import views
 
 app_name = "LibreBadge"
+def applicationAdminURLS(modelName):
+    return[
+        path('create/', eval('views.' + modelName + 'Views' + ".get('CreateView').as_view()"), name= modelName + 'Create'),
+        path('', eval('views.' + modelName + 'Views' + ".get('ListView').as_view()"), name= modelName + 'List'),
+        path('update/<int:pk>/', eval('views.' + modelName + 'Views' + ".get('UpdateView').as_view()"), name= modelName + 'Update'),
+        path('delete/<int:pk>/', eval('views.' + modelName + 'Views' + ".get('DeleteView').as_view()"), name= modelName + 'Delete'),
+        ]
+    
+applicationadminpatterns = [
+    path('', views.applicationadmin, name='applicationadmin'),
+    path('alertmessages/', include(applicationAdminURLS('AlertMessage')), name='alertmessages'),
+    path('badgetemplates/', include(applicationAdminURLS('BadgeTemplate')), name='badgetemplates'),
+]
 urlpatterns = [
-    url('^$', views.index, name='index'),
+    path('', views.index, name='index'),
     url('login/', views.login_request, name='login'),
     url("logout/", views.logout_request, name="logout"),
     url(r'^production/(?P<slug>[-\w]+)/$', views.production, name="production"),
     url(r'^production/(?P<slug>[-\w]+)/cardholders/$', views.productionCardholders, name="productionCardholders"),
     url(r'^production/(?P<slug>[-\w]+)/render/$', views.productionRender, name="productionRender"),
     url(r'^production/(?P<slug>[-\w]+)/update/$', views.productionUpdate, name="productionUpdate"),
-    url('applicationadmin/$', views.applicationadmin, name='applicationadmin'),
-    url(r'^applicationadmin/alertmessages/update/(?P<pk>[-\w]+)/$', views.AlertMessageUpdate.as_view(), name='AlertMessageUpdate'),
-    url(r'^applicationadmin/alertmessages/create/$', views.AlertMessageCreate.as_view(), name='AlertMessageCreate'),
-    url('applicationadmin/alertmessages/$', views.AlertMessageList.as_view(), name='AlertMessageList'),
-    url(r'^applicationadmin/badgetemplates/update/(?P<pk>[-\w]+)/$', views.BadgeTemplateUpdate.as_view(), name='BadgeTemplateUpdate'),
-    url(r'^applicationadmin/badgetemplates/create/$', views.BadgeTemplateCreate.as_view(), name='BadgeTemplateCreate'),
-    url('applicationadmin/badgetemplates/$', views.BadgeTemplateList.as_view(), name='BadgeTemplateList'),
-
+    path('applicationadmin/', include(applicationadminpatterns), name='applicationadmin'),
 ]
 
 if settings.DEBUG:

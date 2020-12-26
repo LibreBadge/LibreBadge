@@ -1,16 +1,8 @@
-{% extends 'LibreBadge/applicationadmin/applicationadminbase.html' %}
+{% extends 'LibreBadge/applicationadmin/formBase.html' %}
 {% load crispy_forms_tags %}
-{% block applicationadmincontent %}
-<form enctype="multipart/form-data" action="" method="POST">
-    {% csrf_token %}
-    <div class="row">
-        <div class="col">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Edit Badge Template</h3>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
+{% block formExtras %}enctype="multipart/form-data"{% endblock %}
+                    {% block cardTitle %}Edit Badge Template{% endblock %}
+                    {% block form %}
                     <div class="form-row">
                         <div class="form-group col-md-6 mb-0">
                             {{ form.name|as_crispy_field }}
@@ -55,18 +47,7 @@
                         </div>
 
                     </div>
-                </div>
-                <!-- /.card-body -->
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Save</button>
-                    <button class="btn btn-warning">Cancel</button>
-                    <button class="btn btn-danger float-right">Delete</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
-{% endblock %}
+                    {% endblock %}
 {% block js %}
 <script>
     $("#selectbox").bootstrapDualListbox();
