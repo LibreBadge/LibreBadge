@@ -24,7 +24,7 @@ def applicationAdminCRUDFunction(model, modelName, fields):
     viewsDictionary['CreateView'] = type(modelName + 'CreateView', (CreateView,), {'template_name': templateNameGenerator('Form'),'model': model, 'fields': fields})
     viewsDictionary['ListView'] = type(modelName + 'ListView', (ListView,), {'template_name': templateNameGenerator('List'),'model': model})
     viewsDictionary['UpdateView'] = type(modelName + 'UpdateView', (UpdateView,), {'template_name': templateNameGenerator('Form'),'model': model, 'fields': fields})
-    viewsDictionary['DeleteView'] = type(modelName + 'DeleteView', (CreateView,), {'success_url': reverse_lazy(modelName + 'Create'),'model': model})
+    viewsDictionary['DeleteView'] = type(modelName + 'DeleteView', (DeleteView,), {'template_name': templateNameGenerator('Delete'),'success_url': reverse_lazy('LibreBadge:' + modelName + 'List'),'model': model, 'fields':fields })
     return(viewsDictionary)
 
 AlertMessageViews = applicationAdminCRUDFunction(AlertMessage, 'AlertMessage', '__all__')
