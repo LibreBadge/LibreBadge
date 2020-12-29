@@ -1,0 +1,27 @@
+{% extends 'LibreBadge/applicationadmin/formBase.html' %}
+{% load crispy_forms_tags %}
+{% block cardTitle%} User {% endblock %}
+{% block form %}
+    <div class="form-row">
+        <div class="form-group col-md-6 mb-0">
+            {{ form.username|as_crispy_field }}
+            <div class="form-row">
+                <div class="col">
+                    {{ form.first_name|as_crispy_field }}
+                </div>
+                <div class="col">
+                    {{ form.last_name|as_crispy_field }}
+                </div>
+            </div>
+            {{ form.email|as_crispy_field }}
+        </div>
+        <div class="form-group col-md-6 mb-0">
+            <b>Permissions</b>
+            {{ form.is_active|as_crispy_field }}
+            {{ form.is_superuser|as_crispy_field }}
+            {{ form.is_active|as_crispy_field }}
+            Last Logged In: {{ object.last_login}}  <br>
+            Date Created: {{ object.date_joined}}
+        </div>
+    </div>
+{% endblock %}

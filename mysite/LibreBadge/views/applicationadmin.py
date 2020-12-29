@@ -1,4 +1,5 @@
 from django.contrib.auth import login
+from django.contrib.auth.models import User, Group
 from .imports import *
 from django.http import Http404
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -9,7 +10,9 @@ from django.urls import reverse_lazy
 
 AdminItems = [
     {"model":"BadgeTemplate", "title":"Badge Templates", "description":"Add or modify badge templates", "icon":"fas fa-id-badge", "url":"LibreBadge:BadgeTemplateList"},
-    {"model":"AlertMessage", "title":"Alert Messages", "description":"Add or modify alert messages", "icon":"fas fa-exclamation-triangle", "url":"LibreBadge:AlertMessageList"}
+    {"model":"AlertMessage", "title":"Alert Messages", "description":"Add or modify alert messages", "icon":"fas fa-exclamation-triangle", "url":"LibreBadge:AlertMessageList"},
+    {"model":"User", "title":"Users", "description":"Add or modify users", "icon":"fas fa-users-cog", "url":"LibreBadge:UserList"},
+    {"model":"Group", "title":"Groups", "description":"Add or modify groups", "icon":"fas fa-users", "url":"LibreBadge:GroupList"}
 ]
 
 @login_required
@@ -29,3 +32,5 @@ def applicationAdminCRUDFunction(model, modelName, fields):
 
 AlertMessageViews = applicationAdminCRUDFunction(AlertMessage, 'AlertMessage', '__all__')
 BadgeTemplateViews = applicationAdminCRUDFunction(BadgeTemplate, 'BadgeTemplate', '__all__')
+UserViews = applicationAdminCRUDFunction(User, 'User', '__all__')
+GroupViews = applicationAdminCRUDFunction(Group, 'Group', '__all__')

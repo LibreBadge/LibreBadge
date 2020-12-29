@@ -1,0 +1,27 @@
+{% extends 'LibreBadge/applicationadmin/tableBase.html' %}
+{% block title %}
+    User
+{% endblock %}
+{% block tableHeader %}
+    <th>Username</th>
+    <th>Email Address</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Staff</th>
+    <th>Edit</th>
+{% endblock %}
+{% block tableRow %}
+    <td>{{ item.username }}</td>
+    <td>{{ item.email }}</td>
+    <td>{{ item.first_name }}</td>
+    <td>{{ item.last_name }}</td>
+    <td>
+        {% if item.is_staff == True %}
+        <span class="fas fa-check text-success"></span>
+        {% endif %}
+        {% if item.is_staff == False %}
+        <span class="fas fa-times text-danger"></span>
+        {% endif %}
+    </td>
+    <td><a href="{% url 'LibreBadge:UserUpdate' pk=item.pk%}"><span style="font-size: 1.5em;" class="fas fa-edit"></span></a> </td>
+{% endblock %}    

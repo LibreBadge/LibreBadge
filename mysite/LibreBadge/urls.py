@@ -18,6 +18,9 @@ applicationadminpatterns = [
     path('', views.applicationadmin, name='applicationadmin'),
     path('alertmessages/', include(applicationAdminURLS('AlertMessage')), name='alertmessages'),
     path('badgetemplates/', include(applicationAdminURLS('BadgeTemplate')), name='badgetemplates'),
+    path('users/', include(applicationAdminURLS('User')), name='users'),
+    path('groups/', include(applicationAdminURLS('Group')), name='groups'),
+
 ]
 urlpatterns = [
     path('', views.index, name='index'),
